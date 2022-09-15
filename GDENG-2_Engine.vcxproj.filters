@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Window.cpp">
+      <Filter>GameEngine\WindowSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>GameEngine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>GameEngine\Graphics\SwapChain</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>GameEngine\Graphics\DeviceContext</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>GameEngine\Graphics\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>GameEngine\Graphics\VertexShader</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>GameEngine\Graphics\PixelShader</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>GameEngine\Graphics\ConstantBuffer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>GameEngine\WindowSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>GameEngine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>GameEngine\Graphics\SwapChain</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceContext.h">
+      <Filter>GameEngine\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>GameEngine\Graphics\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>GameEngine\Graphics\VertexShader</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>GameEngine\Graphics\PixelShader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>GameEngine\Graphics\ConstantBuffer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="App">
+      <UniqueIdentifier>{f7526e48-a53e-44cd-9da7-1150f8b5c88e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{dd889003-fef6-494e-a964-8efbae621351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\WindowSystem">
+      <UniqueIdentifier>{e6f900d2-1a28-47cd-99ac-dcfafff62df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics">
+      <UniqueIdentifier>{f964c829-a20d-4278-855c-d3089681f808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\SwapChain">
+      <UniqueIdentifier>{26a1b6ad-3eef-4d8e-8038-209b0437e57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\DeviceContext">
+      <UniqueIdentifier>{95227eec-47a0-4beb-8e05-c412b0a23d84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\VertexBuffer">
+      <UniqueIdentifier>{b31830c8-7b08-4822-8f91-bae2588f21f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\Shaders">
+      <UniqueIdentifier>{83d0d972-a7ee-4414-9ac2-b1f9c3928922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\VertexShader">
+      <UniqueIdentifier>{7ca15995-b79a-4450-b1f4-96b2c5e62938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\PixelShader">
+      <UniqueIdentifier>{0578e950-de2d-4b4a-8ef1-dd25a416872e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\ConstantBuffer">
+      <UniqueIdentifier>{3c77fe63-2725-4609-8766-ce9ee949229a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader.fx">
+      <Filter>GameEngine\Graphics\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>GameEngine\Graphics\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>GameEngine\Graphics\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
