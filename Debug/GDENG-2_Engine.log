@@ -1,4 +1,4 @@
 ﻿  AppWindow.cpp
-  VertexBuffer.cpp
-  Generating Code...
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(133,28): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(163,110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

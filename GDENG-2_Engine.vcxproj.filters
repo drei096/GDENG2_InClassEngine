@@ -60,6 +60,12 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>GameEngine\Graphics\ConstantBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -94,6 +100,12 @@
     </Filter>
     <Filter Include="GameEngine\Graphics\ConstantBuffer">
       <UniqueIdentifier>{3c77fe63-2725-4609-8766-ce9ee949229a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Math">
+      <UniqueIdentifier>{e87f504e-33be-4fdc-a961-f50e9066017d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\IndexBuffer">
+      <UniqueIdentifier>{5109a899-9e4d-4720-8c49-83401c3f1df9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

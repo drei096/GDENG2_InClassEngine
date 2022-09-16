@@ -18,11 +18,20 @@ public:
 	virtual void OnUpdate() override;
 	virtual void OnDestroy() override;
 
+	void updateQuadPos();
+
 private:
 	SwapChain* swapChain;
 	VertexBuffer* m_vertex_buffer;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
+
+	float old_delta;
+	float new_delta;
+	float deltaTime;
+
+	float deltaScale;
+	float deltaPos;
 };
 
