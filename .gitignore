@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.vs/GDENG-2_Engine/v16/.suo
+.vs/GDENG-2_Engine/v16/Browse.VC.db
+.vs/GDENG-2_Engine/v16/Browse.VC.db-shm
+.vs/GDENG-2_Engine/v16/Browse.VC.db-wal
