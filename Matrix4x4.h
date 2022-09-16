@@ -66,7 +66,63 @@ public:
 		::memcpy(this->matrix, out.matrix, sizeof(float) * 16);
 	}
 
-	
+	void setQuaternionRotation(float theta, float x, float y, float z)
+	{
+		float normU, qx, qy, qz, qw;
+
+		//normalizing axis vector
+		normU = sqrt((x * x) + (y * y) + (z * z));
+		qx = x / normU;
+		qy = y / normU;
+		qz = z / normU;
+
+		//quaternion q setup
+		qw = cos(theta / 2);
+		qx = qx * sin(theta / 2);
+		qy = qy * sin(theta / 2);
+		qz = qz * sin(theta / 2);
+
+		//set the rotation matrix
+
+		this->matrix[0][0] = (qw * qw) + (qx * qx) - (qy * qy) - (qz * qz);
+		this->matrix[0][1] = (2 * qx * qy) - (2 * qw * qz);
+		this->matrix[0][2] = (2 * qx * qz) + (2 * qw * qy);
+		this->matrix[0][3] = 0;
+
+		this->matrix[1][0] = (2 * qx * qy) + (2 * qw * qz);
+		this->matrix[1][1] = (qw * qw) - (qx * qx) + (qy * qy) - (qz * qz);
+		this->matrix[1][2] = (2 * qy * qz) - (2 * qw * qx);
+		this->matrix[1][3] = 0;
+
+		this->matrix[2][0] = (2 * qx * qz) - (2 * qw * qy);
+		this->matrix[2][1] = (2 * qy * qz) + (2 * qw * qx);
+		this->matrix[2][2] = (qw * qw) - (qx * qx) - (qy * qy) + (qz * qz);
+		this->matrix[2][3] = 0;
+	}
+
+	void setEulerRotationX(float x)
+	{
+		this->matrix[1][1] = cos(x);
+		this->matrix[1][2] = sin(x);
+		this->matrix[2][1] = -sin(x);
+		this->matrix[2][2] = cos(x);
+	}
+
+	void setEulerRotationY(float y)
+	{
+		this->matrix[0][0] = cos(y);
+		this->matrix[0][2] = -sin(y);
+		this->matrix[2][0] = sin(y);
+		this->matrix[2][2] = cos(y);
+	}
+
+	void setEulerRotationZ(float z)
+	{
+		this->matrix[0][0] = cos(z);
+		this->matrix[0][1] = sin(z);
+		this->matrix[1][0] = -sin(z);
+		this->matrix[1][1] = cos(z);
+	}
 
 	~Matrix4x4()
 	{ 
