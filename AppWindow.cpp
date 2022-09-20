@@ -31,8 +31,9 @@ AppWindow::~AppWindow()
 
 void AppWindow::OnCreate()
 {
-	//CREATING THE WINDOW AND SWAP CHAIN
+	//CREATING THE WINDOW, SWAP CHAIN, AND INPUT LISTENERS
 	Window::OnCreate();
+	InputSystem::GetInstance()->addListener(this);
 	GraphicsEngine::GetInstance()->init();
 	swapChain = GraphicsEngine::GetInstance()->createSwapChain();
 
@@ -140,6 +141,7 @@ void AppWindow::OnCreate()
 void AppWindow::OnUpdate()
 {
 	Window::OnUpdate();
+	InputSystem::GetInstance()->update();
 
 	//clear render target
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 1, 1, 1, 1);
@@ -211,10 +213,14 @@ void AppWindow::updateQuadPos()
 
 	
 
-	cc.m_world.setScale(Vector3D(1, 1, 1));
+	cc.m_world.setScale(Vector3D(1,1,1));
 
 	temp.setIdentity();
-	temp.setQuaternionRotation(deltaScale, 0, 1, 0);
+	temp.setQuaternionRotation(m_rot_y, 0, 1, 0);
+	cc.m_world *= temp;
+
+	temp.setIdentity();
+	temp.setQuaternionRotation(m_rot_x, 1, 0, 0);
 	cc.m_world *= temp;
 
 	
@@ -230,4 +236,61 @@ void AppWindow::updateQuadPos()
 
 	m_cb->update(GraphicsEngine::GetInstance()->getImmediateDeviceContext(), &cc);
 	
+}
+
+void AppWindow::onKeyDown(int key)
+{
+
+	/*
+	 *MOVE CUBE TEST
+	switch(key)
+	{
+	case 'A':
+		m_rot_y += 0.707f * deltaTime;
+		break;
+	case 'D':
+		m_rot_y -= 0.707f * deltaTime;
+		break;
+	}
+	*/
+}
+
+void AppWindow::onKeyUp(int key)
+{
+}
+
+void AppWindow::onMouseMove(const Point& delta_mouse_pos)
+{
+	m_rot_x -= delta_mouse_pos.m_y * deltaTime;
+	m_rot_y -= delta_mouse_pos.m_x * deltaTime;
+}
+
+void AppWindow::onLeftMouseDown(const Point& mouse_pos)
+{
+	
+}
+
+void AppWindow::onLeftMouseUp(const Point& mouse_pos)
+{
+	
+}
+
+void AppWindow::onRightMouseDown(const Point& mouse_pos)
+{
+	
+}
+
+void AppWindow::onRightMouseUp(const Point& mouse_pos)
+{
+	
+}
+
+void AppWindow::OnFocus()
+{
+	InputSystem::GetInstance()->addListener(this);
+}
+
+void AppWindow::OnKillFocus()
+{
+	InputSystem::GetInstance()->removeListener(this);
 }
