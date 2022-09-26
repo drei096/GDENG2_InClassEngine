@@ -1,3 +1,4 @@
 ﻿  AppWindow.cpp
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(177,28): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(109,31): warning C4244: '=': conversion from 'float' to 'unsigned long', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(111,28): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

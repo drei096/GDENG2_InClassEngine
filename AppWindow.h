@@ -7,11 +7,9 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
-#include "IndexBuffer.h"
-#include "InputListener.h"
-#include "InputSystem.h"
 
-class AppWindow : public Window, public InputListener
+
+class AppWindow : public Window
 {
 public:
 	AppWindow();
@@ -20,10 +18,14 @@ public:
 	virtual void OnCreate() override;
 	virtual void OnUpdate() override;
 	virtual void OnDestroy() override;
+
+	void updateQuadPos();
+
+	/*
 	virtual void OnFocus() override;
 	virtual void OnKillFocus() override;
 
-	void updateQuadPos();
+	
 
 	//inherited from input listener
 	virtual void onKeyDown(int key) override;
@@ -34,6 +36,7 @@ public:
 	virtual void onLeftMouseUp(const Point& mouse_pos) override;
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
 	virtual void onRightMouseUp(const Point& mouse_pos) override;
+	*/
 
 private:
 	SwapChain* swapChain;
@@ -55,6 +58,7 @@ private:
 	float m_rot_z = 0;
 
 	float m_scale_cube = 1;
+	float m_angle = 0.0f;
 
 };
 
