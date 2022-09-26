@@ -19,6 +19,8 @@ public:
 
 	void update();
 
+	void setCursorPosition(const Point& pos);
+
 private:
 	std::unordered_set<InputListener*> m_set_listeners;
 	unsigned char m_keys_state[256] = {};

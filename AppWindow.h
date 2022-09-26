@@ -10,6 +10,7 @@
 #include "IndexBuffer.h"
 #include "InputListener.h"
 #include "InputSystem.h"
+#include "Matrix4x4.h"
 
 class AppWindow : public Window, public InputListener
 {
@@ -23,13 +24,13 @@ public:
 	virtual void OnFocus() override;
 	virtual void OnKillFocus() override;
 
-	void updateQuadPos();
+	void update();
 
 	//inherited from input listener
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;
 
-	virtual void onMouseMove(const Point& delta_mouse_pos) override;
+	virtual void onMouseMove(const Point& mouse_pos) override;
 	virtual void onLeftMouseDown(const Point& mouse_pos) override;
 	virtual void onLeftMouseUp(const Point& mouse_pos) override;
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
@@ -56,5 +57,8 @@ private:
 
 	float m_scale_cube = 1;
 
+	Matrix4x4 m_world_cam;
+	float m_forward = 0.0f;
+	float m_right = 0.0f;
 };
 
