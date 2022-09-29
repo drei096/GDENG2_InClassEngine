@@ -352,3 +352,14 @@ MigrationBackup/
 .vs/GDENG-2_Engine/v16/Browse.VC.db
 .vs/GDENG-2_Engine/v16/Browse.VC.db-shm
 .vs/GDENG-2_Engine/v16/Browse.VC.db-wal
+Debug/GDENG-2_Engine.exe
+Debug/GDENG-2_Engine.ilk
+Debug/GDENG-2_Engine.log
+Debug/GDENG-2_Engine.pdb
+Debug/GDENG-2_Engine.tlog/CL.command.1.tlog
+Debug/GDENG-2_Engine.tlog/CL.read.1.tlog
+Debug/GDENG-2_Engine.tlog/CL.write.1.tlog
+Debug/GDENG-2_Engine.tlog/link.read.1.tlog
+Debug/GDENG-2_Engine.tlog/link.write.1.tlog
+Debug/VertexBuffer.obj
+Debug/Window.obj
