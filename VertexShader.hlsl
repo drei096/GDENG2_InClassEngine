@@ -20,7 +20,6 @@ SOFTWARE.*/
 struct VS_INPUT
 {
 	float4 position: POSITION;
-	float4 position1: POSITION1;
 	float3 color: COLOR;
 	float3 color1: COLOR1;
 };
@@ -44,7 +43,7 @@ VS_OUTPUT vsmain(VS_INPUT input)
 {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 
-	output.position = lerp(input.position, input.position1, (sin(m_angle) + 1.0f) / 2.0f);
+	output.position = input.position;
 	output.color = input.color;
 	output.color1 = input.color1;
 	return output;
