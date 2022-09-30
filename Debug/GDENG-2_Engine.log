@@ -1,3 +1,9 @@
-﻿  AppWindow.cpp
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(120,19): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+﻿  AGameObject.cpp
+  AppWindow.cpp
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(116,19): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  GraphicsEngine.cpp
+  PrimitiveManager.cpp
+  QuadPrimitive.cpp
+  main.cpp
+  Generating Code...
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

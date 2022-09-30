@@ -1,27 +1,8 @@
-/*MIT License
-C++ 3D Game Tutorial Series (https://github.com/PardCode/CPP-3D-Game-Tutorial-Series)
-Copyright (c) 2019-2022, PardCode
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.*/
-
 #include "AppWindow.h"
 #include <Windows.h>
 #include "EngineTime.h"
 
-
+/*
 struct vec3
 {
 	float x, y, z;
@@ -31,9 +12,8 @@ struct vertex
 {
 	vec3 position;
 	vec3 color;
-	vec3 color1;
 };
-
+*/
 
 __declspec(align(16))
 struct constant
@@ -53,39 +33,54 @@ AppWindow::~AppWindow()
 
 void AppWindow::OnCreate()
 {
+	//CREATE WINDOW AND SWAP CHAIN
 	Window::OnCreate();
 	GraphicsEngine::GetInstance()->init();
 	swapChain = GraphicsEngine::GetInstance()->createSwapChain();
 
+	//GET RECT MEASUREMENTS AND INIT SWAPCHAIN
 	RECT rc = this->getClientWindowRect();
 	swapChain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
+
+	//CUBE NORMALIZED VERTEX COORDINATES WITH COLOR DATA
+	/*
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.5f,0.0f,       1,0,0,  0,1,1 }, // POS1
-		{-0.5f,0.5f,0.0f,        1,0,0,  1,1,0 }, // POS2
-		{ 0.5f,-0.5f,0.0f,       0,0,1,  1,0,0 },// POS2
-		{ 0.5f,0.5f,0.0f,        1,1,1,  0,1,0 }
+		{-0.1f,-0.1f,0.0f,       1,0,0,  }, // POS1
+		{-0.1f,0.1f,0.0f,        1,0,0,  }, // POS2
+		{ 0.1f,-0.1f,0.0f,       0,0,1,  },// POS2
+		{ 0.1f,0.1f,0.0f,        1,1,1,  }
 	};
+	*/
 
-	m_vertex_buffer = GraphicsEngine::GetInstance()->createVertexBuffer();
-	UINT size_list = ARRAYSIZE(list);
+	
+
+	//CREATE VERTEX BUFFER
+	//m_vertex_buffer = GraphicsEngine::GetInstance()->createVertexBuffer();
+	//UINT size_list = ARRAYSIZE(list);
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
 	GraphicsEngine::GetInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
-	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_shader);
-	m_vertex_buffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
+	//CREATE VERTEX SHADER AND LOAD VERTEX BUFFER
+	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
 
+	PrimitiveManager::GetInstance()->initQuad(0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, shader_byte_code, size_shader);
 
+	//m_vertex_buffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+
+
+	//CREATE PIXEL SHADER
 	GraphicsEngine::GetInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = GraphicsEngine::GetInstance()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
 
+	//CREATE CONSTANT BUFFER
 	constant cc;
 	cc.m_angle = 0;
 
@@ -97,9 +92,10 @@ void AppWindow::OnCreate()
 void AppWindow::OnUpdate()
 {
 	Window::OnUpdate();
+
 	//CLEAR THE RENDER TARGET 
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain,
-		1.0f, 1.0f, 1.0f, 1);
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain,1.0f, 1.0f, 1.0f, 1);
+
 	//SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
@@ -131,18 +127,18 @@ void AppWindow::OnUpdate()
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 
-	//SET THE VERTICES OF THE TRIANGLE TO DRAW
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(m_vertex_buffer);
+	//SET THE VERTICES OF THE QUAD TO DRAW
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(PrimitiveManager::GetInstance()->quads[0]->vertexBuffer);
 
-	// FINALLY DRAW THE TRIANGLE
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawTriangleStrip(m_vertex_buffer->getSizeVertexList(), 0);
+	// FINALLY DRAW THE QUAD
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawTriangleStrip(PrimitiveManager::GetInstance()->quads[0]->vertexBuffer->getSizeVertexList(), 0);
 	swapChain->present(true);
 }
 
 void AppWindow::OnDestroy()
 {
 	Window::OnDestroy();
-	m_vertex_buffer->release();
+	//m_vertex_buffer->release();
 	swapChain->release();
 	m_vs->release();
 	m_ps->release();

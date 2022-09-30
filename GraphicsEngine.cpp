@@ -6,6 +6,8 @@
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
+#include "AGameObject.h"
+#include "PrimitiveManager.h"
 
 #include <d3dcompiler.h>
 

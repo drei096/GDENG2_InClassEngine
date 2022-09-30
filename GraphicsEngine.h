@@ -9,6 +9,8 @@ class VertexShader;
 class PixelShader;
 class ConstantBuffer;
 class IndexBuffer;
+class AGameObject;
+class PrimitiveManager;
 
 class GraphicsEngine
 {
@@ -61,5 +63,7 @@ private:
 	friend class PixelShader;
 	friend class ConstantBuffer;
 	friend class IndexBuffer;
+	friend class AGameObject;
+	friend class PrimitiveManager;
 };
 

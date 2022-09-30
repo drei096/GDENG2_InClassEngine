@@ -7,6 +7,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
+#include "PrimitiveManager.h"
 
 
 class AppWindow : public Window
@@ -40,7 +41,7 @@ public:
 
 private:
 	SwapChain* swapChain;
-	VertexBuffer* m_vertex_buffer;
+	//VertexBuffer* m_vertex_buffer;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
