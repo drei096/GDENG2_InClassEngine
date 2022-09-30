@@ -38,6 +38,8 @@ void AppWindow::OnCreate()
 	GraphicsEngine::GetInstance()->init();
 	swapChain = GraphicsEngine::GetInstance()->createSwapChain();
 
+	//PrimitiveManager::GetInstance()->init();
+
 	//GET RECT MEASUREMENTS AND INIT SWAPCHAIN
 	RECT rc = this->getClientWindowRect();
 	swapChain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
@@ -68,24 +70,19 @@ void AppWindow::OnCreate()
 
 	//CREATE VERTEX SHADER AND LOAD VERTEX BUFFER
 	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_shader);
-	GraphicsEngine::GetInstance()->releaseCompiledShader();
+	
 
 	PrimitiveManager::GetInstance()->initQuad(0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, shader_byte_code, size_shader);
 
 	//m_vertex_buffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
-
+	GraphicsEngine::GetInstance()->releaseCompiledShader();
 
 	//CREATE PIXEL SHADER
 	GraphicsEngine::GetInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
 	m_ps = GraphicsEngine::GetInstance()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
 
-	//CREATE CONSTANT BUFFER
-	constant cc;
-	cc.m_angle = 0;
 
-	m_cb = GraphicsEngine::GetInstance()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
 
 }
 
@@ -100,27 +97,6 @@ void AppWindow::OnUpdate()
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	/*
-	 * OLD IMPLEMENTATION OF DELTA TIME
-	 *
-	unsigned long new_time = 0;
-	if (old_delta)
-		new_time = ::GetTickCount() - old_delta;
-	deltaTime = new_time / 1000.0f;
-	old_delta = ::GetTickCount();
-	*
-	*
-	*/
-
-
-	m_angle += 1.57f * EngineTime::getDeltaTime();
-	constant cc;
-	cc.m_angle = m_angle;
-
-	m_cb->update(GraphicsEngine::GetInstance()->getImmediateDeviceContext(), &cc);
-
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
 
 	//SET DEFAULT SHADER IN THE GRAPHICS PIPELINE TO BE ABLE TO DRAW
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexShader(m_vs);
@@ -138,7 +114,7 @@ void AppWindow::OnUpdate()
 void AppWindow::OnDestroy()
 {
 	Window::OnDestroy();
-	//m_vertex_buffer->release();
+	PrimitiveManager::GetInstance()->release();
 	swapChain->release();
 	m_vs->release();
 	m_ps->release();

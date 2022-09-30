@@ -27,6 +27,25 @@ void PrimitiveManager::DrawQuad()
 	
 }
 
+void PrimitiveManager::release()
+{
+	std::vector<QuadPrimitive*>::iterator i;
+	for (i = quads.begin(); i != quads.end(); ++i)
+	{
+		static_cast<QuadPrimitive*>(*i)->release();
+		delete* i;
+	}
+	quads.clear();
+}
+
+/*
+void PrimitiveManager::init()
+{
+	vertexBuffer = GraphicsEngine::GetInstance()->createVertexBuffer();
+}
+*/
+
+
 
 
 

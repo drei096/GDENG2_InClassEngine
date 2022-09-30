@@ -14,5 +14,8 @@ public:
 	void DrawQuad();
 
 	std::vector<QuadPrimitive*> quads;
+
+	void init();
+	void release();
 };
 

@@ -23,6 +23,13 @@ UINT QuadPrimitive::getVertexListSize()
 	return ARRAYSIZE(list);
 }
 
+bool QuadPrimitive::release()
+{
+	vertexBuffer->release();
+
+	return true;
+}
+
 
 
 

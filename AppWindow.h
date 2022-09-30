@@ -44,8 +44,6 @@ private:
 	//VertexBuffer* m_vertex_buffer;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
-	ConstantBuffer* m_cb;
-	IndexBuffer* m_ib;
 
 	float old_delta;
 	float new_delta;

@@ -13,7 +13,9 @@ public:
 
 	VertexBuffer* vertexBuffer;
 
+	bool release();
+
 private:
 	vertex list[4];
-
+	
 };
