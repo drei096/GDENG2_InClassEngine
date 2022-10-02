@@ -24,7 +24,7 @@ protected:
 
 public:
 	virtual void* getVertexList() = 0;
-	virtual void setVertexList(float posx, float posy, float posz, float r, float g, float b) = 0;
+	virtual void setVertexList(float posx, float posy, float posz, float r, float g, float b, float offsetX, float offsetY) = 0;
 	virtual UINT getVertexListSize() = 0;
 
 private:

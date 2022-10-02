@@ -7,7 +7,7 @@ class QuadPrimitive : public AGameObject
 {
 public:
 	QuadPrimitive();
-	void setVertexList(float posx, float posy, float posz, float r, float g, float b) override;
+	void setVertexList(float posx, float posy, float posz, float r, float g, float b, float offsetX, float offsetY) override;
 	void* getVertexList() override;
 	UINT getVertexListSize() override;
 

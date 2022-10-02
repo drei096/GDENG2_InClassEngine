@@ -10,7 +10,7 @@ public:
 	static PrimitiveManager* GetInstance();
 
 	//FOR QUADS
-	void initQuad(float posx, float posy, float posz, float r, float g, float b, void* shader_byte_code, size_t byte_code_size);
+	void initQuad(float posx, float posy, float posz, float r, float g, float b, float offsetX, float offsetY, void* shader_byte_code, size_t byte_code_size);
 	void DrawQuad();
 
 	std::vector<QuadPrimitive*> quads;

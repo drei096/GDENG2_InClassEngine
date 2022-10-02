@@ -72,7 +72,10 @@ void AppWindow::OnCreate()
 	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_shader);
 	
 
-	PrimitiveManager::GetInstance()->initQuad(0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, shader_byte_code, size_shader);
+	PrimitiveManager::GetInstance()->initQuad(0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, 0.35f, 0.35f, shader_byte_code, size_shader);
+	PrimitiveManager::GetInstance()->initQuad(0.1f, 0.1f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, shader_byte_code, size_shader);
+	PrimitiveManager::GetInstance()->initQuad(0.3f, 0.3f, 0.0f, 0.0f, 0.0f, 1.0f, -0.45f, -0.45f, shader_byte_code, size_shader);
+
 
 	//m_vertex_buffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
@@ -103,11 +106,18 @@ void AppWindow::OnUpdate()
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 
-	//SET THE VERTICES OF THE QUAD TO DRAW
+	//SET THE VERTICES OF THE QUADS TO DRAW AND FINALLY DRAW THE QUADS
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(PrimitiveManager::GetInstance()->quads[0]->vertexBuffer);
-
-	// FINALLY DRAW THE QUAD
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawTriangleStrip(PrimitiveManager::GetInstance()->quads[0]->vertexBuffer->getSizeVertexList(), 0);
+
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(PrimitiveManager::GetInstance()->quads[1]->vertexBuffer);
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawTriangleStrip(PrimitiveManager::GetInstance()->quads[1]->vertexBuffer->getSizeVertexList(), 0);
+
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(PrimitiveManager::GetInstance()->quads[2]->vertexBuffer);
+	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawTriangleStrip(PrimitiveManager::GetInstance()->quads[2]->vertexBuffer->getSizeVertexList(), 0);
+	
+	
+	
 	swapChain->present(true);
 }
 

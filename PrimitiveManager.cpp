@@ -9,10 +9,10 @@ PrimitiveManager* PrimitiveManager::GetInstance()
 	return &primitiveManager;
 }
 
-void PrimitiveManager::initQuad(float posx, float posy, float posz, float r, float g, float b, void* shader_byte_code, size_t byte_code_size)
+void PrimitiveManager::initQuad(float posx, float posy, float posz, float r, float g, float b, float offsetX, float offsetY, void* shader_byte_code, size_t byte_code_size)
 {
 	auto newQuadPrimitive = new QuadPrimitive();
-	newQuadPrimitive->setVertexList(posx, posy, posz, r,g,b);
+	newQuadPrimitive->setVertexList(posx, posy, posz, r,g,b, offsetX, offsetY);
 
 	newQuadPrimitive->vertexBuffer = GraphicsEngine::GetInstance()->createVertexBuffer();
 	UINT size_list = newQuadPrimitive->getVertexListSize();
