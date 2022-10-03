@@ -1,2 +1,21 @@
-﻿  AppWindow.cpp
-  GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe
+﻿  compilation object save succeeded; see C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\shader.cso
+  AGameObject.cpp
+  AppWindow.cpp
+  ConstantBuffer.cpp
+  DeviceContext.cpp
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\DeviceContext.cpp(84,19): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\DeviceContext.cpp(85,20): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+  EngineTime.cpp
+  GraphicsEngine.cpp
+  IndexBuffer.cpp
+  InputSystem.cpp
+  main.cpp
+  PixelShader.cpp
+  PrimitiveManager.cpp
+  QuadPrimitive.cpp
+  SwapChain.cpp
+  VertexBuffer.cpp
+  VertexShader.cpp
+  Window.cpp
+  Generating Code...
+  GDENG-2_Engine.vcxproj -> C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\GDENG-2_Engine.exe
