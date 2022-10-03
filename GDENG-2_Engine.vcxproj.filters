@@ -40,6 +40,9 @@
     <ClCompile Include="EngineTime.cpp">
       <Filter>GameEngine\Backend</Filter>
     </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -93,6 +96,9 @@
     <ClInclude Include="EngineTime.h">
       <Filter>GameEngine\Backend</Filter>
     </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -139,6 +145,9 @@
     </Filter>
     <Filter Include="GameEngine\Backend">
       <UniqueIdentifier>{3671f5b3-cf78-4be2-83a8-3cc2c69afbf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\Primitives">
+      <UniqueIdentifier>{74b8ef68-ddf3-470a-a68f-e905c4cb55a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
