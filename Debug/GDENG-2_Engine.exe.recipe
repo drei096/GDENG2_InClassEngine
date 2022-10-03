@@ -2,12 +2,12 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\GDENG-2_Engine.exe</FullPath>
+      <FullPath>D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\shader.cso</FullPath>
+      <FullPath>D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\shader.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

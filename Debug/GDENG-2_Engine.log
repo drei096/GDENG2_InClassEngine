@@ -1,21 +1,11 @@
-﻿  compilation object save succeeded; see C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\shader.cso
-  AGameObject.cpp
-  AppWindow.cpp
-  ConstantBuffer.cpp
-  DeviceContext.cpp
-C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\DeviceContext.cpp(84,19): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\DeviceContext.cpp(85,20): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-  EngineTime.cpp
-  GraphicsEngine.cpp
-  IndexBuffer.cpp
-  InputSystem.cpp
-  main.cpp
-  PixelShader.cpp
-  PrimitiveManager.cpp
-  QuadPrimitive.cpp
-  SwapChain.cpp
-  VertexBuffer.cpp
-  VertexShader.cpp
-  Window.cpp
-  Generating Code...
-  GDENG-2_Engine.vcxproj -> C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\GDENG-2_Engine.exe
+﻿Window.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+VertexShader.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+VertexBuffer.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+SwapChain.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+PixelShader.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+main.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+GraphicsEngine.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+DeviceContext.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+ConstantBuffer.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+AppWindow.obj : warning LNK4204: 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\vc143.pdb' is missing debugging information for referencing module; linking object as if no debug info
+  GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe
