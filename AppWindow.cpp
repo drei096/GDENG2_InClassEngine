@@ -3,12 +3,15 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include "EngineTime.h"
+#include "PrimitiveManager.h"
 
+/*
 struct vertex
 {
 	Vector3D position;
 	Vector3D color;
 };
+*/
 
 __declspec(align(16))
 struct constant
@@ -66,6 +69,8 @@ void AppWindow::OnCreate()
 
 	
 	//cube
+
+	/*
 	vertex vertex_list[]
 	{
 		//FRONT FACE OF CUBE
@@ -84,8 +89,9 @@ void AppWindow::OnCreate()
 	//CREATING VERTEX BUFFER
 	m_vertex_buffer = GraphicsEngine::GetInstance()->createVertexBuffer();
 	UINT size_of_list = ARRAYSIZE(vertex_list);
+	*/
 
-
+	/*
 	//CREATING INDEX BUFFER
 	unsigned int index_list[] =
 	{
@@ -113,30 +119,39 @@ void AppWindow::OnCreate()
 		7,6,1,
 		1,0,7
 	};
+	*/
+
+	/*
 	m_ib = GraphicsEngine::GetInstance()->createIndexBuffer();
 	UINT size_of_index_list = ARRAYSIZE(index_list);
 	m_ib->load(index_list, size_of_index_list);
+	*/
 
+	/*
 	//CREATING PIXEL SHADER
 	void* shader_byte_code = nullptr;
 	UINT size_of_shader = 0;
 	GraphicsEngine::GetInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_of_shader);
 	m_ps = GraphicsEngine::GetInstance()->createPixelShader(shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
+	*/
 
-
-
+	/*
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_of_shader);
 	m_vertex_buffer->load(vertex_list, sizeof(vertex), size_of_list, shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
+	*/
 
+	//cube1 = new CubePrimitive();
 
 	//CREATING CONSTANT BUFFER
 	constant cc;
 	m_cb = GraphicsEngine::GetInstance()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
+
+	
 }
 
 void AppWindow::OnUpdate()
@@ -156,21 +171,26 @@ void AppWindow::OnUpdate()
 	
 	update();
 
-
+	/*
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+	*/
 
+	/*
 	//set default shaders
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setPixelShader(m_ps);
+	*/
 
 	//set the vertices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(m_vertex_buffer);
+	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(m_vertex_buffer);
+
 	//set the indices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
+	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
 
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
 
+	PrimitiveManager::GetInstance()->DrawCube(m_cb);
 
 	swapChain->present(true);
 
@@ -180,12 +200,12 @@ void AppWindow::OnUpdate()
 void AppWindow::OnDestroy()
 {
 	Window::OnDestroy();
-	m_vertex_buffer->release();
-	m_ib->release();
+	//m_vertex_buffer->release();
+	//m_ib->release();
 	m_cb->release();
 	swapChain->release();
-	m_vs->release();
-	m_ps->release();
+	//m_vs->release();
+	//m_ps->release();
 	GraphicsEngine::GetInstance()->release();
 
 }

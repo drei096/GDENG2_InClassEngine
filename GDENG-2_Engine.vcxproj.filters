@@ -43,6 +43,12 @@
     <ClCompile Include="AGameObject.cpp">
       <Filter>GameEngine\Graphics\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="CubePrimitive.cpp">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="PrimitiveManager.cpp">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -97,6 +103,12 @@
       <Filter>GameEngine\Backend</Filter>
     </ClInclude>
     <ClInclude Include="AGameObject.h">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="CubePrimitive.h">
+      <Filter>GameEngine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimitiveManager.h">
       <Filter>GameEngine\Graphics\Primitives</Filter>
     </ClInclude>
   </ItemGroup>

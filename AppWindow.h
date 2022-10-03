@@ -60,5 +60,6 @@ private:
 	//VALUES FOR FPS CAMERA
 	bool isRMouseClicked = false;
 	float camSpeed = 0.1f;
+
 };
 
