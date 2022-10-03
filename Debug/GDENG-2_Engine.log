@@ -5,4 +5,10 @@ C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(185,43): warn
 C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(186,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\AppWindow.cpp(180,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\AppWindow.cpp(201,38): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+  main.cpp
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(183,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(184,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(185,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Matrix4x4.h(186,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   GDENG-2_Engine.vcxproj -> C:\Users\Student\Documents\GitHub\GDENG2_InClassEngine\Debug\GDENG-2_Engine.exe

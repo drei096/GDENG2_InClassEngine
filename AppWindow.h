@@ -61,5 +61,7 @@ private:
 	float m_forward = 0.0f;
 	float m_right = 0.0f;
 	float m_up = 0.0f;
+
+	bool isRMouseClicked = false;
 };
 

@@ -263,32 +263,36 @@ void AppWindow::onKeyDown(int key)
 	*/
 
 	//MOVE CAMERA TEST
-	switch(key)
+	if (isRMouseClicked)
 	{
-	case 'W':
-		m_forward = 1.0f;
-		break;
+		switch (key)
+		{
+		case 'W':
+			m_forward = 1.0f;
+			break;
 
-	case 'S':
-		m_forward = -1.0f;
-		break;
+		case 'S':
+			m_forward = -1.0f;
+			break;
 
-	case 'A':
-		m_right = -1.0f;
-		break;
+		case 'A':
+			m_right = -1.0f;
+			break;
 
-	case 'D':
-		m_right = 1.0f;
-		break;
+		case 'D':
+			m_right = 1.0f;
+			break;
 
-	case 'E':
-		m_up = 1.0f;
-		break;
+		case 'E':
+			m_up = 1.0f;
+			break;
 
-	case 'Q':
-		m_up = -1.0f;
-		break;
+		case 'Q':
+			m_up = -1.0f;
+			break;
+		}
 	}
+	
 }
 
 void AppWindow::onKeyUp(int key)
@@ -301,10 +305,12 @@ void AppWindow::onKeyUp(int key)
 
 void AppWindow::onMouseMove(const Point& mouse_pos)
 {
+	if (isRMouseClicked)
+	{
+		m_rot_x -= (mouse_pos.m_y) * deltaTime;
+		m_rot_y -= (mouse_pos.m_x) * deltaTime;
+	}
 	
-
-	m_rot_x -= (mouse_pos.m_y) * deltaTime;
-	m_rot_y -= (mouse_pos.m_x) * deltaTime;
 
 
 }
@@ -321,12 +327,14 @@ void AppWindow::onLeftMouseUp(const Point& mouse_pos)
 
 void AppWindow::onRightMouseDown(const Point& mouse_pos)
 {
-	
+	//FOR FREE MOVEMENT
+	isRMouseClicked = true;
 }
 
 void AppWindow::onRightMouseUp(const Point& mouse_pos)
 {
-	
+	//FOR FREE MOVEMENT
+	isRMouseClicked = false;
 }
 
 void AppWindow::OnFocus()
