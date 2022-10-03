@@ -199,6 +199,11 @@ public:
 		return Vector3D(matrix[0][0], matrix[0][1], matrix[0][2]);
 	}
 
+	Vector3D getYDirection()
+	{
+		return Vector3D(matrix[1][0], matrix[1][1], matrix[1][2]);
+	}
+
 	Vector3D getTranslation()
 	{
 		return Vector3D(matrix[3][0], matrix[3][1], matrix[3][2]);

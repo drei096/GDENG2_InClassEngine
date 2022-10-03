@@ -43,7 +43,7 @@ void InputSystem::update()
 
 		while (it != m_set_listeners.end())
 		{
-			(*it)->onMouseMove(Point(current_mouse_pos.x, current_mouse_pos.y));
+			(*it)->onMouseMove(Point(current_mouse_pos.x - m_old_mouse_pos.m_x, current_mouse_pos.y - m_old_mouse_pos.m_y));
 			++it;
 		}
 	}

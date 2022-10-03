@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Vector3D.h"
 #include "Matrix4x4.h"
+#include "EngineTime.h"
 
 struct vertex
 {
@@ -176,9 +177,7 @@ void AppWindow::OnUpdate()
 
 	swapChain->present(true);
 
-	old_delta = new_delta;
-	new_delta = ::GetTickCount();
-	deltaTime = (old_delta) ? ((new_delta - old_delta) / 1000.0f) : 0;
+	deltaTime = EngineTime::getDeltaTime();
 }
 
 void AppWindow::OnDestroy()
@@ -196,15 +195,12 @@ void AppWindow::OnDestroy()
 
 void AppWindow::update()
 {
+	
 	//get ticks
 	constant cc;
-	cc.m_time = GetTickCount();
+	cc.m_time = EngineTime::getDeltaTime();
 
-	deltaPos += deltaTime * 0.1f;
-	if (deltaPos > 1.0f)
-		deltaPos = 0;
-
-	deltaScale += deltaTime /1.0f;
+	
 
 	Matrix4x4 temp;
 	Matrix4x4 world_cam;
@@ -222,6 +218,7 @@ void AppWindow::update()
 
 	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.3f);
 	new_pos = new_pos + world_cam.getXDirection() * (m_right * 0.3f);
+	new_pos = new_pos + world_cam.getYDirection() * (m_up * 0.3f);
 
 	world_cam.setTranslationMatrix(new_pos);
 
@@ -283,6 +280,14 @@ void AppWindow::onKeyDown(int key)
 	case 'D':
 		m_right = 1.0f;
 		break;
+
+	case 'E':
+		m_up = 1.0f;
+		break;
+
+	case 'Q':
+		m_up = -1.0f;
+		break;
 	}
 }
 
@@ -291,19 +296,17 @@ void AppWindow::onKeyUp(int key)
 	//MOVE CAMERA TEST
 	m_forward = 0.0f;
 	m_right = 0.0f;
+	m_up = 0.0f;
 }
 
 void AppWindow::onMouseMove(const Point& mouse_pos)
 {
-	int width = (this->getClientWindowRect().right - this->getClientWindowRect().left);
-	int height = (this->getClientWindowRect().bottom - this->getClientWindowRect().top);
-
-	m_rot_x -= (mouse_pos.m_y - (height / 2.0f)) * deltaTime;
-	m_rot_y -= (mouse_pos.m_x - (width / 2.0f)) * deltaTime;
-
 	
 
-	InputSystem::GetInstance()->setCursorPosition(Point(width / 2.0f, height / 2.0f));
+	m_rot_x -= (mouse_pos.m_y) * deltaTime;
+	m_rot_y -= (mouse_pos.m_x) * deltaTime;
+
+
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
