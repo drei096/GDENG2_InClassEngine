@@ -8,7 +8,6 @@ struct vertex
 {
 	Vector3D position;
 	Vector3D color;
-	Vector3D color1;
 };
 
 __declspec(align(16))
@@ -17,7 +16,6 @@ struct constant
 	Matrix4x4 m_world;
 	Matrix4x4 m_view;
 	Matrix4x4 m_proj;
-	unsigned int m_time;
 };
 
 
@@ -71,16 +69,16 @@ void AppWindow::OnCreate()
 	vertex vertex_list[]
 	{
 		//FRONT FACE OF CUBE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
+		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0)},
+		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0)},
+		{Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0)},
+		{Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0)},
 
 		//BACK FACE OF CUBE
-		{ Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) }
+		{Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0)},
+		{Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1)},
+		{Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1)},
+		{Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0)}
 	};
 	
 	//CREATING VERTEX BUFFER
@@ -137,7 +135,6 @@ void AppWindow::OnCreate()
 
 	//CREATING CONSTANT BUFFER
 	constant cc;
-	cc.m_time = 0;
 	m_cb = GraphicsEngine::GetInstance()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
 }
@@ -177,7 +174,7 @@ void AppWindow::OnUpdate()
 
 	swapChain->present(true);
 
-	deltaTime = EngineTime::getDeltaTime();
+	
 }
 
 void AppWindow::OnDestroy()
@@ -195,19 +192,18 @@ void AppWindow::OnDestroy()
 
 void AppWindow::update()
 {
-	
 	//get ticks
 	constant cc;
-	cc.m_time = EngineTime::getDeltaTime();
-
 	
 
 	Matrix4x4 temp;
 	Matrix4x4 world_cam;
 
+	//INITIALIZING WORLD MATRIX
 	cc.m_world.setIdentity();
 	world_cam.setIdentity();
 
+	//TEMP MATRICES FOR MOUSE MOVE ROTATION
 	temp.setIdentity();
 	temp.setQuaternionRotation(m_rot_x, 1, 0, 0);
 	world_cam *= temp;
@@ -216,27 +212,20 @@ void AppWindow::update()
 	temp.setQuaternionRotation(m_rot_y, 0, 1, 0);
 	world_cam *= temp;
 
-	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.3f);
-	new_pos = new_pos + world_cam.getXDirection() * (m_right * 0.3f);
-	new_pos = new_pos + world_cam.getYDirection() * (m_up * 0.3f);
+	//NEW POSITION FOR FREECAM MOVEMENT
+	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * camSpeed);
+	new_pos = new_pos + world_cam.getXDirection() * (m_right * camSpeed);
+	new_pos = new_pos + world_cam.getYDirection() * (m_up * camSpeed);
 
 	world_cam.setTranslationMatrix(new_pos);
 
 	m_world_cam = world_cam;
 	world_cam.inverse();
 
-
-
-
+	//SETTING THE VIEW MATRIX
 	cc.m_view = world_cam;
-	/*cc.m_proj.setOrthoLH
-	(
-		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 400.0f,
-		(this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 400.0f,
-		-4.0f,
-		4.0f
-	);*/
-
+	
+	//SETTING THE PROJECTION MATRIX
 	int width = (this->getClientWindowRect().right - this->getClientWindowRect().left);
 	int height = (this->getClientWindowRect().bottom - this->getClientWindowRect().top);
 
@@ -248,20 +237,6 @@ void AppWindow::update()
 
 void AppWindow::onKeyDown(int key)
 {
-
-	/*
-	 *MOVE CUBE TEST
-	switch(key)
-	{
-	case 'A':
-		m_rot_y += 0.707f * deltaTime;
-		break;
-	case 'D':
-		m_rot_y -= 0.707f * deltaTime;
-		break;
-	}
-	*/
-
 	//MOVE CAMERA TEST
 	if (isRMouseClicked)
 	{
@@ -305,14 +280,12 @@ void AppWindow::onKeyUp(int key)
 
 void AppWindow::onMouseMove(const Point& mouse_pos)
 {
+	//FOR UNITY-LIKE FREECAM MOVEMENT
 	if (isRMouseClicked)
 	{
-		m_rot_x -= (mouse_pos.m_y) * deltaTime;
-		m_rot_y -= (mouse_pos.m_x) * deltaTime;
+		m_rot_x -= ((mouse_pos.m_y) * EngineTime::getDeltaTime()) * 0.3f;
+		m_rot_y -= ((mouse_pos.m_x) * EngineTime::getDeltaTime()) * 0.3f;
 	}
-	
-
-
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
@@ -346,3 +319,16 @@ void AppWindow::OnKillFocus()
 {
 	InputSystem::GetInstance()->removeListener(this);
 }
+
+
+
+
+
+
+/*cc.m_proj.setOrthoLH
+	(
+		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 400.0f,
+		(this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 400.0f,
+		-4.0f,
+		4.0f
+	);*/

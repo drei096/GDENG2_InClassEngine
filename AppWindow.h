@@ -44,24 +44,21 @@ private:
 	ConstantBuffer* m_cb;
 	IndexBuffer* m_ib;
 
-	float old_delta;
-	float new_delta;
-	float deltaTime;
+	//CAMERA MATRIX
+	Matrix4x4 m_world_cam;
 
-	float deltaScale;
-	float deltaPos;
-
+	//MOUSE MOVE ROTATION VALUES
 	float m_rot_x = 0;
 	float m_rot_y = 0;
 	float m_rot_z = 0;
 
-	float m_scale_cube = 1;
-
-	Matrix4x4 m_world_cam;
+	//KEY MOVE TRANSLATE VALUES
 	float m_forward = 0.0f;
 	float m_right = 0.0f;
 	float m_up = 0.0f;
 
+	//VALUES FOR FPS CAMERA
 	bool isRMouseClicked = false;
+	float camSpeed = 0.1f;
 };
 
