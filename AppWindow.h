@@ -21,22 +21,7 @@ public:
 
 	void updateQuadPos();
 
-	/*
-	virtual void OnFocus() override;
-	virtual void OnKillFocus() override;
-
 	
-
-	//inherited from input listener
-	virtual void onKeyDown(int key) override;
-	virtual void onKeyUp(int key) override;
-
-	virtual void onMouseMove(const Point& delta_mouse_pos) override;
-	virtual void onLeftMouseDown(const Point& mouse_pos) override;
-	virtual void onLeftMouseUp(const Point& mouse_pos) override;
-	virtual void onRightMouseDown(const Point& mouse_pos) override;
-	virtual void onRightMouseUp(const Point& mouse_pos) override;
-	*/
 
 private:
 	SwapChain* swapChain;
@@ -46,9 +31,6 @@ private:
 	ConstantBuffer* m_cb;
 	IndexBuffer* m_ib;
 
-	float old_delta;
-	float new_delta;
-	float deltaTime;
 
 	float deltaScale;
 	float deltaPos;
@@ -60,5 +42,7 @@ private:
 	float m_scale_cube = 1;
 	float m_angle = 0.0f;
 
+	float animationTicks = 0.0f;
+	bool isForwardTime = true;
 };
 

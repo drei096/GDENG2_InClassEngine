@@ -37,6 +37,9 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>GameEngine\InputSystem</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTime.cpp">
+      <Filter>GameEngine\Backend</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="Point.h">
       <Filter>GameEngine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="EngineTime.h">
+      <Filter>GameEngine\Backend</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -127,6 +133,9 @@
     </Filter>
     <Filter Include="GameEngine\InputSystem">
       <UniqueIdentifier>{cb081549-257d-489a-a343-e4a601de67dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Backend">
+      <UniqueIdentifier>{1d307eca-9194-4b1f-b283-163e04f4cce2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
