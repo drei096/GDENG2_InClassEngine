@@ -42,7 +42,5 @@ private:
 	float m_scale_cube = 1;
 	float m_angle = 0.0f;
 
-	float animationTicks = 0.0f;
-	bool isForwardTime = true;
 };
 

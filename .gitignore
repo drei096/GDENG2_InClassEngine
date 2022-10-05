@@ -378,3 +378,8 @@ Debug/main.obj
 Debug/Window.obj
 GDENG-2_Engine.vcxproj
 GDENG-2_Engine.vcxproj.filters
+Debug/GDENG-2_Engine.pdb
+Debug/GDENG-2_Engine.log
+Debug/GDENG-2_Engine.ilk
+Debug/GDENG-2_Engine.exe
+Debug/AppWindow.obj

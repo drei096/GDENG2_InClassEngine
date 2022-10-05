@@ -42,14 +42,14 @@ void AppWindow::OnCreate()
 	RECT rc = this->getClientWindowRect();
 	swapChain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
-	//FOR SLIDE 13
+	//FOR SLIDE 14
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.8f,-0.8f,0.0f,    -0.32f,-0.11f,0.0f,   1,0,0,  0,1,1 }, // POS1
-		{-0.9f,0.1f,0.0f,     -0.11f,0.78f,0.0f,    1,0,0,  1,1,0 }, // POS2
-		{ 0.0f,-0.4f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS2
-		{ 0.0f,0.1f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,1,0 }
+		{-0.8f,-0.95f,0.0f,    -0.32f,-0.05f,0.0f,   1,0,0,  0,1,1 }, // POS1
+		{-0.9f,0.15f,0.0f,     0.0f,1.0f,0.0f,    1,0,0,  1,1,0 }, // POS2
+		{ 1.0f,-0.4f,0.0f,     0.0f,-0.8f,0.0f,   0,0,1,  1,0,0 },// POS2
+		{ -0.8f,-0.8f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,1,0 }
 	};
 	
 
@@ -91,37 +91,10 @@ void AppWindow::OnUpdate()
 
 
 
-	//FOR SLIDE 13
-	//forward time is enabled at start
-	if(isForwardTime == true)
-	{
-		//continue animation until it reaches 8 seconds
-		if(animationTicks < 8.0f)
-		{
-			animationTicks += EngineTime::getDeltaTime();
-			m_angle += 1.57f * EngineTime::getDeltaTime() * animationTicks;
-			cc.m_angle = m_angle;
-		}
-		//turn forward time to false as it exceeds 8 seconds to make it backward time
-		else
-			isForwardTime = false;
-	}
-
-	//when backward time is enabled
-	if(isForwardTime == false)
-	{
-		//continue animation as current animation ticks reach down to zero
-		if (animationTicks > 0.0f)
-		{
-			animationTicks -= EngineTime::getDeltaTime();
-			m_angle += 1.57f * EngineTime::getDeltaTime() * animationTicks;
-			cc.m_angle = m_angle;
-		}
-		//turn forward time back to true when it goes below zero
-		else
-			isForwardTime = true;
-	}
-	//END OF FOR SLIDE 13
+	//FOR SLIDE 14
+	m_angle += 1.57f * EngineTime::getDeltaTime();
+	cc.m_angle = m_angle;
+	//END OF FOR SLIDE 14
 
 
 
