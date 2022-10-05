@@ -92,7 +92,7 @@ void AppWindow::OnUpdate()
 
 
 	//FOR SLIDE 14
-	EngineTime::setTimeScale(0.7f);
+	EngineTime::setTimeScale(0.5);
 	m_angle += 1.57f * EngineTime::getDeltaTime();
 	cc.m_angle = m_angle;
 	//END OF FOR SLIDE 14
