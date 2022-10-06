@@ -39,6 +39,32 @@ public:
 		return Vector3D(x + vec.x, y + vec.y, z + vec.z);
 	}
 
+	Vector3D operator -(Vector3D vec)
+	{
+		return Vector3D(x - vec.x, y - vec.y, z - vec.z);
+	}
+
+	float getMagnitude(Vector3D vec)
+	{
+		return sqrtf(powf(vec.x, 2) + powf(vec.y, 2) + powf(vec.z, 2));
+	}
+
+	static Vector3D getUnitVector(Vector3D vec)
+	{
+		float magnitude = vec.getMagnitude(vec);
+		return Vector3D( (vec.x * (1 / magnitude)), (vec.y * (1 / magnitude)), (vec.z * (1 / magnitude)));
+	}
+
+	static Vector3D cross(Vector3D v1, Vector3D v2)
+	{
+		return Vector3D((v1.y * v2.z) - (v1.z * v2.y), (v1.x * v2.z) - (v1.z * v2.x), (v1.x * v2.y) - (v1.y * v2.x));
+	}
+
+	static Vector3D getSurfaceNormal(Vector3D v1, Vector3D v2, Vector3D v3)
+	{
+		return getUnitVector(cross(v2 - v1, v3 - v1));
+	}
+
 public:
 	float x;
 	float y;

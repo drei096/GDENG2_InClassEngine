@@ -1,12 +1,17 @@
 #include "CubePrimitive.h"
 
+#include "DeviceContext.h"
+#include "LinePrimitive.h"
+
 CubePrimitive::CubePrimitive()
 {
 	setVertexList();
+	setIndexList();
+	setNormalsList();
 
 	vertexBuffer = GraphicsEngine::GetInstance()->createVertexBuffer();
 
-	setIndexList();
+	
 
 	indexBuffer = GraphicsEngine::GetInstance()->createIndexBuffer();
 	indexBuffer->load(index_list, getIndexListSize());
@@ -25,7 +30,8 @@ CubePrimitive::CubePrimitive()
 	m_ps = GraphicsEngine::GetInstance()->createPixelShader(shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->releaseCompiledShader();
 
-
+	//ADDED RASTERIZER STATE FOR WIREFRAME MODE
+	initWireFrameRS();
 	
 }
 
@@ -43,15 +49,15 @@ void CubePrimitive::setVertexList()
 {
 	//FRONT FACE OF CUBE
 	vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0) };
-	vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0) };
-	vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0) };
-	vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0) };
+	vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,0,1) };
+	vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(0,1,0) };
+	vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(0,0,1) };
 
 	//BACK FACE OF CUBE
 	vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0) };
-	vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1) };
-	vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) };
-	vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) };
+	vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,0,0) };
+	vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,0,1) };
+	vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,1) };
 }
 
 void CubePrimitive::setIndexList()
@@ -110,10 +116,70 @@ IndexBuffer* CubePrimitive::getIndexBuffer()
 	return this->indexBuffer;
 }
 
+void CubePrimitive::setNormalsList()
+{
+	int indexListIterator = 0;
+
+	for(int i = 0; i < 12; i++)
+	{
+		normalsList[i] = Vector3D::getSurfaceNormal(vertex_list[index_list[indexListIterator]].position, vertex_list[index_list[indexListIterator + 1]].position, vertex_list[index_list[indexListIterator + 2]].position);
+		indexListIterator += 3;
+	}
+}
+
+void* CubePrimitive::getNormalsList()
+{
+	return normalsList;
+}
+
+UINT CubePrimitive::getNormalsListSize()
+{
+	return ARRAYSIZE(normalsList);
+}
+
+void CubePrimitive::drawNormalLines(ConstantBuffer* m_cb)
+{
+	LinePrimitive* newLine;
+
+	for(int i = 0; i < getNormalsListSize(); i+=2)
+	{
+		newLine = new LinePrimitive(normalsList[i]);
+
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(newLine->m_vs, m_cb);
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(newLine->m_ps, m_cb);
+
+		//set default shaders
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexShader(newLine->m_vs);
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setPixelShader(newLine->m_ps);
+
+		//set the vertices of the object/cube/triangle to draw
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(newLine->getVertexBuffer());
+
+
+		//draw the line
+		GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawLineList(2, 0);
+	}
+
+	
+}
+
 bool CubePrimitive::release()
 {
 	if (vertexBuffer->release() && indexBuffer->release())
 		return true;
 	else
 		return false;
+}
+
+//ADDED RASTERIZER STATE FOR WIREFRAME MODE
+void CubePrimitive::initWireFrameRS()
+{
+	D3D11_RASTERIZER_DESC wfd;
+	ZeroMemory(&wfd, sizeof(D3D11_RASTERIZER_DESC));
+	wfd.FillMode = D3D11_FILL_WIREFRAME;
+	wfd.CullMode = D3D11_CULL_NONE;
+	wfd.DepthClipEnable = true;
+
+	GraphicsEngine::GetInstance()->d3d11_device->CreateRasterizerState(&wfd, &mWireFrameRS);
+
 }

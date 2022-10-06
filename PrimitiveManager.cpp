@@ -48,8 +48,12 @@ void PrimitiveManager::DrawCube(ConstantBuffer* m_cb)
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setIndexBuffer(newCube->getIndexBuffer());
 
+	//make renderstate to wireframe
+	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->m_device_context->RSSetState(newCube->mWireFrameRS);
+
 	//draw the cube
 	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(newCube->getIndexListSize(), 0, 0);
+	newCube->drawNormalLines(m_cb);
 }
 
 void PrimitiveManager::release()

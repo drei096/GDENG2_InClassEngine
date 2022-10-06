@@ -7,6 +7,8 @@ class VertexShader;
 class PixelShader;
 class ConstantBuffer;
 class IndexBuffer;
+class PrimitiveManager;
+class CubePrimitive;
 
 class DeviceContext
 {
@@ -28,6 +30,7 @@ public:
 	void drawTriangleList(UINT vertex_count, UINT start_vertex_index);
 	void drawTriangleStrip(UINT vertex_count, UINT start_vertex_index);
 	void drawIndexedTriangleList(UINT index_count, UINT start_vertex_index, UINT start_index_location);
+	void drawLineList(UINT vertex_count, UINT start_vertex);
 
 	void setViewportSize(UINT width, UINT height);
 
@@ -39,5 +42,7 @@ private:
 
 private:
 	friend class ConstantBuffer;
+	friend class PrimitiveManager;
+	friend class CubePrimitive;
 };
 

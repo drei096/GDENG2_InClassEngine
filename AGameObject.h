@@ -9,7 +9,7 @@
 #include "GraphicsEngine.h"
 
 class PrimitiveManager;
-
+class GraphicsEngine;
 
 struct vertex
 {
@@ -26,5 +26,6 @@ public:
 
 private:
 	friend class PrimitiveManager;
+	friend class GraphicsEngine;
 };
 
