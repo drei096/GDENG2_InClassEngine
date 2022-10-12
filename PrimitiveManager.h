@@ -1,7 +1,10 @@
 #pragma once
 
-#include "CubePrimitive.h"
+#include "GraphicsEngine.h"
 #include "DeviceContext.h"
+#include "CubePrimitive.h"
+
+class GraphicsEngine;
 
 class PrimitiveManager
 {
@@ -19,4 +22,7 @@ public:
 	void DrawCube(ConstantBuffer* m_cb);
 
 	void release();
+
+private:
+	friend class GraphicsEngine;
 };

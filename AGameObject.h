@@ -6,10 +6,6 @@
 #include "Vector3D.h"
 #include "PixelShader.h"
 #include "VertexShader.h"
-#include "GraphicsEngine.h"
-
-class PrimitiveManager;
-
 
 struct vertex
 {

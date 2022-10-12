@@ -35,21 +35,22 @@ void PrimitiveManager::DrawCube(ConstantBuffer* m_cb)
 {
 	auto newCube = new CubePrimitive();
 
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(newCube->m_vs, m_cb);
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setConstantBuffer(newCube->m_ps, m_cb);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(newCube->m_vs, m_cb);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(newCube->m_ps, m_cb);
 
 	//set default shaders
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexShader(newCube->m_vs);
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setPixelShader(newCube->m_ps);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(newCube->m_vs);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(newCube->m_ps);
 
 	//set the vertices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setVertexBuffer(newCube->getVertexBuffer());
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(newCube->getVertexBuffer());
 
 	//set the indices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setIndexBuffer(newCube->getIndexBuffer());
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(newCube->getIndexBuffer());
 
 	//draw the cube
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(newCube->getIndexListSize(), 0, 0);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(newCube->getIndexListSize(), 0, 0);
+
 }
 
 void PrimitiveManager::release()

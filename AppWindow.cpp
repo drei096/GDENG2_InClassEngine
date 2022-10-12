@@ -37,7 +37,7 @@ void AppWindow::OnCreate()
 	Window::OnCreate();
 	InputSystem::GetInstance()->addListener(this);
 	GraphicsEngine::GetInstance()->init();
-	swapChain = GraphicsEngine::GetInstance()->createSwapChain();
+	swapChain = GraphicsEngine::GetInstance()->getRenderingSystem()->createSwapChain();
 
 	//INITIALIZE WORLD CAM MATRIX
 	m_world_cam.setTranslationMatrix(Vector3D(0, 0, -2));
@@ -148,7 +148,7 @@ void AppWindow::OnCreate()
 
 	//CREATING CONSTANT BUFFER
 	constant cc;
-	m_cb = GraphicsEngine::GetInstance()->createConstantBuffer();
+	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
 	m_cb->load(&cc, sizeof(constant));
 
 	
@@ -160,11 +160,11 @@ void AppWindow::OnUpdate()
 	InputSystem::GetInstance()->update();
 
 	//clear render target
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 1, 1, 1, 1);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 1, 1, 1, 1);
 
 	//set viewport size of render target
 	RECT rc = this->getClientWindowRect();
-	GraphicsEngine::GetInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
 
 
@@ -251,7 +251,7 @@ void AppWindow::update()
 
 	cc.m_proj.setPerspectiveFOVLH(1.57f, (float)width / (float)height, 0.1f, 100.0f);
 
-	m_cb->update(GraphicsEngine::GetInstance()->getImmediateDeviceContext(), &cc);
+	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	
 }
 

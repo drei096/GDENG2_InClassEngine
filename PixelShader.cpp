@@ -1,7 +1,7 @@
 #include "PixelShader.h"
-#include "GraphicsEngine.h"
+#include "RenderingSystem.h"
 
-PixelShader::PixelShader()
+PixelShader::PixelShader(RenderingSystem* system) : m_renderingSystem(system)
 {
 }
 
@@ -18,7 +18,7 @@ bool PixelShader::release()
 
 bool PixelShader::init(const void* shader_byte_code, size_t byte_code_size)
 {
-	if (FAILED(GraphicsEngine::GetInstance()->d3d11_device->CreatePixelShader(shader_byte_code, byte_code_size, nullptr, &m_pixel_shader)))
+	if (FAILED(m_renderingSystem->d3d11_device->CreatePixelShader(shader_byte_code, byte_code_size, nullptr, &m_pixel_shader)))
 	{
 		return false;
 	}

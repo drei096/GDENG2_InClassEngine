@@ -1,17 +1,11 @@
 #pragma once
 #include <d3d11.h>
-
-class SwapChain;
-class VertexBuffer;
-class VertexShader;
-class PixelShader;
-class ConstantBuffer;
-class IndexBuffer;
+#include "Prerequisites.h"
 
 class DeviceContext
 {
 public:
-	DeviceContext(ID3D11DeviceContext* deviceContext);
+	DeviceContext(ID3D11DeviceContext* deviceContext, RenderingSystem* system);
 	~DeviceContext();
 	bool release();
 
@@ -36,6 +30,7 @@ public:
 
 private:
 	ID3D11DeviceContext* m_device_context;
+	RenderingSystem* m_renderingSystem = nullptr;
 
 private:
 	friend class ConstantBuffer;

@@ -1,7 +1,7 @@
 #include "SwapChain.h"
-#include "GraphicsEngine.h"
+#include "RenderingSystem.h"
 
-SwapChain::SwapChain()
+SwapChain::SwapChain(RenderingSystem* system) : m_renderingSystem(system)
 {
 	
 }
@@ -13,7 +13,7 @@ SwapChain::~SwapChain()
 
 bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 {
-	ID3D11Device* deviceRef = GraphicsEngine::GetInstance()->d3d11_device;
+	ID3D11Device* deviceRef = m_renderingSystem->d3d11_device;
 
 	DXGI_SWAP_CHAIN_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
@@ -29,7 +29,7 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
 	desc.SampleDesc.Quality = 0;
 	desc.Windowed = TRUE;
 
-	HRESULT res = GraphicsEngine::GetInstance()->dxgiFactory->CreateSwapChain(deviceRef, &desc, &swapChain);
+	HRESULT res = m_renderingSystem->dxgiFactory->CreateSwapChain(deviceRef, &desc, &swapChain);
 	if(FAILED(res))
 	{
 		return false;

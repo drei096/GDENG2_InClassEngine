@@ -1,29 +1,31 @@
 #include "CubePrimitive.h"
 
+#include "GraphicsEngine.h"
+
 CubePrimitive::CubePrimitive()
 {
 	setVertexList();
 
-	vertexBuffer = GraphicsEngine::GetInstance()->createVertexBuffer();
+	vertexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexBuffer();
 
 	setIndexList();
 
-	indexBuffer = GraphicsEngine::GetInstance()->createIndexBuffer();
+	indexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createIndexBuffer();
 	indexBuffer->load(index_list, getIndexListSize());
 
 	void* shader_byte_code = nullptr;
 	UINT size_of_shader = 0;
 
 	//CREATING VERTEX SHADER
-	GraphicsEngine::GetInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
-	m_vs = GraphicsEngine::GetInstance()->createVertexShader(shader_byte_code, size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
+	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
 	vertexBuffer->load(vertex_list, sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader);
-	GraphicsEngine::GetInstance()->releaseCompiledShader();
+	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER
-	GraphicsEngine::GetInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_of_shader);
-	m_ps = GraphicsEngine::GetInstance()->createPixelShader(shader_byte_code, size_of_shader);
-	GraphicsEngine::GetInstance()->releaseCompiledShader();
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_of_shader);
+	m_ps = GraphicsEngine::GetInstance()->getRenderingSystem()->createPixelShader(shader_byte_code, size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 
 	

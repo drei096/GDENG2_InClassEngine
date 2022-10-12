@@ -1,7 +1,7 @@
 #include "IndexBuffer.h"
-#include "GraphicsEngine.h"
+#include "RenderingSystem.h"
 
-IndexBuffer::IndexBuffer() :m_buffer(0)
+IndexBuffer::IndexBuffer(RenderingSystem* system) : m_renderingSystem(system), m_buffer(0)
 {
 }
 
@@ -25,7 +25,7 @@ bool IndexBuffer::load(void* list_indices, UINT size_list)
 
 	m_size_list = size_list;
 
-	if (FAILED(GraphicsEngine::GetInstance()->d3d11_device->CreateBuffer(&buffer_desc, &init_data, &m_buffer)))
+	if (FAILED(m_renderingSystem->d3d11_device->CreateBuffer(&buffer_desc, &init_data, &m_buffer)))
 	{
 		return false;
 	}
