@@ -52,6 +52,12 @@
     <ClCompile Include="RenderingSystem.cpp">
       <Filter>GameEngine\Graphics\RenderingSystem</Filter>
     </ClCompile>
+    <ClCompile Include="ViewportCameraManager.cpp">
+      <Filter>GameEngine\Graphics\RenderingSystem\ViewportCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameEngine\Graphics\RenderingSystem\ViewportCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -120,6 +126,12 @@
     <ClInclude Include="Prerequisites.h">
       <Filter>GameEngine\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="ViewportCameraManager.h">
+      <Filter>GameEngine\Graphics\RenderingSystem\ViewportCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngine\Graphics\RenderingSystem\ViewportCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -172,6 +184,9 @@
     </Filter>
     <Filter Include="GameEngine\Graphics\RenderingSystem\Primitives">
       <UniqueIdentifier>{74b8ef68-ddf3-470a-a68f-e905c4cb55a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\RenderingSystem\ViewportCamera">
+      <UniqueIdentifier>{1bb4c2e1-f123-4cb8-b2ce-92ff7d010cfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

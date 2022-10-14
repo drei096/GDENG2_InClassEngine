@@ -1,9 +1,11 @@
 #include "CubePrimitive.h"
-
 #include "GraphicsEngine.h"
+#include "ViewportCameraManager.h"
 
-CubePrimitive::CubePrimitive()
+
+CubePrimitive::CubePrimitive(std::string name) : AGameObject(name)
 {
+
 	setVertexList();
 
 	vertexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexBuffer();
@@ -27,7 +29,17 @@ CubePrimitive::CubePrimitive()
 	m_ps = GraphicsEngine::GetInstance()->getRenderingSystem()->createPixelShader(shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
+	//CREATING CONSTANT BUFFER
+	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
+	m_cb->load(&cc, sizeof(constantData));
 
+	//set default shaders
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
+
+	
+
+	
 	
 }
 
@@ -112,6 +124,64 @@ IndexBuffer* CubePrimitive::getIndexBuffer()
 	return this->indexBuffer;
 }
 
+ConstantBuffer* CubePrimitive::getConstantBuffer()
+{
+	return this->m_cb;
+}
+
+void* CubePrimitive::getCBData()
+{
+	return &cc;
+}
+
+void CubePrimitive::update(float deltaTime)
+{
+}
+
+void CubePrimitive::draw(float width, float height)
+{
+	Matrix4x4 allMatrix;
+	allMatrix.setIdentity();
+	Matrix4x4 translationMatrix;
+	translationMatrix.setIdentity();
+	translationMatrix.setTranslationMatrix(this->getLocalPosition());
+
+	/*
+	Vector3D rotation = this->getLocalRotation();
+	Matrix4x4 zMatrix; zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
+	Matrix4x4 xMatrix; xMatrix.setQuaternionRotation(rotation.x, 1,0,0);
+	Matrix4x4 yMatrix; yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
+
+	//Scale --> Rotate --> Transform as recommended order.
+	Matrix4x4 rotMatrix; rotMatrix.setIdentity();
+	rotMatrix *= zMatrix;
+	rotMatrix *= yMatrix;
+	rotMatrix *= xMatrix;
+	allMatrix *= rotMatrix;
+	*/
+
+	allMatrix *= translationMatrix;
+	cc.m_world = allMatrix;
+
+	Matrix4x4 cameraMatrix = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
+	cc.m_view = cameraMatrix;
+
+	
+	float aspectRatio = (float)width / (float)height;
+	cc.m_proj.setPerspectiveFOVLH(1.57f, aspectRatio, 0.1f, 100.0f);
+
+	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+
+	//set the indices of the object/cube/triangle to draw
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());
+	//set the vertices of the object/cube/triangle to draw
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
+
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+}
+
 bool CubePrimitive::release()
 {
 	if (vertexBuffer->release() && indexBuffer->release())
@@ -119,3 +189,5 @@ bool CubePrimitive::release()
 	else
 		return false;
 }
+
+

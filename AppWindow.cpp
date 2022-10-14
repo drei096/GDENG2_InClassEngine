@@ -4,6 +4,7 @@
 #include "Matrix4x4.h"
 #include "EngineTime.h"
 #include "PrimitiveManager.h"
+#include "ViewportCameraManager.h"
 
 /*
 struct vertex
@@ -13,13 +14,7 @@ struct vertex
 };
 */
 
-__declspec(align(16))
-struct constant
-{
-	Matrix4x4 m_world;
-	Matrix4x4 m_view;
-	Matrix4x4 m_proj;
-};
+
 
 
 AppWindow::AppWindow()
@@ -40,11 +35,15 @@ void AppWindow::OnCreate()
 	swapChain = GraphicsEngine::GetInstance()->getRenderingSystem()->createSwapChain();
 
 	//INITIALIZE WORLD CAM MATRIX
-	m_world_cam.setTranslationMatrix(Vector3D(0, 0, -2));
+	//m_world_cam.setTranslationMatrix(Vector3D(0, 0, -2));
 
 	//GETTING THE RECT OF WINDOW
 	RECT rc = this->getClientWindowRect();
 	swapChain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
+
+	this->windowWidth = rc.right - rc.left;
+	this->windowHeight = rc.bottom - rc.top;
+	ViewportCameraManager::initialize();
 
 	/*
 	//quad rainbow
@@ -146,11 +145,18 @@ void AppWindow::OnCreate()
 
 	//cube1 = new CubePrimitive();
 
-	//CREATING CONSTANT BUFFER
-	constant cc;
-	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
-	m_cb->load(&cc, sizeof(constant));
-
+	//constant cc;
+	//m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
+	//m_cb->load(&cc, sizeof(constantData));
+	
+	/*
+	for(int i = 0; i < 100; i++)
+	{
+		auto newCube = new CubePrimitive();
+		
+	}
+	*/
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
 	
 }
 
@@ -168,7 +174,7 @@ void AppWindow::OnUpdate()
 
 
 
-	
+	ViewportCameraManager::getInstance()->update();
 	update();
 
 	/*
@@ -190,7 +196,7 @@ void AppWindow::OnUpdate()
 
 	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
 
-	PrimitiveManager::GetInstance()->DrawCube(m_cb);
+	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 
 	swapChain->present(true);
 
@@ -202,7 +208,7 @@ void AppWindow::OnDestroy()
 	Window::OnDestroy();
 	//m_vertex_buffer->release();
 	//m_ib->release();
-	m_cb->release();
+	//m_cb->release();
 	swapChain->release();
 	//m_vs->release();
 	//m_ps->release();
@@ -212,6 +218,7 @@ void AppWindow::OnDestroy()
 
 void AppWindow::update()
 {
+	/*
 	//get ticks
 	constant cc;
 	
@@ -252,60 +259,24 @@ void AppWindow::update()
 	cc.m_proj.setPerspectiveFOVLH(1.57f, (float)width / (float)height, 0.1f, 100.0f);
 
 	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
-	
+	*/
 }
 
 void AppWindow::onKeyDown(int key)
 {
-	//MOVE CAMERA TEST
-	if (isRMouseClicked)
-	{
-		switch (key)
-		{
-		case 'W':
-			m_forward = 1.0f;
-			break;
-
-		case 'S':
-			m_forward = -1.0f;
-			break;
-
-		case 'A':
-			m_right = -1.0f;
-			break;
-
-		case 'D':
-			m_right = 1.0f;
-			break;
-
-		case 'E':
-			m_up = 1.0f;
-			break;
-
-		case 'Q':
-			m_up = -1.0f;
-			break;
-		}
-	}
+	
+	
 	
 }
 
 void AppWindow::onKeyUp(int key)
 {
-	//MOVE CAMERA TEST
-	m_forward = 0.0f;
-	m_right = 0.0f;
-	m_up = 0.0f;
+	
 }
 
 void AppWindow::onMouseMove(const Point& mouse_pos)
 {
-	//FOR UNITY-LIKE FREECAM MOVEMENT
-	if (isRMouseClicked)
-	{
-		m_rot_x -= ((mouse_pos.m_y) * EngineTime::getDeltaTime()) * 0.3f;
-		m_rot_y -= ((mouse_pos.m_x) * EngineTime::getDeltaTime()) * 0.3f;
-	}
+	
 }
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
@@ -320,14 +291,12 @@ void AppWindow::onLeftMouseUp(const Point& mouse_pos)
 
 void AppWindow::onRightMouseDown(const Point& mouse_pos)
 {
-	//FOR FREE MOVEMENT
-	isRMouseClicked = true;
+	
 }
 
 void AppWindow::onRightMouseUp(const Point& mouse_pos)
 {
-	//FOR FREE MOVEMENT
-	isRMouseClicked = false;
+	
 }
 
 void AppWindow::OnFocus()

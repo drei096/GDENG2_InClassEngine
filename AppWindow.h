@@ -12,6 +12,16 @@
 #include "InputSystem.h"
 #include "Matrix4x4.h"
 
+/*
+__declspec(align(16))
+struct constant
+{
+	Matrix4x4 m_world;
+	Matrix4x4 m_view;
+	Matrix4x4 m_proj;
+};
+*/
+
 class AppWindow : public Window, public InputListener
 {
 public:
@@ -61,5 +71,8 @@ private:
 	bool isRMouseClicked = false;
 	float camSpeed = 0.1f;
 
+	float windowWidth = 0.0f;
+	float windowHeight = 0.0f;
+	
 };
 

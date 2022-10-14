@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
 #include "CubePrimitive.h"
@@ -11,17 +15,39 @@ class PrimitiveManager
 public:
 	static PrimitiveManager* GetInstance();
 
-	void init();
+	typedef std::string String;
+	typedef std::vector<AGameObject*> List;
+	typedef std::unordered_map<String, AGameObject*> HashTable;
 
-	//FOR QUADS
-	void initQuad(float posx, float posy, float posz, float r, float g, float b, float offsetX, float offsetY, void* shader_byte_code, size_t byte_code_size);
-	void DrawQuad();
+	enum PrimitiveType {
+		CUBE,
+		PLANE,
+		SPHERE
+	};
 
-	//FOR CUBES
-	void InitCube();
-	void DrawCube(ConstantBuffer* m_cb);
+	static void initialize();
+	static void destroy();
 
-	void release();
+	AGameObject* findObjectByName(std::string name);
+	List getAllObjects();
+	int activeObjects();
+	void updateAll();
+	void renderAll(int viewportWidth, int viewportHeight);
+	void addObject(AGameObject* gameObject);
+	void createObject(PrimitiveType type);
+	void deleteObject(AGameObject* gameObject);
+	void deleteObjectByName(std::string name);
+	void setSelectedObject(std::string name);
+	void setSelectedObject(AGameObject* gameObject);
+	AGameObject* getSelectedObject();
+
+	
+
+private:
+	HashTable gameObjectMap;
+	List gameObjectList;
+
+	AGameObject* selectedObject = nullptr;
 
 private:
 	friend class GraphicsEngine;

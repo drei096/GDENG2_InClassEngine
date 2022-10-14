@@ -1,13 +1,6 @@
-﻿  AppWindow.cpp
+﻿  CubePrimitive.cpp
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(183,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(184,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(185,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(186,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(306,61): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(307,61): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-  PrimitiveManager.cpp
-  RenderingSystem.cpp
-  VertexShader.cpp
-  Generating Code...
-  LINK : D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe not found or not built by the last incremental link; performing full link
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

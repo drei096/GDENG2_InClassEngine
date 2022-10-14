@@ -21,6 +21,10 @@ public:
 
 	void setCursorPosition(const Point& pos);
 
+
+	bool isKeyDown(int key);
+	bool isKeyUp(int key);
+
 private:
 	std::unordered_set<InputListener*> m_set_listeners;
 	unsigned char m_keys_state[256] = {};
