@@ -76,6 +76,20 @@ public:
 		::memcpy(this->matrix, out.matrix, sizeof(float) * 16);
 	}
 
+	Matrix4x4 multiplyTo(Matrix4x4 matrix)
+	{
+		Matrix4x4 out;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				out.matrix[i][j] =
+					this->matrix[i][0] * matrix.matrix[0][j] + this->matrix[i][1] * matrix.matrix[1][j] +
+					this->matrix[i][2] * matrix.matrix[2][j] + this->matrix[i][3] * matrix.matrix[3][j];
+			}
+		}
+
+		return out;
+	}
+
 	void setQuaternionRotation(float theta, float x, float y, float z)
 	{
 		float normU, qx, qy, qz, qw;

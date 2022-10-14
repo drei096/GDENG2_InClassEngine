@@ -142,24 +142,39 @@ void CubePrimitive::draw(float width, float height)
 {
 	Matrix4x4 allMatrix;
 	allMatrix.setIdentity();
+
 	Matrix4x4 translationMatrix;
 	translationMatrix.setIdentity();
 	translationMatrix.setTranslationMatrix(this->getLocalPosition());
 
-	/*
+	Matrix4x4 scaleMatrix;
+	scaleMatrix.setIdentity();
+	scaleMatrix.setScale(this->getLocalScale());
+
+	
 	Vector3D rotation = this->getLocalRotation();
-	Matrix4x4 zMatrix; zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
-	Matrix4x4 xMatrix; xMatrix.setQuaternionRotation(rotation.x, 1,0,0);
-	Matrix4x4 yMatrix; yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
+	Matrix4x4 zMatrix;
+	zMatrix.setIdentity();
+	zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
+
+	Matrix4x4 xMatrix;
+	xMatrix.setIdentity();
+	xMatrix.setQuaternionRotation(rotation.x, 1,0,0);
+
+	Matrix4x4 yMatrix;
+	yMatrix.setIdentity();
+	yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
 
 	//Scale --> Rotate --> Transform as recommended order.
-	Matrix4x4 rotMatrix; rotMatrix.setIdentity();
+	Matrix4x4 rotMatrix;
+	rotMatrix.setIdentity();
 	rotMatrix *= zMatrix;
 	rotMatrix *= yMatrix;
 	rotMatrix *= xMatrix;
 	allMatrix *= rotMatrix;
-	*/
+	
 
+	allMatrix *= scaleMatrix;
 	allMatrix *= translationMatrix;
 	cc.m_world = allMatrix;
 

@@ -23,6 +23,8 @@ void Camera::update(float deltaTime)
 	float z = localPos.z;
 	float moveSpeed = 10.0f;
 
+	std::cout << "(" << x << "," << y << "," << z << ")" << std::endl;
+
 	if(this->mouseDown)
 	{
 		if (InputSystem::GetInstance()->isKeyDown('W'))
@@ -93,8 +95,7 @@ void Camera::onMouseMove(const Point& mouse_pos)
 
 		this->setRotation(x, y, z);
 		this->updateViewMatrix();
-
-		std::cout << " Local rot: " << this->getLocalRotation().x << " " << this->getLocalRotation().y << " " << this->getLocalRotation().z << "\n";
+		
 	}
 }
 
@@ -123,8 +124,10 @@ void Camera::draw(float width, float height)
 void Camera::updateViewMatrix()
 {
 	this->localMatrix.setIdentity();
-	Matrix4x4 worldCam; worldCam.setIdentity();
-	Matrix4x4 temp; temp.setIdentity();
+	Matrix4x4 worldCam;
+	worldCam.setIdentity();
+	Matrix4x4 temp;
+	temp.setIdentity();
 
 	Vector3D localRot = this->getLocalRotation();
 
@@ -135,9 +138,11 @@ void Camera::updateViewMatrix()
 	temp.setQuaternionRotation(localRot.y, 0, 1, 0);
 	worldCam *= temp;
 
-	temp.setIdentity();
-	temp.setTranslationMatrix(this->getLocalPosition());
-	worldCam *= temp;
+	//temp.setIdentity();
+	//temp.setTranslationMatrix(this->getLocalPosition());
+	//worldCam *= temp;
+
+	worldCam.setTranslationMatrix(this->getLocalPosition());
 
 	/*Vector3D cameraPos = this->worldCameraMatrix.getTranslation() + (worldCam.getZDirection() * (this->forwardDirection * 0.01f));
 	std::cout << "Camera pos: " << cameraPos.getX() << " " << cameraPos.getY() << " " << cameraPos.getZ() << "\n";

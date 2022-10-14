@@ -156,7 +156,11 @@ void AppWindow::OnCreate()
 		
 	}
 	*/
-	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
+	for(int i = 0; i<100; i++)
+	{
+		PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
+	}
+	
 	
 }
 

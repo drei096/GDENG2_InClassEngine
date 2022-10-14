@@ -1,5 +1,5 @@
 #include "PrimitiveManager.h"
-
+#include "MathUtils.h"
 #include "EngineTime.h"
 
 
@@ -80,10 +80,15 @@ void PrimitiveManager::addObject(AGameObject* gameObject)
 
 void PrimitiveManager::createObject(PrimitiveType type)
 {
-	if (type == PrimitiveType::CUBE) {
+	if (type == PrimitiveType::CUBE) 
+	{
+		float x, y;
+		x = MathUtils::randomFloat(-0.75, 0.75);
+		y = MathUtils::randomFloat(-0.75, 0.75);
+
 		CubePrimitive* cube = new CubePrimitive("Cube");
-		cube->setPosition(0.0f, 0.0f, 0.0f);
-		cube->setScale(1.0f, 1.0f, 1.0f);
+		cube->setPosition(x, y, 0.0f);
+		cube->setScale(0.5f, 0.5f, 0.5f);
 		cube->setRotation(0.0f, 0.0f, 0.0f);
 		this->addObject(cube);
 	}
