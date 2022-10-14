@@ -200,6 +200,8 @@ void AppWindow::OnUpdate()
 
 	//GraphicsEngine::GetInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
 
+
+	PrimitiveManager::GetInstance()->updateAll();
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 
 	swapChain->present(true);

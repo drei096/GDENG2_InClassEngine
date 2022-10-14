@@ -1,5 +1,6 @@
 #pragma once
 #include "AGameObject.h"
+#include "MathUtils.h"
 
 struct vertex;
 
@@ -28,6 +29,7 @@ public:
 	void update(float deltaTime) override;
 	void draw(float width, float height) override;
 
+	void setAnimSpeed(float value);
 
 	bool release();
 
@@ -42,5 +44,10 @@ private:
 	ConstantBuffer* m_cb = nullptr;
 
 	constantData cc;
+
+	float deltaTime;
+	float ticks = 0.0f;
+	float speed = 1.0f;
+	float animSpeed;
 };
 

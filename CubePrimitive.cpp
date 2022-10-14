@@ -136,6 +136,21 @@ void* CubePrimitive::getCBData()
 
 void CubePrimitive::update(float deltaTime)
 {
+	this->deltaTime = deltaTime;
+	if (InputSystem::GetInstance()->isKeyDown('W'))
+	{
+		this->ticks += deltaTime;
+
+		float rotSpeed = this->ticks * this->speed * this->animSpeed;
+		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	}
+	else if (InputSystem::GetInstance()->isKeyDown('S'))
+	{
+		this->ticks -= deltaTime;
+
+		float rotSpeed = this->ticks * this->speed * this->animSpeed;
+		this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	}
 }
 
 void CubePrimitive::draw(float width, float height)
@@ -183,7 +198,14 @@ void CubePrimitive::draw(float width, float height)
 
 	
 	float aspectRatio = (float)width / (float)height;
-	cc.m_proj.setPerspectiveFOVLH(1.57f, aspectRatio, 0.1f, 100.0f);
+	//cc.m_proj.setPerspectiveFOVLH(1.57f, aspectRatio, 0.1f, 100.0f);
+	cc.m_proj.setOrthoLH
+	(
+		width / 400.0f,
+		height / 400.0f,
+		-4.0f,
+		4.0f
+	);
 
 	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
@@ -195,6 +217,11 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
 
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+}
+
+void CubePrimitive::setAnimSpeed(float value)
+{
+	this->animSpeed = value;
 }
 
 bool CubePrimitive::release()

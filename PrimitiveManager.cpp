@@ -50,7 +50,8 @@ void PrimitiveManager::updateAll()
 
 void PrimitiveManager::renderAll(int viewportWidth, int viewportHeight)
 {
-	for (int i = 0; i < this->gameObjectList.size(); i++) {
+	for (int i = 0; i < this->gameObjectList.size(); i++) 
+	{
 		//replace with component update
 		if (this->gameObjectList[i]->isEnabled()) {
 			this->gameObjectList[i]->draw(viewportWidth, viewportHeight);
@@ -60,18 +61,21 @@ void PrimitiveManager::renderAll(int viewportWidth, int viewportHeight)
 
 void PrimitiveManager::addObject(AGameObject* gameObject)
 {
-	if (this->gameObjectMap[gameObject->getName()] != NULL) {
+	if (this->gameObjectMap[gameObject->getName()] != NULL) 
+	{
 		int count = 1;
 		String revisedString = gameObject->getName() + " " + "(" + std::to_string(count) + ")";
-		while (this->gameObjectMap[revisedString] != NULL) {
+		while (this->gameObjectMap[revisedString] != NULL) 
+		{
 			count++;
 			revisedString = gameObject->getName() + " " + "(" + std::to_string(count) + ")";
 		}
-		//std::cout << "Duplicate found. New name is: " << revisedString << "\n";
+		
 		gameObject->name = revisedString;
 		this->gameObjectMap[revisedString] = gameObject;
 	}
-	else {
+	else 
+	{
 		this->gameObjectMap[gameObject->getName()] = gameObject;
 	}
 
@@ -88,8 +92,9 @@ void PrimitiveManager::createObject(PrimitiveType type)
 
 		CubePrimitive* cube = new CubePrimitive("Cube");
 		cube->setPosition(x, y, 0.0f);
-		cube->setScale(0.5f, 0.5f, 0.5f);
+		cube->setScale(0.25f, 0.25f, 0.25f);
 		cube->setRotation(0.0f, 0.0f, 0.0f);
+		cube->setAnimSpeed(MathUtils::randomFloat(-3.75f, 3.75f));
 		this->addObject(cube);
 	}
 
