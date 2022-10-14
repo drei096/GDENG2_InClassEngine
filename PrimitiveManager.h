@@ -7,6 +7,7 @@
 #include "GraphicsEngine.h"
 #include "DeviceContext.h"
 #include "CubePrimitive.h"
+#include "PlanePrimitive.h"
 
 class GraphicsEngine;
 

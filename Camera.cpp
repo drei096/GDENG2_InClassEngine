@@ -5,7 +5,7 @@
 Camera::Camera(std::string name) : AGameObject(name)
 {
 	this->setPosition(0.0f, 0.0f, -2.0f);
-	//this->worldCameraMatrix.setTranslation(this->getLocalPosition());
+	
 	this->updateViewMatrix();
 	InputSystem::GetInstance()->addListener(this);
 }
@@ -142,13 +142,6 @@ void Camera::updateViewMatrix()
 	temp.setTranslationMatrix(this->getLocalPosition());
 	worldCam *= temp;
 
-	//worldCam.setTranslationMatrix(this->getLocalPosition());
-
-	/*Vector3D cameraPos = this->worldCameraMatrix.getTranslation() + (worldCam.getZDirection() * (this->forwardDirection * 0.01f));
-	std::cout << "Camera pos: " << cameraPos.getX() << " " << cameraPos.getY() << " " << cameraPos.getZ() << "\n";
-	temp.setTranslation(cameraPos);
-	worldCam = worldCam.multiplyTo(temp);
-	this->worldCameraMatrix = worldCam;*/
 
 	worldCam.inverse();
 	this->localMatrix = worldCam;

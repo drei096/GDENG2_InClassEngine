@@ -34,7 +34,7 @@ public:
 
 	
 
-private:
+protected:
 	vertex vertex_list[8];
 	unsigned int index_list[36];
 	VertexBuffer* vertexBuffer = nullptr;

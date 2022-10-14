@@ -94,18 +94,15 @@ void PrimitiveManager::createObject(PrimitiveType type)
 	if (type == PrimitiveType::CUBE) 
 	{
 		CubePrimitive* cube = new CubePrimitive("Cube");
-		cube->setPosition(0.0f, 0.0f, 0.0f);
-		cube->setScale(1.0f, 1.0f, 1.0f);
-		cube->setRotation(0.0f, 0.0f, 0.0f);
 		this->addObject(cube);
 	}
 
-	/*
+	
 	if (type == PrimitiveType::PLANE) {
-		Plane* plane = new Plane("Plane", shaderByteCode, sizeShader);
+		PlanePrimitive* plane = new PlanePrimitive("Plane");
 		this->addObject(plane);
 	}
-	*/
+	
 }
 
 void PrimitiveManager::deleteObject(AGameObject* gameObject)

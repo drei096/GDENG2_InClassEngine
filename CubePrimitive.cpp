@@ -38,7 +38,9 @@ CubePrimitive::CubePrimitive(std::string name) : AGameObject(name)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	
-
+	setPosition(0.0f, 0.0f, 0.0f);
+	setScale(1.0f, 1.0f, 1.0f);
+	setRotation(0.0f, 0.0f, 0.0f);
 	
 	
 }
@@ -136,6 +138,7 @@ void* CubePrimitive::getCBData()
 
 void CubePrimitive::update(float deltaTime)
 {
+	
 }
 
 void CubePrimitive::draw(float width, float height)
@@ -183,7 +186,7 @@ void CubePrimitive::draw(float width, float height)
 
 	
 	float aspectRatio = (float)width / (float)height;
-	cc.m_proj.setPerspectiveFOVLH(1.57f, aspectRatio, 0.1f, 100.0f);
+	cc.m_proj.setPerspectiveFOVLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
 	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);

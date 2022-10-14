@@ -35,7 +35,7 @@ void AppWindow::OnCreate()
 
 	//CREATING A CUBE OBJECT
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
-	
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE);
 	
 }
 
