@@ -138,11 +138,11 @@ void Camera::updateViewMatrix()
 	temp.setQuaternionRotation(localRot.y, 0, 1, 0);
 	worldCam *= temp;
 
-	//temp.setIdentity();
-	//temp.setTranslationMatrix(this->getLocalPosition());
-	//worldCam *= temp;
+	temp.setIdentity();
+	temp.setTranslationMatrix(this->getLocalPosition());
+	worldCam *= temp;
 
-	worldCam.setTranslationMatrix(this->getLocalPosition());
+	//worldCam.setTranslationMatrix(this->getLocalPosition());
 
 	/*Vector3D cameraPos = this->worldCameraMatrix.getTranslation() + (worldCam.getZDirection() * (this->forwardDirection * 0.01f));
 	std::cout << "Camera pos: " << cameraPos.getX() << " " << cameraPos.getY() << " " << cameraPos.getZ() << "\n";
