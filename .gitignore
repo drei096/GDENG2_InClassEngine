@@ -460,3 +460,15 @@ Debug/GDENG-2_Engine.tlog/link.read.1.tlog
 Debug/GDENG-2_Engine.tlog/link.write.1.tlog
 GDENG-2_Engine.vcxproj
 GDENG-2_Engine.vcxproj.filters
+Debug/AppWindow.obj
+Debug/DeviceContext.obj
+Debug/GDENG-2_Engine.exe
+Debug/GDENG-2_Engine.ilk
+Debug/GDENG-2_Engine.log
+Debug/GDENG-2_Engine.pdb
+Debug/GDENG-2_Engine.tlog/CL.command.1.tlog
+Debug/GDENG-2_Engine.tlog/CL.read.1.tlog
+Debug/GDENG-2_Engine.tlog/CL.write.1.tlog
+Debug/GDENG-2_Engine.tlog/link.read.1.tlog
+Debug/main.obj
+Debug/SwapChain.obj

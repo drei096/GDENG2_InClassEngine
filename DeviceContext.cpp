@@ -29,7 +29,11 @@ void DeviceContext::clearRenderTargetColor(SwapChain* swapChain, float r, float 
 {
 	FLOAT clear_color[] = { r,g,b,a };
 	m_device_context->ClearRenderTargetView(swapChain->renderTargetView, clear_color);
-	m_device_context->OMSetRenderTargets(1, &swapChain->renderTargetView, NULL);
+
+	//FOR DEPTH STENCIL VIEW
+	m_device_context->ClearDepthStencilView(swapChain->depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 0);
+
+	m_device_context->OMSetRenderTargets(1, &swapChain->renderTargetView, swapChain->depthStencilView);
 	
 }
 
