@@ -17,6 +17,7 @@ Camera::~Camera()
 
 void Camera::update(float deltaTime)
 {
+	/*
 	Vector3D localPos = this->getLocalPosition();
 	float x = localPos.x;
 	float y = localPos.y;
@@ -63,21 +64,55 @@ void Camera::update(float deltaTime)
 			this->setPosition(x, y, z);
 			this->updateViewMatrix();
 		}
-
 	}
+	*/
+
+	
 }
 
 Matrix4x4 Camera::getViewMatrix()
 {
-	return this->localMatrix;
+	return this->viewCamera;
 }
 
 void Camera::onKeyDown(int key)
 {
+	if (this->mouseDown)
+	{
+		if (InputSystem::GetInstance()->isKeyDown('W'))
+		{
+			forward = 1.0f;
+		}
+		if (InputSystem::GetInstance()->isKeyDown('E'))
+		{
+			up = 1.0f;
+		}
+		if (InputSystem::GetInstance()->isKeyDown('S'))
+		{
+			forward = -1.0f;
+		}
+		if (InputSystem::GetInstance()->isKeyDown('Q'))
+		{
+			up = -1.0f;
+		}
+		if (InputSystem::GetInstance()->isKeyDown('A'))
+		{
+			right = -1.0f;
+		}
+		if (InputSystem::GetInstance()->isKeyDown('D'))
+		{
+			right = 1.0f;
+		}
+
+		updateViewMatrix();
+	}
 }
 
 void Camera::onKeyUp(int key)
 {
+	forward = 0.0f;
+	right = 0.0f;
+	up = 0.0f;
 }
 
 void Camera::onMouseMove(const Point& mouse_pos)
@@ -123,7 +158,6 @@ void Camera::draw(float width, float height)
 
 void Camera::updateViewMatrix()
 {
-	this->localMatrix.setIdentity();
 	Matrix4x4 worldCam;
 	worldCam.setIdentity();
 	Matrix4x4 temp;
@@ -138,13 +172,22 @@ void Camera::updateViewMatrix()
 	temp.setQuaternionRotation(localRot.y, 0, 1, 0);
 	worldCam *= temp;
 
+
+	//NEW POSITION FOR FREECAM MOVEMENT
 	temp.setIdentity();
-	temp.setTranslationMatrix(this->getLocalPosition());
+	Vector3D new_pos = localMatrix.getTranslation() + worldCam.getZDirection() * (forward * camSpeed);
+	new_pos = new_pos + worldCam.getXDirection() * (right * camSpeed);
+	new_pos = new_pos + worldCam.getYDirection() * (up * camSpeed);
+	temp.setTranslationMatrix(new_pos);
 	worldCam *= temp;
+	localMatrix = worldCam;
+
+	//temp.setTranslationMatrix(this->getLocalPosition());
+	//worldCam *= temp;
 
 
 	worldCam.inverse();
-	this->localMatrix = worldCam;
+	this->viewCamera = worldCam;
 }
 
 

@@ -12,8 +12,9 @@ public:
 	bool present(bool vsync);
 
 private:
-	IDXGISwapChain* swapChain;
-	ID3D11RenderTargetView* renderTargetView;
+	IDXGISwapChain* swapChain = nullptr;
+	ID3D11RenderTargetView* renderTargetView = nullptr;
+	ID3D11DepthStencilView* depthStencilView = nullptr;
 	RenderingSystem* m_renderingSystem = nullptr;
 
 private:

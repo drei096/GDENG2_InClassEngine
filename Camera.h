@@ -1,6 +1,7 @@
 #pragma once
 #include "AGameObject.h"
 #include "InputListener.h"
+#include "EngineTime.h"
 
 class Camera : public AGameObject, public InputListener
 {
@@ -28,5 +29,12 @@ private:
 
 	float ticks = 0.0f;
 	float mouseDown = false;
+
+	float forward = 0.0f;
+	float right = 0.0f;
+	float up = 0.0f;
+	float camSpeed = 0.5f;
+
+	Matrix4x4 viewCamera;
 };
 
