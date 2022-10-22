@@ -13,5 +13,9 @@ public:
 
 	void update(float deltaTime) override;
 	void draw(int width, int height);
+	void setVertexList();
 
+private:
+	//FOR ANIMATION PURPOSES
+	float animationTicks = 0.0f;
 };

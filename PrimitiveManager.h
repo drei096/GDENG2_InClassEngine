@@ -30,18 +30,19 @@ public:
 	static void destroy();
 
 	AGameObject* findObjectByName(std::string name);
+
 	List getAllObjects();
-	int activeObjects();
+	int getActiveObjectsCount();
+
 	void updateAll();
 	void renderAll(int viewportWidth, int viewportHeight);
+
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
+
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
-	void setSelectedObject(std::string name);
-	void setSelectedObject(AGameObject* gameObject);
-	AGameObject* getSelectedObject();
-
+	
 	
 
 private:

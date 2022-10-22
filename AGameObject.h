@@ -28,7 +28,7 @@ class AGameObject
 {
 public:
 	AGameObject(std::string name);
-	
+	virtual bool release();
 
 	void* getVertexList();
 	void setVertexList();
@@ -56,6 +56,16 @@ private:
 	friend class PrimitiveManager;
 
 protected:
+	VertexBuffer* vertexBuffer = nullptr;
+	IndexBuffer* indexBuffer = nullptr;
+	ConstantBuffer* m_cb = nullptr;
+
+	constantData cc;
+
+	PixelShader* m_ps;
+	VertexShader* m_vs;
+
+
 	std::string name;
 	Vector3D localPosition;
 	Vector3D localRotation;

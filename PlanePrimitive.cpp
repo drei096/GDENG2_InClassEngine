@@ -38,6 +38,7 @@ PlanePrimitive::PlanePrimitive(std::string name) : CubePrimitive(name)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
+	this->setPosition(0.0f, 0.0f, 0.0f);
 	this->setScale(10.0f, 0.01f, 10.0f);
 	this->setRotation(0.0f, 0.0f, 0.0f);
 }
@@ -108,4 +109,20 @@ void PlanePrimitive::draw(int width, int height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
 
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+}
+
+void PlanePrimitive::setVertexList()
+{
+	//FRONT FACE OF CUBE
+	vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1) };
+	vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1) };
+	vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1) };
+	vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1) };
+
+	//BACK FACE OF CUBE
+	vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1) };
+	vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1) };
+	vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1) };
+	vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1) };
+	
 }

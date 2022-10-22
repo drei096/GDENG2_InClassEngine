@@ -27,7 +27,6 @@ public:
 private:
 	void updateViewMatrix();
 
-	float ticks = 0.0f;
 	float mouseDown = false;
 
 	float forward = 0.0f;

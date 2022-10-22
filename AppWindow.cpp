@@ -31,7 +31,7 @@ void AppWindow::OnCreate()
 
 	this->windowWidth = rc.right - rc.left;
 	this->windowHeight = rc.bottom - rc.top;
-	ViewportCameraManager::initialize();
+	ViewportCameraManager::init();
 
 	//CREATING A CUBE OBJECT
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
@@ -45,7 +45,7 @@ void AppWindow::OnUpdate()
 	InputSystem::GetInstance()->update();
 
 	//clear render target
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 1, 1, 1, 1);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 0.1f, 0.1f, 0.2f, 1);
 
 	//set viewport size of render target
 	RECT rc = this->getClientWindowRect();
@@ -56,6 +56,7 @@ void AppWindow::OnUpdate()
 
 
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
+	PrimitiveManager::GetInstance()->updateAll();
 
 	swapChain->present(true);
 
@@ -64,10 +65,17 @@ void AppWindow::OnUpdate()
 
 void AppWindow::OnDestroy()
 {
-	Window::OnDestroy();
+	//destroy primitives
+	PrimitiveManager::GetInstance()->destroy();
+
+	//destroy cam
+	ViewportCameraManager::getInstance()->destroy();
+
+	
 	swapChain->release();
 	GraphicsEngine::GetInstance()->release();
 
+	Window::OnDestroy();
 }
 
 

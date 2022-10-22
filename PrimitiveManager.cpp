@@ -12,6 +12,14 @@ PrimitiveManager* PrimitiveManager::GetInstance()
 
 void PrimitiveManager::destroy()
 {
+	
+	for (int i = 0; i < GetInstance()->gameObjectList.size(); i++)
+	{
+		GetInstance()->gameObjectList[i]->release();
+		delete GetInstance()->gameObjectList[i];
+	}
+	
+
 	GetInstance()->gameObjectMap.clear();
 	GetInstance()->gameObjectList.clear();
 	
@@ -35,7 +43,7 @@ PrimitiveManager::List PrimitiveManager::getAllObjects()
 	return this->gameObjectList;
 }
 
-int PrimitiveManager::activeObjects()
+int PrimitiveManager::getActiveObjectsCount()
 {
 	return gameObjectList.size();
 }
@@ -44,10 +52,11 @@ void PrimitiveManager::updateAll()
 {
 	for (int i = 0; i < this->gameObjectList.size(); i++) 
 	{
-		//replace with component update
 		if (this->gameObjectList[i]->isEnabled()) 
 		{
 			this->gameObjectList[i]->update(EngineTime::getDeltaTime());
+
+			//to possibly add: update fxns of each obj components
 		}
 	}
 }
@@ -56,7 +65,6 @@ void PrimitiveManager::renderAll(int viewportWidth, int viewportHeight)
 {
 	for (int i = 0; i < this->gameObjectList.size(); i++) 
 	{
-		//replace with component update
 		if (this->gameObjectList[i]->isEnabled()) 
 		{
 			this->gameObjectList[i]->draw(viewportWidth, viewportHeight);
@@ -66,6 +74,7 @@ void PrimitiveManager::renderAll(int viewportWidth, int viewportHeight)
 
 void PrimitiveManager::addObject(AGameObject* gameObject)
 {
+	// IF THE CREATED GAME OBJECT HAS A DUPLICATE, REVISE ITS NAME
 	if (this->gameObjectMap[gameObject->getName()] != NULL)
 	{
 		int count = 1;
@@ -81,11 +90,13 @@ void PrimitiveManager::addObject(AGameObject* gameObject)
 		gameObject->name = revisedString;
 		this->gameObjectMap[revisedString] = gameObject;
 	}
+	// ELSE, PUT THE GAME OBJECT IN HASH TABLE
 	else 
 	{
 		this->gameObjectMap[gameObject->getName()] = gameObject;
 	}
 
+	//ADD IT ALSO TO THE LIST
 	this->gameObjectList.push_back(gameObject);
 }
 
@@ -98,7 +109,8 @@ void PrimitiveManager::createObject(PrimitiveType type)
 	}
 
 	
-	if (type == PrimitiveType::PLANE) {
+	if (type == PrimitiveType::PLANE) 
+	{
 		PlanePrimitive* plane = new PlanePrimitive("Plane");
 		this->addObject(plane);
 	}
@@ -137,22 +149,5 @@ void PrimitiveManager::deleteObjectByName(std::string name)
 	}
 }
 
-void PrimitiveManager::setSelectedObject(std::string name)
-{
-	if (this->gameObjectMap[name] != NULL) 
-	{
-		this->setSelectedObject(this->gameObjectMap[name]);
-	}
-}
-
-void PrimitiveManager::setSelectedObject(AGameObject* gameObject)
-{
-	this->selectedObject = gameObject;
-}
-
-AGameObject* PrimitiveManager::getSelectedObject()
-{
-	return this->selectedObject;
-}
 
 

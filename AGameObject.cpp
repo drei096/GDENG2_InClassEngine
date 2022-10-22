@@ -7,6 +7,14 @@ AGameObject::AGameObject(std::string name)
 	this->localRotation = Vector3D::zeros();
 }
 
+bool AGameObject::release()
+{
+	if (m_cb->release() && m_vs->release() && m_ps->release() && indexBuffer->release() && vertexBuffer->release())
+		return true;
+	else
+		return false;
+}
+
 
 void AGameObject::setPosition(float x, float y, float z)
 {

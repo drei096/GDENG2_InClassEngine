@@ -17,55 +17,6 @@ Camera::~Camera()
 
 void Camera::update(float deltaTime)
 {
-	/*
-	Vector3D localPos = this->getLocalPosition();
-	float x = localPos.x;
-	float y = localPos.y;
-	float z = localPos.z;
-	float moveSpeed = 10.0f;
-
-	std::cout << "(" << x << "," << y << "," << z << ")" << std::endl;
-
-	if(this->mouseDown)
-	{
-		if (InputSystem::GetInstance()->isKeyDown('W'))
-		{
-			z += deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-		if (InputSystem::GetInstance()->isKeyDown('E'))
-		{
-			y += deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-		if (InputSystem::GetInstance()->isKeyDown('S'))
-		{
-			z -= deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-		if (InputSystem::GetInstance()->isKeyDown('Q'))
-		{
-			y -= deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-		if (InputSystem::GetInstance()->isKeyDown('A'))
-		{
-			x -= deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-		if (InputSystem::GetInstance()->isKeyDown('D'))
-		{
-			x += deltaTime * moveSpeed;
-			this->setPosition(x, y, z);
-			this->updateViewMatrix();
-		}
-	}
-	*/
 
 	
 }
@@ -182,8 +133,6 @@ void Camera::updateViewMatrix()
 	worldCam *= temp;
 	localMatrix = worldCam;
 
-	//temp.setTranslationMatrix(this->getLocalPosition());
-	//worldCam *= temp;
 
 
 	worldCam.inverse();

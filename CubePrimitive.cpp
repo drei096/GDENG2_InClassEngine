@@ -38,9 +38,9 @@ CubePrimitive::CubePrimitive(std::string name) : AGameObject(name)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	
-	setPosition(0.0f, 0.0f, 0.0f);
-	setScale(1.0f, 1.0f, 1.0f);
-	setRotation(0.0f, 0.0f, 0.0f);
+	this->setPosition(0.0f, 0.0f, 0.0f);
+	this->setScale(1.0f, 1.0f, 1.0f);
+	this->setRotation(0.0f, 0.0f, 0.0f);
 	
 	
 }
@@ -138,7 +138,14 @@ void* CubePrimitive::getCBData()
 
 void CubePrimitive::update(float deltaTime)
 {
-	
+	/*
+	* ROTATE A CUBE
+	* 
+	this->animationTicks += deltaTime;
+
+	float rotSpeed = this->animationTicks * 1.0f;
+	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	*/
 }
 
 void CubePrimitive::draw(float width, float height)
@@ -202,10 +209,7 @@ void CubePrimitive::draw(float width, float height)
 
 bool CubePrimitive::release()
 {
-	if (vertexBuffer->release() && indexBuffer->release())
-		return true;
-	else
-		return false;
+	return true;
 }
 
 

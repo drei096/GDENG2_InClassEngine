@@ -8,13 +8,14 @@ ViewportCameraManager* ViewportCameraManager::getInstance()
     return sharedInstance;
 }
 
-void ViewportCameraManager::initialize()
+void ViewportCameraManager::init()
 {
     sharedInstance = new ViewportCameraManager();
 }
 
 void ViewportCameraManager::destroy()
 {
+    sharedInstance->sceneCamera->~Camera();
     delete sharedInstance;
 }
 
