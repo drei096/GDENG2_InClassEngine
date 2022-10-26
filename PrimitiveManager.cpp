@@ -117,6 +117,64 @@ void PrimitiveManager::createObject(PrimitiveType type)
 	
 }
 
+void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point)
+{
+	if (type == PrimitiveType::CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube");
+		cube->setPosition(point);
+		this->addObject(cube);
+	}
+
+
+	if (type == PrimitiveType::PLANE)
+	{
+		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		plane->setPosition(point);
+		this->addObject(plane);
+	}
+}
+
+void PrimitiveManager::createObjectAtPoint(PrimitiveType type, float x, float y, float z)
+{
+	if (type == PrimitiveType::CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube");
+		cube->setPosition(x, y, z);
+		this->addObject(cube);
+	}
+
+
+	if (type == PrimitiveType::PLANE)
+	{
+		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		plane->setPosition(x, y, z);
+		this->addObject(plane);
+	}
+}
+
+void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy)
+{
+	if (type == PrimitiveType::CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube");
+		cube->setPosition(translateBy);
+		cube->setScale(scaleBy);
+		cube->setRotation(rotateBy);
+		this->addObject(cube);
+	}
+
+
+	if (type == PrimitiveType::PLANE)
+	{
+		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		plane->setPosition(translateBy);
+		plane->setScale(scaleBy);
+		plane->setRotation(rotateBy);
+		this->addObject(plane);
+	}
+}
+
 void PrimitiveManager::deleteObject(AGameObject* gameObject)
 {
 	this->gameObjectMap.erase(gameObject->getName());

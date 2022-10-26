@@ -40,6 +40,13 @@ public:
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
 
+	//NEW! CREATE PRIMS AT A SPECIFIED POINT
+	void createObjectAtPoint(PrimitiveType type, Vector3D point);
+	void createObjectAtPoint(PrimitiveType type, float x, float y, float z);
+
+	//NEW! CREATE PRIMS WITH TRANSFORMATIONS
+	void createObjectWithTransformations(PrimitiveType type, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy);
+
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
 	

@@ -36,7 +36,10 @@ void AppWindow::OnCreate()
 	//CREATING A CUBE OBJECT
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE);
-	
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f));
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f);
+	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
+
 }
 
 void AppWindow::OnUpdate()
