@@ -1,19 +1,31 @@
-﻿  AppWindow.cpp
+﻿  AGameObject.cpp
+  AppWindow.cpp
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(183,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(184,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(185,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(186,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(306,61): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(307,61): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  ConstantBuffer.cpp
+  CubePrimitive.cpp
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\CubePrimitive.cpp(144,19): warning C4018: '<': signed/unsigned mismatch
   DeviceContext.cpp
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\DeviceContext.cpp(93,19): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\DeviceContext.cpp(94,20): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
   GraphicsEngine.cpp
+  IndexBuffer.cpp
+  InputSystem.cpp
+  LinePrimitive.cpp
+  PixelShader.cpp
+  PrimitiveManager.cpp
   SwapChain.cpp
+  VertexBuffer.cpp
+  VertexShader.cpp
   main.cpp
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(183,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(184,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(185,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(186,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Generating Code...
+  LINK : D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe not found or not built by the last incremental link; performing full link
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe
