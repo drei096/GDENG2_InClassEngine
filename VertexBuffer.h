@@ -1,5 +1,6 @@
 #pragma once
 #include <d3d11.h>
+#include "ShaderCollection.h"
 #include "Prerequisites.h"
 
 class VertexBuffer
@@ -7,7 +8,7 @@ class VertexBuffer
 public:
 	VertexBuffer(RenderingSystem* system);
 	~VertexBuffer();
-	bool load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader);
+	bool load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader, ShaderTypes shaderType);
 	bool release();
 	UINT getSizeVertexList();
 

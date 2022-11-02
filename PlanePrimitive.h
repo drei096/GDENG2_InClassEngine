@@ -8,12 +8,13 @@
 class PlanePrimitive : public CubePrimitive
 {
 public:
-	PlanePrimitive(std::string name);
+	PlanePrimitive(std::string name, ShaderTypes shaderType);
 	~PlanePrimitive();
 
+	void setVertexList(ShaderTypes shaderType);
+
 	void update(float deltaTime) override;
-	void draw(int width, int height);
-	void setVertexList();
+	
 
 private:
 	//FOR ANIMATION PURPOSES

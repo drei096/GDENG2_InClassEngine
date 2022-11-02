@@ -64,6 +64,9 @@
     <ClCompile Include="PlanePrimitive.cpp">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderCollection.cpp">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="PlanePrimitive.h">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderCollection.h">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -205,10 +211,16 @@
     <FxCompile Include="shader.fx">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="AlbedoVertexShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="AlbedoPixelShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="LerpingAlbedoVertexShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="LerpingAlbedoPixelShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

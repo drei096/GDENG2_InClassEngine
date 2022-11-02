@@ -3,10 +3,12 @@
 #include "ViewportCameraManager.h"
 
 
-CubePrimitive::CubePrimitive(std::string name) : AGameObject(name)
+CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameObject(name)
 {
+	AssignVertexAndPixelShaders(shaderType);
+	this->cubeShaderType = shaderType;
 
-	setVertexList();
+	setVertexList(shaderType);
 
 	vertexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexBuffer();
 
@@ -19,18 +21,19 @@ CubePrimitive::CubePrimitive(std::string name) : AGameObject(name)
 	UINT size_of_shader = 0;
 
 	//CREATING VERTEX SHADER
-	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
-	vertexBuffer->load(vertex_list, sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader);
+	vertexBuffer->load(vertex_list, sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER
-	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(this->pixelShaderFile, "psmain", &shader_byte_code, &size_of_shader);
 	m_ps = GraphicsEngine::GetInstance()->getRenderingSystem()->createPixelShader(shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING CONSTANT BUFFER
 	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
+	cc.m_angle = 0.0f;
 	m_cb->load(&cc, sizeof(constantData));
 
 	//set default shaders
@@ -55,19 +58,36 @@ UINT CubePrimitive::getVertexListSize()
 	return ARRAYSIZE(vertex_list);
 }
 
-void CubePrimitive::setVertexList()
+void CubePrimitive::setVertexList(ShaderTypes shaderType)
 {
-	//FRONT FACE OF CUBE
-	vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0) };
-	vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0) };
-	vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0) };
-	vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0) };
+	if(shaderType == ShaderTypes::ALBEDO)
+	{
+		//FRONT FACE OF CUBE
+		vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0) };
+		vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0) };
+		vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0) };
+		vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0) };
 
-	//BACK FACE OF CUBE
-	vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0) };
-	vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1) };
-	vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) };
-	vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) };
+		//BACK FACE OF CUBE
+		vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0) };
+		vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1) };
+		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) };
+		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) };
+	}
+	else if (shaderType == ShaderTypes::LERPING_ALBEDO)
+	{
+		//FRONT FACE OF CUBE
+		vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0), Vector3D(1,0,1) };
+		vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0) , Vector3D(0,0,1) };
+		vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0) , Vector3D(0,1,0) };
+		vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0) , Vector3D(0.25f,0,0.5f) };
+
+		//BACK FACE OF CUBE
+		vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0) , Vector3D(0,0,1) };
+		vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1) , Vector3D(1,0,0) };
+		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) , Vector3D(1,0,1) };
+		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
+	}
 }
 
 void CubePrimitive::setIndexList()
@@ -136,8 +156,15 @@ void* CubePrimitive::getCBData()
 	return &cc;
 }
 
+void CubePrimitive::AssignVertexAndPixelShaders(ShaderTypes shaderType)
+{
+	ShaderCollection::GetInstance()->getShadersByType(shaderType, &vertexShaderFile, &pixelShaderFile);
+}
+
 void CubePrimitive::update(float deltaTime)
 {
+	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
+
 	/*
 	* ROTATE A CUBE
 	* 
@@ -195,6 +222,12 @@ void CubePrimitive::draw(float width, float height)
 	float aspectRatio = (float)width / (float)height;
 	cc.m_proj.setPerspectiveFOVLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
+	
+	if(cubeShaderType == ShaderTypes::LERPING_ALBEDO)
+	{
+		cc.m_angle += 1.57f * EngineTime::getDeltaTime();
+	}
+	
 	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);

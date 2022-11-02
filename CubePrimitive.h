@@ -1,16 +1,17 @@
 #pragma once
 #include "AGameObject.h"
+#include "ShaderCollection.h"
 
 struct vertex;
 
 class CubePrimitive : public AGameObject
 {
 public:
-	CubePrimitive(std::string name);
+	CubePrimitive(std::string name, ShaderTypes shaderType);
 
 	void* getVertexList();
 	UINT getVertexListSize();
-	void setVertexList();
+	void setVertexList(ShaderTypes shaderType);
 
 	void setIndexList();
 	void* getIndexList();
@@ -21,6 +22,8 @@ public:
 
 	ConstantBuffer* getConstantBuffer();
 	void* getCBData();
+
+	void AssignVertexAndPixelShaders(ShaderTypes shaderType);
 
 
 	void update(float deltaTime) override;
@@ -39,6 +42,10 @@ protected:
 private:
 	//FOR ANIMATION PURPOSES
 	float animationTicks = 0.0f;
-	
+
+protected:
+	LPCWSTR vertexShaderFile = L"";
+	LPCWSTR pixelShaderFile = L"";
+	ShaderTypes cubeShaderType;
 };
 

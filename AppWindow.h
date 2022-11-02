@@ -11,7 +11,7 @@
 #include "InputListener.h"
 #include "InputSystem.h"
 #include "Matrix4x4.h"
-
+#include "ShaderCollection.h"
 
 
 class AppWindow : public Window, public InputListener

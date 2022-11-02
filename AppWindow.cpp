@@ -23,7 +23,7 @@ void AppWindow::OnCreate()
 	InputSystem::GetInstance()->addListener(this);
 	GraphicsEngine::GetInstance()->init();
 	swapChain = GraphicsEngine::GetInstance()->getRenderingSystem()->createSwapChain();
-
+	ShaderCollection::GetInstance()->LoadAllShaders();
 
 	//GETTING THE RECT OF WINDOW AND INITIALIZING CAMERA
 	RECT rc = this->getClientWindowRect();
@@ -34,12 +34,13 @@ void AppWindow::OnCreate()
 	ViewportCameraManager::init();
 
 	//CREATING A CUBE OBJECT
-	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE);
-	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f));
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f);
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
-
+	
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::LERPING_ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
+	 
 }
 
 void AppWindow::OnUpdate()

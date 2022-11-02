@@ -100,28 +100,28 @@ void PrimitiveManager::addObject(AGameObject* gameObject)
 	this->gameObjectList.push_back(gameObject);
 }
 
-void PrimitiveManager::createObject(PrimitiveType type)
+void PrimitiveManager::createObject(PrimitiveType type, ShaderTypes shaderType)
 {
 	if (type == PrimitiveType::CUBE) 
 	{
-		CubePrimitive* cube = new CubePrimitive("Cube");
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
 		this->addObject(cube);
 	}
 
 	
 	if (type == PrimitiveType::PLANE) 
 	{
-		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		this->addObject(plane);
 	}
 	
 }
 
-void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point)
+void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point, ShaderTypes shaderType)
 {
 	if (type == PrimitiveType::CUBE)
 	{
-		CubePrimitive* cube = new CubePrimitive("Cube");
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
 		cube->setPosition(point);
 		this->addObject(cube);
 	}
@@ -129,17 +129,17 @@ void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point)
 
 	if (type == PrimitiveType::PLANE)
 	{
-		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		plane->setPosition(point);
 		this->addObject(plane);
 	}
 }
 
-void PrimitiveManager::createObjectAtPoint(PrimitiveType type, float x, float y, float z)
+void PrimitiveManager::createObjectAtPoint(PrimitiveType type, float x, float y, float z, ShaderTypes shaderType)
 {
 	if (type == PrimitiveType::CUBE)
 	{
-		CubePrimitive* cube = new CubePrimitive("Cube");
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
 		cube->setPosition(x, y, z);
 		this->addObject(cube);
 	}
@@ -147,17 +147,17 @@ void PrimitiveManager::createObjectAtPoint(PrimitiveType type, float x, float y,
 
 	if (type == PrimitiveType::PLANE)
 	{
-		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		plane->setPosition(x, y, z);
 		this->addObject(plane);
 	}
 }
 
-void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy)
+void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, ShaderTypes shaderType, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy)
 {
 	if (type == PrimitiveType::CUBE)
 	{
-		CubePrimitive* cube = new CubePrimitive("Cube");
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
 		cube->setPosition(translateBy);
 		cube->setScale(scaleBy);
 		cube->setRotation(rotateBy);
@@ -167,7 +167,7 @@ void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, Vecto
 
 	if (type == PrimitiveType::PLANE)
 	{
-		PlanePrimitive* plane = new PlanePrimitive("Plane");
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		plane->setPosition(translateBy);
 		plane->setScale(scaleBy);
 		plane->setRotation(rotateBy);

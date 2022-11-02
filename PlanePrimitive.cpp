@@ -2,10 +2,11 @@
 #include "GraphicsEngine.h"
 #include "ViewportCameraManager.h"
 
-PlanePrimitive::PlanePrimitive(std::string name) : CubePrimitive(name)
+PlanePrimitive::PlanePrimitive(std::string name, ShaderTypes shaderType) : CubePrimitive(name, shaderType)
 {
-	setVertexList();
-	
+	AssignVertexAndPixelShaders(shaderType);
+
+	setVertexList(shaderType);
 
 	this->vertexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexBuffer();
 
@@ -20,18 +21,19 @@ PlanePrimitive::PlanePrimitive(std::string name) : CubePrimitive(name)
 
 
 	//CREATING VERTEX SHADER
-	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
-	vertexBuffer->load(getVertexList(), sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader);
+	vertexBuffer->load(getVertexList(), sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER
-	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(this->pixelShaderFile, "psmain", &shader_byte_code, &size_of_shader);
 	m_ps = GraphicsEngine::GetInstance()->getRenderingSystem()->createPixelShader(shader_byte_code, size_of_shader);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING CONSTANT BUFFER
 	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
+	cc.m_angle = 0.0f;
 	m_cb->load(&cc, sizeof(constantData));
 
 	//set default shaders
@@ -52,77 +54,36 @@ void PlanePrimitive::update(float deltaTime)
 	
 }
 
-void PlanePrimitive::draw(int width, int height)
+void PlanePrimitive::setVertexList(ShaderTypes shaderType)
 {
-	Matrix4x4 allMatrix;
-	allMatrix.setIdentity();
+	if (shaderType == ShaderTypes::ALBEDO)
+	{
+		//FRONT FACE OF CUBE
+		vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1) };
+		vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1) };
+		vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1) };
+		vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1) };
 
-	Matrix4x4 translationMatrix;
-	translationMatrix.setIdentity();
-	translationMatrix.setTranslationMatrix(this->getLocalPosition());
+		//BACK FACE OF CUBE
+		vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1) };
+		vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1) };
+		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1) };
+		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1) };
+	}
+	else if (shaderType == ShaderTypes::LERPING_ALBEDO)
+	{
+		//FRONT FACE OF CUBE
+		vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0), Vector3D(1,0,1) };
+		vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0) , Vector3D(0,0,1) };
+		vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0) , Vector3D(0,1,0) };
+		vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0) , Vector3D(0.25f,0,0.5f) };
 
-	Matrix4x4 scaleMatrix;
-	scaleMatrix.setIdentity();
-	scaleMatrix.setScale(this->getLocalScale());
-
-
-	Vector3D rotation = this->getLocalRotation();
-	Matrix4x4 zMatrix;
-	zMatrix.setIdentity();
-	zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
-
-	Matrix4x4 xMatrix;
-	xMatrix.setIdentity();
-	xMatrix.setQuaternionRotation(rotation.x, 1, 0, 0);
-
-	Matrix4x4 yMatrix;
-	yMatrix.setIdentity();
-	yMatrix.setQuaternionRotation(rotation.y, 0, 1, 0);
-
-	//Scale --> Rotate --> Transform as recommended order.
-	Matrix4x4 rotMatrix;
-	rotMatrix.setIdentity();
-	rotMatrix *= zMatrix;
-	rotMatrix *= yMatrix;
-	rotMatrix *= xMatrix;
-	allMatrix *= rotMatrix;
-
-
-	allMatrix *= scaleMatrix;
-	allMatrix *= translationMatrix;
-	cc.m_world = allMatrix;
-
-	Matrix4x4 cameraMatrix = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
-	cc.m_view = cameraMatrix;
-
-
-	float aspectRatio = (float)width / (float)height;
-	cc.m_proj.setPerspectiveFOVLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
-
-	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
-
-	//set the indices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());
-	//set the vertices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
-
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+		//BACK FACE OF CUBE
+		vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0) , Vector3D(0,0,1) };
+		vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1) , Vector3D(1,0,0) };
+		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) , Vector3D(1,0,1) };
+		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
+	}
 }
 
-void PlanePrimitive::setVertexList()
-{
-	//FRONT FACE OF CUBE
-	vertex_list[0] = { Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1) };
-	vertex_list[1] = { Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1) };
-	vertex_list[2] = { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1) };
-	vertex_list[3] = { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1) };
 
-	//BACK FACE OF CUBE
-	vertex_list[4] = { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(1,1,1) };
-	vertex_list[5] = { Vector3D(0.5f,0.5f,0.5f),    Vector3D(1,1,1) };
-	vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(1,1,1) };
-	vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(1,1,1) };
-	
-}

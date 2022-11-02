@@ -8,6 +8,7 @@
 #include "DeviceContext.h"
 #include "CubePrimitive.h"
 #include "PlanePrimitive.h"
+#include "ShaderCollection.h"
 
 class GraphicsEngine;
 
@@ -38,14 +39,14 @@ public:
 	void renderAll(int viewportWidth, int viewportHeight);
 
 	void addObject(AGameObject* gameObject);
-	void createObject(PrimitiveType type);
+	void createObject(PrimitiveType type, ShaderTypes shaderType);
 
 	//NEW! CREATE PRIMS AT A SPECIFIED POINT
-	void createObjectAtPoint(PrimitiveType type, Vector3D point);
-	void createObjectAtPoint(PrimitiveType type, float x, float y, float z);
+	void createObjectAtPoint(PrimitiveType type, Vector3D point, ShaderTypes shaderType);
+	void createObjectAtPoint(PrimitiveType type, float x, float y, float z, ShaderTypes shaderType);
 
 	//NEW! CREATE PRIMS WITH TRANSFORMATIONS
-	void createObjectWithTransformations(PrimitiveType type, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy);
+	void createObjectWithTransformations(PrimitiveType type, ShaderTypes shaderType, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy);
 
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
