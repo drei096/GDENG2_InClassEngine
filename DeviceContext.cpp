@@ -81,6 +81,12 @@ void DeviceContext::drawIndexedTriangleList(UINT index_count, UINT start_vertex_
 	m_device_context->DrawIndexed(index_count, start_index_location, start_vertex_index);
 }
 
+void DeviceContext::drawLineList(UINT vertex_count, UINT start_vertex)
+{
+	m_device_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_LINELIST);
+	m_device_context->Draw(vertex_count, start_vertex);
+}
+
 void DeviceContext::setViewportSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT viewport = {};

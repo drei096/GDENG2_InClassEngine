@@ -37,7 +37,7 @@ void AppWindow::OnCreate()
 	
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::LERPING_ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
 	 
@@ -103,7 +103,31 @@ void AppWindow::onMouseMove(const Point& mouse_pos)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
-	
+	/*
+	Matrix4x4 viewMatrixInverse;
+
+
+
+	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
+	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
+	float aspectRatio = width / height;
+
+	float vx = (2.0f * mouse_pos.m_x / width - 1.0f) / CameraHandler::GetInstance()->GetSceneCameraProjectionMatrix().m_mat[0][0];
+	float vy = (-2.0f * mouse_pos.m_y / height + 1.0f) / CameraHandler::GetInstance()->GetSceneCameraProjectionMatrix().m_mat[1][1];
+
+	ray.origin = CameraHandler::GetInstance()->GetSceneCameraMatrix().getTranslation();
+	ray.direction = Vector3D(vx, vy, 1.0f);
+
+	viewMatrixInverse = CameraHandler::GetInstance()->GetSceneCameraViewMatrix();
+	viewMatrixInverse.inverse();
+
+	ray.origin = Matrix4x4::Vector3Transform(ray.origin, viewMatrixInverse);
+	ray.direction = Matrix4x4::Vector3TransformNormal(ray.direction, viewMatrixInverse);
+	//ray.direction = Vector3D::getUnitVector(ray.direction);
+
+	std::cout << ray.origin.x << ", " << ray.origin.y << ", " << ray.origin.z << std::endl;
+	std::cout << ray.direction.x << ", " << ray.direction.y << ", " << ray.direction.z << std::endl;
+	*/
 }
 
 void AppWindow::onLeftMouseUp(const Point& mouse_pos)

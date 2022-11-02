@@ -67,6 +67,9 @@
     <ClCompile Include="ShaderCollection.cpp">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="LinePrimitive.cpp">
+      <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="ShaderCollection.h">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="LinePrimitive.h">
+      <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@
 #include "DeviceContext.h"
 #include "CubePrimitive.h"
 #include "PlanePrimitive.h"
+#include "LinePrimitive.h"
 #include "ShaderCollection.h"
 
 class GraphicsEngine;
@@ -24,7 +25,8 @@ public:
 	enum PrimitiveType {
 		CUBE,
 		PLANE,
-		SPHERE
+		SPHERE,
+		LINE,
 	};
 
 	static void initialize();
@@ -42,6 +44,7 @@ public:
 	void createObject(PrimitiveType type, ShaderTypes shaderType);
 
 	//NEW! CREATE PRIMS AT A SPECIFIED POINT
+	void createObjectAtPoint(PrimitiveType type, Vector3D forLine_origin, Vector3D point, ShaderTypes shaderType);
 	void createObjectAtPoint(PrimitiveType type, Vector3D point, ShaderTypes shaderType);
 	void createObjectAtPoint(PrimitiveType type, float x, float y, float z, ShaderTypes shaderType);
 

@@ -13,6 +13,12 @@
 #include "Matrix4x4.h"
 #include "ShaderCollection.h"
 
+struct PickingRay
+{
+	Vector3D origin;
+	Vector3D direction;
+};
+
 
 class AppWindow : public Window, public InputListener
 {
@@ -42,6 +48,8 @@ private:
 
 	float windowWidth = 0.0f;
 	float windowHeight = 0.0f;
+
+	PickingRay ray;
 	
 };
 

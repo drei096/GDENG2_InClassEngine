@@ -117,6 +117,29 @@ void PrimitiveManager::createObject(PrimitiveType type, ShaderTypes shaderType)
 	
 }
 
+void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D forLine_origin, Vector3D point, ShaderTypes shaderType)
+{
+	if (type == PrimitiveType::CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+		cube->setPosition(point);
+		this->addObject(cube);
+	}
+
+	if (type == PrimitiveType::PLANE)
+	{
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
+		plane->setPosition(point);
+		this->addObject(plane);
+	}
+
+	if (type == PrimitiveType::LINE)
+	{
+		LinePrimitive* line = new LinePrimitive("line", forLine_origin, point);
+		this->addObject(line);
+	}
+}
+
 void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point, ShaderTypes shaderType)
 {
 	if (type == PrimitiveType::CUBE)
