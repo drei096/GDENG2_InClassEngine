@@ -2,6 +2,8 @@
 #include "EngineTime.h"
 
 //Window* window=nullptr;
+int Window::HEIGHT = 768;
+int Window::WIDTH = 1024;
 
 Window::Window()
 {
@@ -86,7 +88,7 @@ bool Window::init()
 		window = this;*/
 
 		//Creation of the window
-	m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"MyWindowClass", L"DirectX Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768,
+	m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"MyWindowClass", L"DirectX Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, WIDTH, HEIGHT,
 		NULL, NULL, NULL, this);
 
 	//if the creation fail return false

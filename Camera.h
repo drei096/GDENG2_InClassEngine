@@ -11,6 +11,8 @@ public:
 
 	void update(float deltaTime) override;
 	Matrix4x4 getViewMatrix();
+	Matrix4x4 getMatrix();
+	Matrix4x4 getCamProjMatrix();
 
 	//inherited from input listener
 	virtual void onKeyDown(int key) override;
@@ -35,5 +37,8 @@ private:
 	float camSpeed = 0.5f;
 
 	Matrix4x4 viewCamera;
+	float fovInDegrees = 90.0f;
+	float nearPlane = 0.1f;
+	float farPlane = 1000.0f;
 };
 

@@ -26,6 +26,24 @@ Matrix4x4 Camera::getViewMatrix()
 	return this->viewCamera;
 }
 
+Matrix4x4 Camera::getMatrix()
+{
+	return this->localMatrix;
+}
+
+Matrix4x4 Camera::getCamProjMatrix()
+{
+	int width = Window::WIDTH;
+	int height = Window::HEIGHT;
+	float aspectRatio = (float)width / (float)height;
+	float fov = fovInDegrees * (3.1415926f / 180.0f);
+
+	Matrix4x4 projectionMatrix;
+	projectionMatrix.setPerspectiveFOVLH(fov, aspectRatio, nearPlane, farPlane);
+
+	return projectionMatrix;
+}
+
 void Camera::onKeyDown(int key)
 {
 	if (this->mouseDown)

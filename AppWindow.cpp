@@ -103,35 +103,38 @@ void AppWindow::onMouseMove(const Point& mouse_pos)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
-	/*
+	
 	Matrix4x4 viewMatrixInverse;
-
-
 
 	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
 	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
 	float aspectRatio = width / height;
 
-	float vx = (2.0f * mouse_pos.m_x / width - 1.0f) / CameraHandler::GetInstance()->GetSceneCameraProjectionMatrix().m_mat[0][0];
-	float vy = (-2.0f * mouse_pos.m_y / height + 1.0f) / CameraHandler::GetInstance()->GetSceneCameraProjectionMatrix().m_mat[1][1];
 
-	ray.origin = CameraHandler::GetInstance()->GetSceneCameraMatrix().getTranslation();
-	ray.direction = Vector3D(vx, vy, 1.0f);
+	float vx = ((2.0f * mouse_pos.m_x / width ) - 1.0f) / ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix().matrix[0][0];
+	float vy = (-(2.0f * mouse_pos.m_y / height ) + 1.0f) / ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix().matrix[1][1];
 
-	viewMatrixInverse = CameraHandler::GetInstance()->GetSceneCameraViewMatrix();
+	ray.origin = Vector4D(ViewportCameraManager::getInstance()->getSceneCamera()->getLocalPosition(), 1.0f);
+	ray.direction = Vector4D(vx, vy, 1.0f, 0.0f);
+
+	viewMatrixInverse = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
 	viewMatrixInverse.inverse();
 
-	ray.origin = Matrix4x4::Vector3Transform(ray.origin, viewMatrixInverse);
-	ray.direction = Matrix4x4::Vector3TransformNormal(ray.direction, viewMatrixInverse);
+	ray.origin = viewMatrixInverse.multiplyTo(ray.origin);
+	ray.direction = viewMatrixInverse.multiplyTo(ray.direction);
 	//ray.direction = Vector3D::getUnitVector(ray.direction);
 
 	std::cout << ray.origin.x << ", " << ray.origin.y << ", " << ray.origin.z << std::endl;
 	std::cout << ray.direction.x << ", " << ray.direction.y << ", " << ray.direction.z << std::endl;
-	*/
+
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);
+	
+	
+	
 }
 
 void AppWindow::onLeftMouseUp(const Point& mouse_pos)
-{
+{ 
 	
 }
 

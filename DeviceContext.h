@@ -29,6 +29,8 @@ public:
 	void setVertexShader(VertexShader* vertex_shader);
 	void setPixelShader(PixelShader* pixel_shader);
 
+
+
 private:
 	ID3D11DeviceContext* m_device_context;
 	RenderingSystem* m_renderingSystem = nullptr;

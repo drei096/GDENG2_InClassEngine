@@ -15,6 +15,10 @@ public:
 	{
 	}
 
+	Vector4D(const Vector3D& vector, float w) : x(vector.x), y(vector.y), z(vector.z), w(w)
+	{
+	}
+
 	~Vector4D()
 	{
 

@@ -223,6 +223,57 @@ public:
 		return Vector3D(matrix[3][0], matrix[3][1], matrix[3][2]);
 	}
 
+	//FOR OBJECT PICKING, CODE SUBJECT TO REVIEW
+	static Vector3D Vector3Transform(const Vector3D& inVector, Matrix4x4 inMatrix)
+	{
+		Matrix4x4 temp;
+		temp.setIdentity();
+		temp.matrix[3][0] = inVector.x;
+		temp.matrix[3][1] = inVector.y;
+		temp.matrix[3][2] = inVector.z;
+		temp.matrix[3][3] = 1.0f;
+
+		temp = temp.multiplyTo(inMatrix);
+		return Vector3D(temp.matrix[3][0], temp.matrix[3][1], temp.matrix[3][2]);
+	}
+
+	//FOR OBJECT PICKING, CODE SUBJECT TO REVIEW
+	static Vector3D Vector3TransformNormal(const Vector3D& inVector, Matrix4x4 inMatrix)
+	{
+		Matrix4x4 temp;
+		temp.setIdentity();
+		temp.matrix[3][0] = inVector.x;
+		temp.matrix[3][1] = inVector.y;
+		temp.matrix[3][2] = inVector.z;
+		temp.matrix[3][3] = 0.0f;
+
+		temp = temp.multiplyTo(inMatrix);
+		return Vector3D(temp.matrix[3][0], temp.matrix[3][1], temp.matrix[3][2]);
+	}
+
+	Vector4D multiplyTo(Vector4D inVector)
+	{
+		Vector4D outVector;
+
+		outVector.x = (inVector.x * this->matrix[0][0]) + (inVector.y * this->matrix[1][0]) + (inVector.z * this->matrix[2][0]) + (inVector.w * this->matrix[3][0]);
+		outVector.y = (inVector.x * this->matrix[0][1]) + (inVector.y * this->matrix[1][1]) + (inVector.z * this->matrix[2][1]) + (inVector.w * this->matrix[3][1]);
+		outVector.z = (inVector.x * this->matrix[0][2]) + (inVector.y * this->matrix[1][2]) + (inVector.z * this->matrix[2][2]) + (inVector.w * this->matrix[3][2]);
+		outVector.w = (inVector.x * this->matrix[0][3]) + (inVector.y * this->matrix[1][3]) + (inVector.z * this->matrix[2][3]) + (inVector.w * this->matrix[3][3]);
+
+		/*
+		outVector.x = inVector.x * (this->matrix[0][0] + this->matrix[0][1] + this->matrix[0][2] + this->matrix[0][3]);
+		outVector.y = inVector.y * (this->matrix[1][0] + this->matrix[1][1] + this->matrix[1][2] + this->matrix[1][3]);
+		outVector.z = inVector.z * (this->matrix[2][0] + this->matrix[2][1] + this->matrix[2][2] + this->matrix[2][3]);
+		outVector.w = inVector.w * (this->matrix[3][0] + this->matrix[3][1] + this->matrix[3][2] + this->matrix[3][3]);
+		*/
+		/*out.x = in.getX() * (this->matrix[0][0] + this->matrix[1][0] + this->matrix[2][0] + this->matrix[3][0]);
+		out.y = in.getY() * (this->matrix[0][1] + this->matrix[1][1] + this->matrix[2][1] + this->matrix[3][1]);
+		out.z = in.getZ() * (this->matrix[0][2] + this->matrix[1][2] + this->matrix[2][2] + this->matrix[3][2]);
+		out.w = in.getW() * (this->matrix[0][3] + this->matrix[1][3] + this->matrix[2][3] + this->matrix[3][3]);*/
+
+		return outVector;
+	}
+
 	~Matrix4x4()
 	{ 
 

@@ -106,3 +106,5 @@ void DeviceContext::setPixelShader(PixelShader* pixel_shader)
 {
 	m_device_context->PSSetShader(pixel_shader->m_pixel_shader, nullptr, 0);
 }
+
+

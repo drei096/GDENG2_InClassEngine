@@ -12,11 +12,12 @@
 #include "InputSystem.h"
 #include "Matrix4x4.h"
 #include "ShaderCollection.h"
+#include <DirectXMath.h>
 
 struct PickingRay
 {
-	Vector3D origin;
-	Vector3D direction;
+	Vector4D origin;
+	Vector4D direction;
 };
 
 

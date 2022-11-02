@@ -49,6 +49,17 @@ public:
 		return Vector3D(1.0f, 1.0f, 1.0f);
 	}
 
+	float getMagnitude(Vector3D vec)
+	{
+		return sqrtf(powf(vec.x, 2) + powf(vec.y, 2) + powf(vec.z, 2));
+	}
+
+	static Vector3D getUnitVector(Vector3D vec)
+	{
+		float magnitude = vec.getMagnitude(vec);
+		return Vector3D((vec.x * (1 / magnitude)), (vec.y * (1 / magnitude)), (vec.z * (1 / magnitude)));
+	}
+
 public:
 	float x;
 	float y;

@@ -23,6 +23,11 @@ public:
 	void setHWND(HWND hwnd);
 
 	~Window();
+
+public:
+	static int WIDTH;
+	static int HEIGHT;
+
 protected:
 	HWND m_hwnd;
 	bool m_isRunning;

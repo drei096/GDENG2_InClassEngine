@@ -64,8 +64,8 @@ protected:
 
 	constantData cc;
 
-	PixelShader* m_ps;
-	VertexShader* m_vs;
+	PixelShader* m_ps = nullptr;
+	VertexShader* m_vs = nullptr;
 
 
 	std::string name;

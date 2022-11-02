@@ -220,7 +220,7 @@ void CubePrimitive::draw(float width, float height)
 
 	
 	float aspectRatio = (float)width / (float)height;
-	cc.m_proj.setPerspectiveFOVLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
+	cc.m_proj = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
 	
 	if(cubeShaderType == ShaderTypes::LERPING_ALBEDO)
