@@ -25,11 +25,12 @@ void InputSystem::removeListener(InputListener* listener)
     m_set_listeners.erase(listener);
 }
 
-void InputSystem::update()
+void InputSystem::update(HWND hwnd)
 {
 	//FOR RECOGNIZING MOUSE MOVE
 	POINT current_mouse_pos = {};
 	GetCursorPos(&current_mouse_pos);
+	ScreenToClient(hwnd, &current_mouse_pos);
 
 	if(isFirstTime)
 	{

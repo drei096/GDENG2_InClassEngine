@@ -22,6 +22,8 @@ public:
 	RECT getClientWindowRect();
 	void setHWND(HWND hwnd);
 
+	HWND getHWND();
+
 	~Window();
 
 public:

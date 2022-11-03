@@ -181,6 +181,12 @@ void Window::setHWND(HWND hwnd)
 	this->m_hwnd = hwnd;
 }
 
+HWND Window::getHWND()
+{
+	return m_hwnd;
+}
+
+
 Window::~Window()
 {
 }

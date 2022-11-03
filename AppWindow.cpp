@@ -46,7 +46,7 @@ void AppWindow::OnCreate()
 void AppWindow::OnUpdate()
 {
 	Window::OnUpdate();
-	InputSystem::GetInstance()->update();
+	InputSystem::GetInstance()->update(m_hwnd);
 
 	//clear render target
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 0.1f, 0.1f, 0.2f, 1);
@@ -165,9 +165,11 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 	
 	//ray.direction = Vector3D::getUnitVector(ray.direction);
 
+	
 	std::cout << ray.origin.x << ", " << ray.origin.y << ", " << ray.origin.z << std::endl;
 	std::cout << ray.direction.x << ", " << ray.direction.y << ", " << ray.direction.z << std::endl;
 
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.origin.x, ray.origin.y, ray.origin.z), ShaderTypes::ALBEDO);
 	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);
 	
 	

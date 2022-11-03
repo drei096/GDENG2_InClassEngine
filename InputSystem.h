@@ -3,6 +3,7 @@
 #include "InputListener.h"
 #include <unordered_set>
 #include <Windows.h>
+#include "Window.h"
 #include "Point.h"
 
 class InputSystem
@@ -17,7 +18,7 @@ public:
 	void addListener(InputListener* listener);
 	void removeListener(InputListener* listener);
 
-	void update();
+	void update(HWND hwnd);
 
 	void setCursorPosition(const Point& pos);
 
@@ -32,5 +33,6 @@ private:
 
 	Point m_old_mouse_pos;
 	bool isFirstTime = true;
+
 };
 

@@ -93,7 +93,7 @@ void Camera::onMouseMove(const Point& mouse_pos)
 		float y = localRot.y;
 		float z = localRot.z;
 
-		float speed = 0.005f;
+		float speed = 0.001f;
 		x -= mouse_pos.m_y * speed;
 		y -= mouse_pos.m_x * speed;
 
