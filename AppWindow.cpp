@@ -105,23 +105,31 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
 	
 	Matrix4x4 viewMatrixInverse;
+	Matrix4x4 projMatrix;
+	Matrix4x4 viewProjMatrix;
+
+	//DirectX::XMVector3Unproject()
+	//DirectX::XMVector3TransformCoord()
 
 	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
 	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
 	float aspectRatio = width / height;
 
 
-	float vx = ((2.0f * mouse_pos.m_x / width ) - 1.0f) / ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix().matrix[0][0];
-	float vy = (-(2.0f * mouse_pos.m_y / height ) + 1.0f) / ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix().matrix[1][1];
+	float vx = ((2.0f * mouse_pos.m_x / width ) - 1.0f);
+	float vy = (1.0f - (2.0f * mouse_pos.m_y / height ));
 
 	ray.origin = Vector4D(ViewportCameraManager::getInstance()->getSceneCamera()->getLocalPosition(), 1.0f);
-	ray.direction = Vector4D(vx, vy, 1.0f, 0.0f);
+	ray.direction = Vector4D(vx, vy, 1.0f, 1.0f);
 
 	viewMatrixInverse = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
 	viewMatrixInverse.inverse();
+	projMatrix = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
 	ray.origin = viewMatrixInverse.multiplyTo(ray.origin);
+	ray.direction = projMatrix.multiplyTo(ray.direction);
 	ray.direction = viewMatrixInverse.multiplyTo(ray.direction);
+	
 	//ray.direction = Vector3D::getUnitVector(ray.direction);
 
 	std::cout << ray.origin.x << ", " << ray.origin.y << ", " << ray.origin.z << std::endl;
