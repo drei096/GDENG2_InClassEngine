@@ -13,6 +13,7 @@
 #include "Matrix4x4.h"
 #include "ShaderCollection.h"
 #include <DirectXMath.h>
+#include <DirectXCollision.h>
 
 struct PickingRay
 {

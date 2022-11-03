@@ -32,6 +32,17 @@ public:
 		this->w = -(v1.x * (v2.y * v3.z - v3.y * v2.z) - v1.y * (v2.x * v3.z - v3.x * v2.z) + v1.z * (v2.x * v3.y - v3.x * v2.y));
 	}
 
+	float getMagnitude(Vector4D vec)
+	{
+		return sqrtf(powf(vec.x, 2) + powf(vec.y, 2) + powf(vec.z, 2) + powf(vec.w, 2));
+	}
+
+	static Vector4D getUnitVector(Vector4D vec)
+	{
+		float magnitude = vec.getMagnitude(vec);
+		return Vector4D( (vec.x * (1 / magnitude)), (vec.y * (1 / magnitude)), (vec.z * (1 / magnitude)) , (vec.w * (1 / magnitude)));
+	}
+
 public:
 	float x;
 	float y;

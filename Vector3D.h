@@ -34,9 +34,19 @@ public:
 		return Vector3D(x * num, y * num, z * num);
 	}
 
+	Vector3D operator *(float num, Vector3D vec)
+	{
+		return Vector3D(vec.x * num, vec.y * num, vec.z * num);
+	}
+
 	Vector3D operator +(Vector3D vec)
 	{
 		return Vector3D(x + vec.x, y + vec.y, z + vec.z);
+	}
+
+	Vector3D operator -(Vector3D vec)
+	{
+		return Vector3D(x - vec.x, y - vec.y, z - vec.z);
 	}
 
 	static Vector3D zeros()
@@ -58,6 +68,15 @@ public:
 	{
 		float magnitude = vec.getMagnitude(vec);
 		return Vector3D((vec.x * (1 / magnitude)), (vec.y * (1 / magnitude)), (vec.z * (1 / magnitude)));
+	}
+
+	float dotProd(Vector3D v1, Vector3D v2) //function for multiplying vector values; returns total value of vector products"sum"
+	{
+		float sum = 0;
+
+		sum = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+
+		return sum;
 	}
 
 public:
