@@ -103,13 +103,45 @@ void AppWindow::onMouseMove(const Point& mouse_pos)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
+	/*
+	Vector4D D = Vector4D(-1.0f, 1.0f, 0.0f, 0.0f);
+
+	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
+	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
+
+	Vector4D scale = Vector4D(width * 0.5f, -height * 0.5f, 1.0f - 0.0f, 1.0f);
+	scale = Vector4D(1 / scale.x, 1 / scale.y, 1 / scale.z, 1 / scale.w);
+
+	Vector4D offset = Vector4D(-0.0f, -0.0f, -0.0f, 0.0f);
+	offset = Vector4D((scale.x * offset.x + D.x), (scale.y * offset.y + D.y), (scale.z * offset.z + D.z), (scale.w * offset.w + D.w));
+
+	Matrix4x4 transform = ViewportCameraManager::getInstance()->getSceneCamera()->getMatrix().multiplyTo(ViewportCameraManager::getInstance()->getSceneCameraViewMatrix());
+	transform = transform.multiplyTo(ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix());
+	transform.inverse();
+
+	Vector4D result = Vector4D((mouse_pos.m_x * scale.x + offset.x), (mouse_pos.m_y * scale.y + offset.y), (0.0f * scale.z + offset.z), (1.0f * scale.w + offset.w));
+
+	Vector4D Z = Vector4D(result.z, result.z, result.z, result.z);
+	Vector4D Y = Vector4D(result.y, result.y, result.y, result.y);
+	Vector4D X = Vector4D(result.x, result.x, result.x, result.x);
+	Vector4D transformCoordResult = Vector4D((Z.x * transform.matrix[2][0] + transform.matrix[3][0]), (Z.y * transform.matrix[2][1] + transform.matrix[3][1]), (Z.z * transform.matrix[2][2] + transform.matrix[3][2]), (Z.w * transform.matrix[2][3] + transform.matrix[3][3]));
+	transformCoordResult = Vector4D((Y.x * transform.matrix[1][0] + transformCoordResult.x), (Y.y * transform.matrix[1][1] + transformCoordResult.y), (Y.z * transform.matrix[1][2] + transformCoordResult.z), (Y.w * transform.matrix[1][3] + transformCoordResult.w));
+	transformCoordResult = Vector4D((X.x * transform.matrix[0][0] + transformCoordResult.x), (X.y * transform.matrix[0][1] + transformCoordResult.y), (X.z * transform.matrix[0][2] + transformCoordResult.z), (X.w * transform.matrix[0][3] + transformCoordResult.w));
+	Vector4D W = Vector4D(transformCoordResult.w, transformCoordResult.w, transformCoordResult.w, transformCoordResult.w);
+	Vector4D xm_divide = Vector4D(transformCoordResult.x / W.x, transformCoordResult.y / W.y, transformCoordResult.z / W.z, transformCoordResult.w / W.w);
+
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(xm_divide.x, xm_divide.y, xm_divide.z), ShaderTypes::ALBEDO);
+
+	std::cout << xm_divide.x << ", " << xm_divide.y << ", " << xm_divide.z << std::endl;
+	*/
+
+
 	
 	Matrix4x4 viewMatrixInverse;
 	Matrix4x4 projMatrix;
 	Matrix4x4 viewProjMatrix;
 
-	//DirectX::XMVector3Unproject()
-	//DirectX::XMVector3TransformCoord()
+	
 
 	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
 	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
@@ -118,6 +150,7 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 
 	float vx = ((2.0f * mouse_pos.m_x / width ) - 1.0f);
 	float vy = (1.0f - (2.0f * mouse_pos.m_y / height ));
+	
 
 	ray.origin = Vector4D(ViewportCameraManager::getInstance()->getSceneCamera()->getLocalPosition(), 1.0f);
 	ray.direction = Vector4D(vx, vy, 1.0f, 1.0f);
@@ -136,6 +169,7 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 	std::cout << ray.direction.x << ", " << ray.direction.y << ", " << ray.direction.z << std::endl;
 
 	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);
+	
 	
 	
 	
