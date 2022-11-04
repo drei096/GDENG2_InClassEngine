@@ -103,6 +103,8 @@ void AppWindow::onMouseMove(const Point& mouse_pos)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
+	bool isFirstObjectFound = false;
+	int listIterator = 0;
 	const PrimitiveManager::List gameObjectList = PrimitiveManager::GetInstance()->getAllObjects();
 	if (gameObjectList.empty())
 		return;
@@ -135,9 +137,23 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 	ray.direction = viewMatrixInverse.multiplyTo(ray.direction);
 	
 	//ray.direction = Vector4D::getUnitVector(ray.direction);
-	
 
 	Vector3D temp;
+	while(isFirstObjectFound == false)
+	{
+		float directionMagnitude = temp.getMagnitude(Vector3D(ray.direction.x, ray.direction.y, ray.direction.z));
+		if (directionMagnitude < gameObjectList[listIterator]->getBoundingSphereValue())
+		{
+			std::cout << gameObjectList[listIterator]->getName() << std::endl;
+			isFirstObjectFound = true;
+		}
+		else
+			listIterator++;
+	}
+
+	//std::cout << temp.getMagnitude(Vector3D(ray.direction.x, ray.direction.y, ray.direction.z)) << std::endl;
+
+	/*
 	Vector3D rayOrigin3D = Vector3D(ray.origin.x, ray.origin.y, ray.origin.z);
 	Vector3D rayDirection3D = Vector3D(ray.direction.x, ray.direction.y, ray.direction.z);
 
@@ -153,11 +169,12 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 		if(closestPointMagnitude < gameObjectList[i]->getBoundingSphereValue())
 		{
 			std::cout << gameObjectList[i]->getName() << std::endl;
+			break;
 		}
 
 		//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, rayClosestPoint, ShaderTypes::ALBEDO);
 	}
-	
+	*/
 
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.origin.x, ray.origin.y, ray.origin.z), ShaderTypes::ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);

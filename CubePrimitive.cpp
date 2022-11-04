@@ -89,7 +89,7 @@ void CubePrimitive::setVertexList(ShaderTypes shaderType)
 		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
 	}
 
-	computeBoundingSphere();
+	
 }
 
 void CubePrimitive::setIndexList()
@@ -224,7 +224,8 @@ void CubePrimitive::draw(float width, float height)
 	float aspectRatio = (float)width / (float)height;
 	cc.m_proj = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
-	
+	computeBoundingSphere();
+
 	if(cubeShaderType == ShaderTypes::LERPING_ALBEDO)
 	{
 		cc.m_angle += 1.57f * EngineTime::getDeltaTime();
@@ -246,18 +247,27 @@ void CubePrimitive::draw(float width, float height)
 void CubePrimitive::computeBoundingSphere()
 {
 	Vector3D minVertex, maxVertex;
+	
 
 	for(int i = 0; i < getVertexListSize(); i++)
 	{
-		minVertex.x = MathUtils::minValue(minVertex.x, vertex_list[i].position.x);
-		minVertex.y = MathUtils::minValue(minVertex.y, vertex_list[i].position.y);    // Find smallest y value in model
-		minVertex.z = MathUtils::minValue(minVertex.z, vertex_list[i].position.z);    // Find smallest z value in model
+		Vector4D vertex4D = Vector4D(vertex_list[i].position, 1.0f);
+		Vector4D vertex4DTransformed = Vector4D(cc.m_world.multiplyTo(vertex4D));
+		vertex4DTransformed = cc.m_view.multiplyTo(vertex4DTransformed);
+		vertex4DTransformed = cc.m_proj.multiplyTo(vertex4DTransformed);
+		Vector3D vertex3DTransformed = Vector3D(vertex4DTransformed.x, vertex4DTransformed.y, vertex4DTransformed.z);
+
+
+		minVertex.x = MathUtils::minValue(minVertex.x, vertex3DTransformed.x);
+		minVertex.y = MathUtils::minValue(minVertex.y, vertex3DTransformed.y);    // Find smallest y value in model
+		minVertex.z = MathUtils::minValue(minVertex.z, vertex3DTransformed.z);    // Find smallest z value in model
 
 		//Get the largest vertex 
-		maxVertex.x = MathUtils::maxValue(maxVertex.x, vertex_list[i].position.x);    // Find largest x value in model
-		maxVertex.y = MathUtils::maxValue(maxVertex.y, vertex_list[i].position.y);    // Find largest y value in model
-		maxVertex.z = MathUtils::maxValue(maxVertex.z, vertex_list[i].position.z);    // Find largest z value in model
+		maxVertex.x = MathUtils::maxValue(maxVertex.x, vertex3DTransformed.x);    // Find largest x value in model
+		maxVertex.y = MathUtils::maxValue(maxVertex.y, vertex3DTransformed.y);    // Find largest y value in model
+		maxVertex.z = MathUtils::maxValue(maxVertex.z, vertex3DTransformed.z);    // Find largest z value in model
 	}
+
 
 	// Compute distance between maxVertex and minVertex
 	float distX = (maxVertex.x - minVertex.x) / 2.0f;
