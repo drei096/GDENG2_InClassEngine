@@ -16,3 +16,13 @@ int MathUtils::randomInt(int a, int b)
 
     return num;
 }
+
+float MathUtils::minValue(const float a, const float b)
+{
+    return (a < b) ? a : b;
+}
+
+float MathUtils::maxValue(float a, float b)
+{
+    return (a < b) ? b : a;
+}

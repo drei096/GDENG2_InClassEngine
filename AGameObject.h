@@ -48,6 +48,9 @@ public:
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
 
+	Vector3D getObjectCenterOffset();
+	float getBoundingSphereValue();
+
 	virtual void update(float deltaTime) = 0;
 	virtual void draw(float width, float height) = 0;
 
@@ -73,6 +76,9 @@ protected:
 	Vector3D localRotation;
 	Vector3D localScale;
 	Matrix4x4 localMatrix;
+
+	Vector3D objectCenterOffset;
+	float boundingSphereValue;
 
 private:
 	bool enabled = true;

@@ -61,6 +61,16 @@ Vector3D AGameObject::getLocalRotation()
 	return this->localRotation;
 }
 
+Vector3D AGameObject::getObjectCenterOffset()
+{
+	return objectCenterOffset;
+}
+
+float AGameObject::getBoundingSphereValue()
+{
+	return boundingSphereValue;
+}
+
 std::string AGameObject::getName()
 {
 	return this->name;

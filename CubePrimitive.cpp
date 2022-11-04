@@ -88,6 +88,8 @@ void CubePrimitive::setVertexList(ShaderTypes shaderType)
 		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) , Vector3D(1,0,1) };
 		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
 	}
+
+	computeBoundingSphere();
 }
 
 void CubePrimitive::setIndexList()
@@ -238,6 +240,40 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
 
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+}
+
+
+void CubePrimitive::computeBoundingSphere()
+{
+	Vector3D minVertex, maxVertex;
+
+	for(int i = 0; i < getVertexListSize(); i++)
+	{
+		minVertex.x = MathUtils::minValue(minVertex.x, vertex_list[i].position.x);
+		minVertex.y = MathUtils::minValue(minVertex.y, vertex_list[i].position.y);    // Find smallest y value in model
+		minVertex.z = MathUtils::minValue(minVertex.z, vertex_list[i].position.z);    // Find smallest z value in model
+
+		//Get the largest vertex 
+		maxVertex.x = MathUtils::maxValue(maxVertex.x, vertex_list[i].position.x);    // Find largest x value in model
+		maxVertex.y = MathUtils::maxValue(maxVertex.y, vertex_list[i].position.y);    // Find largest y value in model
+		maxVertex.z = MathUtils::maxValue(maxVertex.z, vertex_list[i].position.z);    // Find largest z value in model
+	}
+
+	// Compute distance between maxVertex and minVertex
+	float distX = (maxVertex.x - minVertex.x) / 2.0f;
+	float distY = (maxVertex.y - minVertex.y) / 2.0f;
+	float distZ = (maxVertex.z - minVertex.z) / 2.0f;
+
+	// Now store the distance between (0, 0, 0) in model space to the models real center
+	objectCenterOffset = Vector3D(maxVertex.x - distX, maxVertex.y - distY, maxVertex.z - distZ);
+
+	// Compute bounding sphere (distance between min and max bounding box vertices)
+	// boundingSphere = sqrt(distX*distX + distY*distY + distZ*distZ) / 2.0f;
+	Vector3D distVec = Vector3D(distX, distY, distZ);
+	Vector3D temp;
+	boundingSphereValue = temp.getMagnitude(distVec);
+
+	//std::cout << boundingSphereValue << std::endl;
 }
 
 bool CubePrimitive::release()

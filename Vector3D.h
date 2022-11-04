@@ -34,10 +34,7 @@ public:
 		return Vector3D(x * num, y * num, z * num);
 	}
 
-	Vector3D operator *(float num, Vector3D vec)
-	{
-		return Vector3D(vec.x * num, vec.y * num, vec.z * num);
-	}
+	
 
 	Vector3D operator +(Vector3D vec)
 	{

@@ -35,7 +35,7 @@ void AppWindow::OnCreate()
 
 	//CREATING A CUBE OBJECT
 	
-	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
@@ -145,14 +145,22 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 	{
 		Vector3D rayClosestPoint = rayOrigin3D + (rayDirection3D * (temp.dotProd((gameObjectList[i]->getLocalPosition() - rayOrigin3D), rayDirection3D) / temp.dotProd(rayDirection3D, rayDirection3D)));
 
-		//get distance bet. rayclosestpoint to current object position
+		//get magnitude of rayclosestpoint
+		float closestPointMagnitude = temp.getMagnitude(rayClosestPoint);
+		//std::cout << closestPointMagnitude << std::endl;
 
 		//finally, check to see if the distance is less than the current object's bounding sphere
+		if(closestPointMagnitude < gameObjectList[i]->getBoundingSphereValue())
+		{
+			std::cout << gameObjectList[i]->getName() << std::endl;
+		}
+
+		//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, rayClosestPoint, ShaderTypes::ALBEDO);
 	}
 	
 
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.origin.x, ray.origin.y, ray.origin.z), ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(ray.direction.x, ray.direction.y, ray.direction.z), ShaderTypes::ALBEDO);
 	
 	
 	

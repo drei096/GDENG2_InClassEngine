@@ -1,6 +1,7 @@
 #pragma once
 #include "AGameObject.h"
 #include "ShaderCollection.h"
+#include "MathUtils.h"
 
 struct vertex;
 
@@ -30,6 +31,8 @@ public:
 	void draw(float width, float height) override;
 
 
+	void computeBoundingSphere();
+
 	bool release() override;
 
 
@@ -47,5 +50,7 @@ protected:
 	LPCWSTR vertexShaderFile = L"";
 	LPCWSTR pixelShaderFile = L"";
 	ShaderTypes cubeShaderType;
+
+	
 };
 
