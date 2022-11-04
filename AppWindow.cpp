@@ -33,6 +33,8 @@ void AppWindow::OnCreate()
 	this->windowHeight = rc.bottom - rc.top;
 	ViewportCameraManager::init();
 
+	InitIMGUI();
+
 	//CREATING A CUBE OBJECT
 	
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
@@ -40,7 +42,8 @@ void AppWindow::OnCreate()
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
 	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
-	 
+
+	
 }
 
 void AppWindow::OnUpdate()
@@ -62,9 +65,10 @@ void AppWindow::OnUpdate()
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 	PrimitiveManager::GetInstance()->updateAll();
 
-	swapChain->present(true);
 
-	
+	PresentIMGUI();
+
+	swapChain->present(true);
 }
 
 void AppWindow::OnDestroy()
@@ -103,6 +107,7 @@ void AppWindow::onMouseMove(const Point& mouse_pos)
 
 void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
+	/*
 	bool isFirstObjectFound = false;
 	int listIterator = 0;
 	const PrimitiveManager::List gameObjectList = PrimitiveManager::GetInstance()->getAllObjects();
@@ -153,7 +158,7 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 
 	//std::cout << temp.getMagnitude(Vector3D(ray.direction.x, ray.direction.y, ray.direction.z)) << std::endl;
 
-	/*
+	
 	Vector3D rayOrigin3D = Vector3D(ray.origin.x, ray.origin.y, ray.origin.z);
 	Vector3D rayDirection3D = Vector3D(ray.direction.x, ray.direction.y, ray.direction.z);
 
@@ -197,6 +202,43 @@ void AppWindow::onRightMouseDown(const Point& mouse_pos)
 void AppWindow::onRightMouseUp(const Point& mouse_pos)
 {
 	
+}
+
+void AppWindow::InitIMGUI()
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	ImGui_ImplWin32_Init(m_hwnd);
+	ImGui_ImplDX11_Init(GraphicsEngine::GetInstance()->getRenderingSystem()->d3d11_device, GraphicsEngine::GetInstance()->getRenderingSystem()->imm_Context);
+	ImGui::StyleColorsDark();
+}
+
+void AppWindow::PresentIMGUI()
+{
+	//START IMGUI FRAME
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	//DRAW HERE
+	ImGui::Begin("Credits");
+	ImGui::Text("GDENG-2_InClassEngine v0.1\n");
+	ImGui::Text("Created by Aldrey D. Gaurana - GDENG-2 X22\n");
+	ImGui::Text("Acknowledgements:\n");
+	ImGui::Text(" - Sir Del Gallego for the course\n");
+	ImGui::Text(" - PardCode (https://www.youtube.com/c/PardCode)\n");
+	ImGui::Text(" - RedBull (https://www.redbull.com/ph-en/)\n");
+	ImGui::Text(" - Google (https://google.com)\n");
+	ImGui::Text(" - Stack Overflow (https://stackoverflow.com)\n");
+	ImGui::Text(" - IMGUI (https://github.com/ocornut/imgui)");
+
+	ImGui::End();
+	//DO NOT DRAW PAST HERE
+
+
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
 void AppWindow::OnFocus()

@@ -5,8 +5,6 @@ D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(199,43): warning C4244: '=
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(200,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(32,31): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(33,33): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(62,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(62,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(119,14): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(120,15): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(65,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(65,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

@@ -70,6 +70,11 @@
     <ClCompile Include="LinePrimitive.cpp">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -156,6 +161,14 @@
     <ClInclude Include="LinePrimitive.h">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_dx11.h" />
+    <ClInclude Include="imgui_impl_win32.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -229,5 +242,8 @@
     <FxCompile Include="LerpingAlbedoPixelShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
   </ItemGroup>
 </Project>

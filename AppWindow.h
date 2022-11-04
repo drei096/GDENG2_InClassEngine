@@ -15,6 +15,7 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
+
 struct PickingRay
 {
 	Vector4D origin;
@@ -44,6 +45,7 @@ public:
 	virtual void onRightMouseDown(const Point& mouse_pos) override;
 	virtual void onRightMouseUp(const Point& mouse_pos) override;
 
+
 private:
 	SwapChain* swapChain;
 	
@@ -52,6 +54,10 @@ private:
 	float windowHeight = 0.0f;
 
 	PickingRay ray;
+
+private:
+	void InitIMGUI();
+	void PresentIMGUI();
 	
 };
 
