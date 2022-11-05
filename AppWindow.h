@@ -14,6 +14,7 @@
 #include "ShaderCollection.h"
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
+#include "UIManager.h"
 
 
 struct PickingRay
@@ -55,9 +56,7 @@ private:
 
 	PickingRay ray;
 
-private:
-	void InitIMGUI();
-	void PresentIMGUI();
+
 	
 };
 

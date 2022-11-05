@@ -157,3 +157,13 @@ bool RenderingSystem::compilePixelShader(const wchar_t* file_name, const char* e
 
 	return true;
 }
+
+ID3D11Device* RenderingSystem::getD3D11Device()
+{
+	return d3d11_device;
+}
+
+ID3D11DeviceContext* RenderingSystem::getD3D11DeviceContext()
+{
+	return imm_Context;
+}

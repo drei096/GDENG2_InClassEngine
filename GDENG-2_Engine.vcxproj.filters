@@ -70,11 +70,39 @@
     <ClCompile Include="LinePrimitive.cpp">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="imgui.cpp" />
-    <ClCompile Include="imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_dx11.cpp" />
-    <ClCompile Include="imgui_impl_win32.cpp" />
-    <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="imgui.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="AUIScreen.cpp">
+      <Filter>GameEngine\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>GameEngine\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits_UI.cpp">
+      <Filter>GameEngine\Graphics\UI\Credits Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuToolbar.cpp">
+      <Filter>GameEngine\Graphics\UI\Menu Toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorPickerScreen.cpp">
+      <Filter>GameEngine\Graphics\UI\ColorPicker Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -161,14 +189,45 @@
     <ClInclude Include="LinePrimitive.h">
       <Filter>GameEngine\Graphics\RenderingSystem\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="imconfig.h" />
-    <ClInclude Include="imgui.h" />
-    <ClInclude Include="imgui_impl_dx11.h" />
-    <ClInclude Include="imgui_impl_win32.h" />
-    <ClInclude Include="imgui_internal.h" />
-    <ClInclude Include="imstb_rectpack.h" />
-    <ClInclude Include="imstb_textedit.h" />
-    <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="imconfig.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>GameEngine\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIScreen.h">
+      <Filter>GameEngine\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>GameEngine\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits_UI.h">
+      <Filter>GameEngine\Graphics\UI\Credits Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuToolbar.h">
+      <Filter>GameEngine\Graphics\UI\Menu Toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorPickerScreen.h">
+      <Filter>GameEngine\Graphics\UI\ColorPicker Screen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -225,6 +284,21 @@
     <Filter Include="GameEngine\Graphics\RenderingSystem\ViewportCamera">
       <UniqueIdentifier>{1bb4c2e1-f123-4cb8-b2ce-92ff7d010cfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\ImGui">
+      <UniqueIdentifier>{04889e52-de58-4ba2-b7f5-b28bf1e7350c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\UI">
+      <UniqueIdentifier>{1f340bfa-0563-4959-891b-eb80842aee6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\UI\Credits Screen">
+      <UniqueIdentifier>{d35901cd-8917-4fbb-8dc9-84e68c66a621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\UI\Menu Toolbar">
+      <UniqueIdentifier>{6ba60d92-900f-4047-9bf5-78fa7ea61af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\UI\ColorPicker Screen">
+      <UniqueIdentifier>{4f8e1c2e-8002-453e-b64e-94a5aaf8a95b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="shader.fx">
@@ -244,6 +318,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgui.ini" />
+    <None Include="imgui.ini">
+      <Filter>GameEngine\ImGui</Filter>
+    </None>
   </ItemGroup>
 </Project>

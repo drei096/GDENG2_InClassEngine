@@ -20,7 +20,9 @@ void AppWindow::OnCreate()
 {
 	//CREATING THE WINDOW, SWAP CHAIN, AND INPUT LISTENERS
 	Window::OnCreate();
+	//INIT INPUT SYSTEM
 	InputSystem::GetInstance()->addListener(this);
+	//INIT GRAPHICS SYSTEM
 	GraphicsEngine::GetInstance()->init();
 	swapChain = GraphicsEngine::GetInstance()->getRenderingSystem()->createSwapChain();
 	ShaderCollection::GetInstance()->LoadAllShaders();
@@ -31,9 +33,12 @@ void AppWindow::OnCreate()
 
 	this->windowWidth = rc.right - rc.left;
 	this->windowHeight = rc.bottom - rc.top;
+
+	//INIT VIEWPORT CAMERA
 	ViewportCameraManager::init();
 
-	InitIMGUI();
+	//INIT GUI
+	UIManager::initialize(m_hwnd);
 
 	//CREATING A CUBE OBJECT
 	
@@ -65,8 +70,7 @@ void AppWindow::OnUpdate()
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 	PrimitiveManager::GetInstance()->updateAll();
 
-
-	PresentIMGUI();
+	UIManager::GetInstance()->drawAllUIScreens();
 
 	swapChain->present(true);
 }
@@ -204,42 +208,6 @@ void AppWindow::onRightMouseUp(const Point& mouse_pos)
 	
 }
 
-void AppWindow::InitIMGUI()
-{
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	ImGui_ImplWin32_Init(m_hwnd);
-	ImGui_ImplDX11_Init(GraphicsEngine::GetInstance()->getRenderingSystem()->d3d11_device, GraphicsEngine::GetInstance()->getRenderingSystem()->imm_Context);
-	ImGui::StyleColorsDark();
-}
-
-void AppWindow::PresentIMGUI()
-{
-	//START IMGUI FRAME
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
-	//DRAW HERE
-	ImGui::Begin("Credits");
-	ImGui::Text("GDENG-2_InClassEngine v0.1\n");
-	ImGui::Text("Created by Aldrey D. Gaurana - GDENG-2 X22\n");
-	ImGui::Text("Acknowledgements:\n");
-	ImGui::Text(" - Sir Del Gallego for the course\n");
-	ImGui::Text(" - PardCode (https://www.youtube.com/c/PardCode)\n");
-	ImGui::Text(" - RedBull (https://www.redbull.com/ph-en/)\n");
-	ImGui::Text(" - Google (https://google.com)\n");
-	ImGui::Text(" - Stack Overflow (https://stackoverflow.com)\n");
-	ImGui::Text(" - IMGUI (https://github.com/ocornut/imgui)");
-
-	ImGui::End();
-	//DO NOT DRAW PAST HERE
-
-
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-}
 
 void AppWindow::OnFocus()
 {

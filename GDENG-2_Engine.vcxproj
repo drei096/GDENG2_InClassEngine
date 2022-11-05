@@ -21,13 +21,17 @@
   <ItemGroup>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AppWindow.cpp" />
+    <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColorPickerScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Credits_UI.cpp" />
     <ClCompile Include="CubePrimitive.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_dx11.cpp" />
     <ClCompile Include="imgui_impl_win32.cpp" />
@@ -37,12 +41,14 @@
     <ClCompile Include="LinePrimitive.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="MenuToolbar.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PlanePrimitive.cpp" />
     <ClCompile Include="PrimitiveManager.cpp" />
     <ClCompile Include="RenderingSystem.cpp" />
     <ClCompile Include="ShaderCollection.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="ViewportCameraManager.cpp" />
@@ -51,8 +57,11 @@
   <ItemGroup>
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AppWindow.h" />
+    <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ColorPickerScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Credits_UI.h" />
     <ClInclude Include="CubePrimitive.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EngineTime.h" />
@@ -71,6 +80,7 @@
     <ClInclude Include="LinePrimitive.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="MenuToolbar.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PlanePrimitive.h" />
     <ClInclude Include="Point.h" />
@@ -79,6 +89,7 @@
     <ClInclude Include="RenderingSystem.h" />
     <ClInclude Include="ShaderCollection.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
     <ClInclude Include="VertexBuffer.h" />
