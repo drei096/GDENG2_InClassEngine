@@ -46,8 +46,12 @@
     <ClCompile Include="PlanePrimitive.cpp" />
     <ClCompile Include="PrimitiveManager.cpp" />
     <ClCompile Include="RenderingSystem.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderCollection.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
@@ -87,8 +91,12 @@
     <ClInclude Include="Prerequisites.h" />
     <ClInclude Include="PrimitiveManager.h" />
     <ClInclude Include="RenderingSystem.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderCollection.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vector4D.h" />
@@ -188,6 +196,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\GDENG-2_Engine\Libs\DirectXTex\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\GDENG-2_Engine\Libs\DirectXTex\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -208,7 +218,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;DirectXTexD_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

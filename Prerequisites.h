@@ -8,3 +8,7 @@ class ConstantBuffer;
 class IndexBuffer;
 class RenderingSystem;
 class GraphicsEngine;
+class Resource;
+class ResourceManager;
+class Texture;
+class TextureManager;

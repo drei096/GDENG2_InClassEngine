@@ -4,6 +4,9 @@
 #include "imgui_impl_dx11.h"
 #include <string>
 #include <iostream>
+#include "TextureManager.h"
+#include "Texture.h"
+#include "GraphicsEngine.h"
 
 class AUIScreen
 {

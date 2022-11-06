@@ -103,6 +103,18 @@
     <ClCompile Include="ColorPickerScreen.cpp">
       <Filter>GameEngine\Graphics\UI\ColorPicker Screen</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -228,6 +240,18 @@
     <ClInclude Include="ColorPickerScreen.h">
       <Filter>GameEngine\Graphics\UI\ColorPicker Screen</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>GameEngine\Graphics\Resource Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>GameEngine\Graphics\Resource Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -298,6 +322,12 @@
     </Filter>
     <Filter Include="GameEngine\Graphics\UI\ColorPicker Screen">
       <UniqueIdentifier>{4f8e1c2e-8002-453e-b64e-94a5aaf8a95b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\Resource Manager">
+      <UniqueIdentifier>{0af891e3-82d8-4d14-9578-441138c28063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\Resource Manager\Texture Manager">
+      <UniqueIdentifier>{e3ce5c49-7071-4b1d-bc5f-25e5fc42389c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
