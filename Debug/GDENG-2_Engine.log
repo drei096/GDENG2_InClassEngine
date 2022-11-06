@@ -9,4 +9,5 @@ D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(62,58): warning C4244: '
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(62,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(119,14): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
 D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(120,15): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(142,52): warning C4018: '<': signed/unsigned mismatch
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

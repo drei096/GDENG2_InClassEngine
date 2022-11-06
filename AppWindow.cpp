@@ -39,7 +39,7 @@ void AppWindow::OnCreate()
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
+	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
 	 
 }
 
@@ -139,7 +139,7 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 	//ray.direction = Vector4D::getUnitVector(ray.direction);
 
 	Vector3D temp;
-	while(isFirstObjectFound == false)
+	while(isFirstObjectFound == false && listIterator < gameObjectList.size())
 	{
 		float directionMagnitude = temp.getMagnitude(Vector3D(ray.direction.x, ray.direction.y, ray.direction.z));
 		if (directionMagnitude < gameObjectList[listIterator]->getBoundingSphereValue())
