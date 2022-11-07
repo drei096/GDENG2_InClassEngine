@@ -1,7 +1,7 @@
 #include "CubePrimitive.h"
 #include "GraphicsEngine.h"
 #include "ViewportCameraManager.h"
-
+#include <cmath>
 
 CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameObject(name)
 {
@@ -9,6 +9,8 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	this->cubeShaderType = shaderType;
 
 	setVertexList(shaderType);
+
+	std::cout << shaderType << std::endl;
 
 	vertexBuffer = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexBuffer();
 
@@ -35,10 +37,6 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	m_cb = GraphicsEngine::GetInstance()->getRenderingSystem()->createConstantBuffer();
 	cc.m_angle = 0.0f;
 	m_cb->load(&cc, sizeof(constantData));
-
-	//set default shaders
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	
 	this->setPosition(0.0f, 0.0f, 0.0f);
@@ -165,15 +163,23 @@ void CubePrimitive::AssignVertexAndPixelShaders(ShaderTypes shaderType)
 
 void CubePrimitive::update(float deltaTime)
 {
+	
 	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
-
-	/*
-	* ROTATE A CUBE
-	* 
+	
 	this->animationTicks += deltaTime;
 
-	float rotSpeed = this->animationTicks * 1.0f;
-	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
+	/*
+	scaleSpeed += 0.0001f * deltaTime;
+
+	
+	if(this->getLocalScale().x <= 10.0f && this->getLocalScale().y >= 0.01f && this->getLocalScale().z <= 10.0f)
+	{
+		float xscale = MathUtils::lerp(this->getLocalScale().x, 10.0f, (sin(scaleSpeed)) * animationTicks);
+		float yscale = MathUtils::lerp(this->getLocalScale().y, 0.01f, (sin(scaleSpeed)) * animationTicks);
+		float zscale = MathUtils::lerp(this->getLocalScale().z, 10.0f, (sin(scaleSpeed)) * animationTicks);
+
+		this->setScale(xscale, yscale, zscale);
+	}
 	*/
 }
 
@@ -205,15 +211,15 @@ void CubePrimitive::draw(float width, float height)
 	yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
 
 	//Scale --> Rotate --> Transform as recommended order.
+	allMatrix *= scaleMatrix;
+
 	Matrix4x4 rotMatrix;
 	rotMatrix.setIdentity();
 	rotMatrix *= zMatrix;
 	rotMatrix *= yMatrix;
 	rotMatrix *= xMatrix;
 	allMatrix *= rotMatrix;
-	
 
-	allMatrix *= scaleMatrix;
 	allMatrix *= translationMatrix;
 	cc.m_world = allMatrix;
 
@@ -232,8 +238,13 @@ void CubePrimitive::draw(float width, float height)
 	}
 	
 	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
+
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+
+	//set default shaders
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());

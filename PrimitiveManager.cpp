@@ -106,6 +106,7 @@ void PrimitiveManager::createObject(PrimitiveType type, ShaderTypes shaderType)
 	{
 		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
 		this->addObject(cube);
+		
 	}
 
 	
@@ -113,6 +114,7 @@ void PrimitiveManager::createObject(PrimitiveType type, ShaderTypes shaderType)
 	{
 		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		this->addObject(plane);
+		
 	}
 	
 }

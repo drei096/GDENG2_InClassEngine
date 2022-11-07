@@ -26,3 +26,8 @@ float MathUtils::maxValue(float a, float b)
 {
     return (a < b) ? b : a;
 }
+
+float MathUtils::lerp(float startVal, float endVal, float percentage)
+{
+    return startVal + (endVal - startVal) * percentage;
+}

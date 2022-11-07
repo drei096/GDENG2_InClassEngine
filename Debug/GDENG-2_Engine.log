@@ -1,2 +1,15 @@
-﻿  Credits_UI.cpp
+﻿  AppWindow.cpp
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(197,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(198,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(199,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(200,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(34,31): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(35,33): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(102,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Programming\c++\GDENG-2\GDENG-2_Engine\AppWindow.cpp(102,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+DirectXTexD_x86.lib(BC.obj) : warning LNK4099: PDB '' was not found with 'DirectXTexD_x86.lib(BC.obj)' or at ''; linking object as if no debug info
+DirectXTexD_x86.lib(BC4BC5.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(BC4BC5.obj)' or at 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(BC6HBC7.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(BC6HBC7.obj)' or at 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexConvert.obj) : warning LNK4099: PDB 'DirectXTex.pdb' was not found with 'DirectXTexD_x86.lib(DirectXTexConvert.obj)' or at 'D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\DirectXTex.pdb'; linking object as if no debug info
+DirectXTexD_x86.lib(DirectXTexMipMaps.obj) : warning LNK4099: PDB '' was not found with 'DirectXTexD_x86.lib(DirectXTexMipMaps.obj)' or at ''; linking object as if no debug info
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

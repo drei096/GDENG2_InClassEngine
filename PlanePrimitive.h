@@ -12,6 +12,7 @@ public:
 	~PlanePrimitive();
 
 	void setVertexList(ShaderTypes shaderType);
+	
 
 	void update(float deltaTime) override;
 	

@@ -6,5 +6,6 @@ public:
 	static int randomInt(int a, int b);
 	static float minValue(float a, float b);
 	static float maxValue(float a, float b);
+	static float lerp(float startVal, float endVal, float percentage);
 };
 

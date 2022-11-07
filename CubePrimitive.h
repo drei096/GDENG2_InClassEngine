@@ -3,6 +3,7 @@
 #include "ShaderCollection.h"
 #include "MathUtils.h"
 
+
 struct vertex;
 
 class CubePrimitive : public AGameObject
@@ -45,6 +46,8 @@ protected:
 private:
 	//FOR ANIMATION PURPOSES
 	float animationTicks = 0.0f;
+	float scaleSpeed = 0.0f;
+	float translateSpeed = 0.0f;
 
 protected:
 	LPCWSTR vertexShaderFile = L"";
