@@ -252,6 +252,9 @@
     <ClInclude Include="Texture.h">
       <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -344,6 +347,12 @@
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="LerpingAlbedoPixelShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="FlatTexturedVertexShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="FlatTexturedPixelShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

@@ -25,7 +25,10 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
-	vertexBuffer->load(vertex_list, sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+
+	//set to texturedvertex for now
+	vertexBuffer->load(texd_vertex_list, sizeof(texturedVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER
@@ -86,8 +89,62 @@ void CubePrimitive::setVertexList(ShaderTypes shaderType)
 		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) , Vector3D(1,0,1) };
 		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
 	}
+	else if (shaderType == ShaderTypes::FLAT_TEXTURED)
+	{
+		Vector3D positionList[] =
+		{
+			{Vector3D(-0.5f,-0.5f,-0.5f)},
+			{ Vector3D(-0.5f,0.5f,-0.5f)},
+			{ Vector3D(0.5f,0.5f,-0.5f)},
+			{ Vector3D(0.5f,-0.5f,-0.5f)},
 
-	
+			//BACK FACE OF CUBE
+			{ Vector3D(0.5f,-0.5f,0.5f)},
+			{ Vector3D(0.5f,0.5f,0.5f)},
+			{ Vector3D(-0.5f,0.5f,0.5f)},
+			{ Vector3D(-0.5f,-0.5f,0.5f)}
+		};
+
+		Vector2D texcoordList[] =
+		{
+			{Vector2D(0.0f, 0.0f)},
+			{ Vector2D(0.0f, 1.0f)},
+			{ Vector2D(1.0f, 0.0f)},
+			{ Vector2D(1.0f, 1.0f)},
+		};
+
+		//FRONT FACE OF CUBE
+		texd_vertex_list[0] = { positionList[0], texcoordList[1]};
+		texd_vertex_list[1] = { positionList[1], texcoordList[0] };
+		texd_vertex_list[2] = { positionList[2], texcoordList[2] };
+		texd_vertex_list[3] = { positionList[3], texcoordList[3] };
+
+		//BACK FACE OF CUBE
+		texd_vertex_list[4] = { positionList[4], texcoordList[1] };
+		texd_vertex_list[5] = { positionList[5], texcoordList[0] };
+		texd_vertex_list[6] = { positionList[6], texcoordList[2] };
+		texd_vertex_list[7] = { positionList[7], texcoordList[3] };
+
+		texd_vertex_list[8] = { positionList[1], texcoordList[1] };
+		texd_vertex_list[9] = { positionList[6], texcoordList[0] };
+		texd_vertex_list[10] = { positionList[5], texcoordList[2] };
+		texd_vertex_list[11] = { positionList[2], texcoordList[3] };
+
+		texd_vertex_list[12] = { positionList[7], texcoordList[1] };
+		texd_vertex_list[13] = { positionList[0], texcoordList[0] };
+		texd_vertex_list[14] = { positionList[3], texcoordList[2] };
+		texd_vertex_list[15] = { positionList[4], texcoordList[3] };
+
+		texd_vertex_list[16] = { positionList[3], texcoordList[1] };
+		texd_vertex_list[17] = { positionList[2], texcoordList[0] };
+		texd_vertex_list[18] = { positionList[5], texcoordList[2] };
+		texd_vertex_list[19] = { positionList[4], texcoordList[3] };
+
+		texd_vertex_list[20] = { positionList[7], texcoordList[1] };
+		texd_vertex_list[21] = { positionList[6], texcoordList[0] };
+		texd_vertex_list[22] = { positionList[1], texcoordList[2] };
+		texd_vertex_list[23] = { positionList[0], texcoordList[3] };
+	}
 }
 
 void CubePrimitive::setIndexList()

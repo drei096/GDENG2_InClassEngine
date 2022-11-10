@@ -1,10 +1,5 @@
 #include "AppWindow.h"
-#include <Windows.h>
-#include "Vector3D.h"
-#include "Matrix4x4.h"
-#include "EngineTime.h"
-#include "PrimitiveManager.h"
-#include "ViewportCameraManager.h"
+
 
 
 AppWindow::AppWindow()
@@ -48,39 +43,6 @@ void AppWindow::OnCreate()
 	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.0f, 0.0f, 0.0f), Vector3D(5.0f, 0.1f, 5.0f), Vector3D(0.0f, 0.0f, 0.0f));
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
 
-	
-	//1ST ROW
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.0f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.3f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.6f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.9f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(1.2f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(1.5f, 0.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-
-	//2ND ROW
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.3f, 0.5f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 0.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(1.2f, 0.5f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 0.0f));
-
-	//3RD ROW
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.3f, 1.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.6f, 1.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.9f, 1.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(1.2f, 1.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-
-	//4TH ROW
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.73f, 1.5f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 0.0f));
-
-	//5TH ROW
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.6f, 2.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, 5.0f));
-	PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.9f, 2.0f, 0.0f), Vector3D(1.0f, 0.01f, 1.0f), Vector3D(0.0f, 0.0f, -5.0f));
-	
-
-	/*
-	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 0.9f, 0.0f), ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(-1.5f, 2.0f, 0.0f), ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(-1.5f, 3.0f, -2.0f), ShaderTypes::ALBEDO);
-	*/
 }
 
 void AppWindow::OnUpdate()

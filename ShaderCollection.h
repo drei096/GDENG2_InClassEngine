@@ -5,7 +5,8 @@
 enum ShaderTypes
 {
 	ALBEDO,
-	LERPING_ALBEDO
+	LERPING_ALBEDO,
+	FLAT_TEXTURED,
 };
 
 enum ShaderTypesIndiv

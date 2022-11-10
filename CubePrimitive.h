@@ -40,7 +40,8 @@ public:
 	
 
 protected:
-	vertex vertex_list[8];
+	flatColorVertex vertex_list[8];
+	texturedVertex texd_vertex_list[24];
 	unsigned int index_list[36];
 
 private:

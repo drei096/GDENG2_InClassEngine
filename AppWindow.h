@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 #include "Window.h"
 #include "GraphicsEngine.h"
 #include "SwapChain.h"
@@ -10,6 +11,11 @@
 #include "IndexBuffer.h"
 #include "InputListener.h"
 #include "InputSystem.h"
+#include "Vector2D.h"
+#include "Vector3D.h"
+#include "EngineTime.h"
+#include "PrimitiveManager.h"
+#include "ViewportCameraManager.h"
 #include "Matrix4x4.h"
 #include "ShaderCollection.h"
 #include <DirectXMath.h>

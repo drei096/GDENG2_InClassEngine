@@ -4,17 +4,25 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
+#include "Vector2D.h"
 #include "Vector3D.h"
 #include "PixelShader.h"
 #include "VertexShader.h"
 #include "DeviceContext.h"
 #include "AppWindow.h"
 
-struct vertex
+struct flatColorVertex
 {
 	Vector3D position;
 	Vector3D color;
 	Vector3D color1;
+	Vector2D texcoord;
+};
+
+struct texturedVertex
+{
+	Vector3D position;
+	Vector2D texcoord;
 };
 
 __declspec(align(16))
