@@ -4,6 +4,7 @@
 
 Texture::Texture(const wchar_t* full_path) : Resource(full_path)
 {
+	CoInitialize(nullptr);
 	DirectX::ScratchImage image_data;
 	HRESULT res = DirectX::LoadFromWICFile(full_path, DirectX::WIC_FLAGS_NONE, nullptr, image_data);
 
@@ -20,9 +21,12 @@ Texture::Texture(const wchar_t* full_path) : Resource(full_path)
 
 		// pass the description data to the shaderResourceView object
 		GraphicsEngine::GetInstance()->getRenderingSystem()->d3d11_device->CreateShaderResourceView(m_texture, &desc, &m_shader_res_view);
+		
 	}
 	else
 		throw std::exception("Texture not created successfully");
+
+	CoUninitialize();
 }
 
 Texture::~Texture()

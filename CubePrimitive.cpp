@@ -1,12 +1,23 @@
 #include "CubePrimitive.h"
-#include "GraphicsEngine.h"
-#include "ViewportCameraManager.h"
 #include <cmath>
+#include <iostream>
+
+#include "ConstantBuffer.h"
+#include "DeviceContext.h"
+#include "ShaderCollection.h"
+#include "ViewportCameraManager.h"
+#include "GraphicsEngine.h"
+#include "IndexBuffer.h"
+#include "MathUtils.h"
+#include "VertexBuffer.h"
 
 CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameObject(name)
 {
 	AssignVertexAndPixelShaders(shaderType);
 	this->cubeShaderType = shaderType;
+
+	//temp
+	wood_tex = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\wood.jpg");
 
 	setVertexList(shaderType);
 
@@ -51,12 +62,26 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 
 void* CubePrimitive::getVertexList()
 {
-	return vertex_list;
+	if (cubeShaderType == ShaderTypes::ALBEDO || cubeShaderType == ShaderTypes::LERPING_ALBEDO)
+	{
+		return vertex_list;
+	}
+	else if (cubeShaderType == ShaderTypes::FLAT_TEXTURED)
+	{
+		return texd_vertex_list;
+	}
 }
 
 UINT CubePrimitive::getVertexListSize()
 {
-	return ARRAYSIZE(vertex_list);
+	if (cubeShaderType == ShaderTypes::ALBEDO || cubeShaderType == ShaderTypes::LERPING_ALBEDO)
+	{
+		return ARRAYSIZE(vertex_list);
+	}
+	else if (cubeShaderType == ShaderTypes::FLAT_TEXTURED)
+	{
+		return ARRAYSIZE(texd_vertex_list);
+	}
 }
 
 void CubePrimitive::setVertexList(ShaderTypes shaderType)
@@ -150,37 +175,76 @@ void CubePrimitive::setVertexList(ShaderTypes shaderType)
 void CubePrimitive::setIndexList()
 {
 	//CREATING INDEX BUFFER
-	unsigned int cube_index_list[] =
+
+	if(cubeShaderType == ShaderTypes::ALBEDO || cubeShaderType == ShaderTypes::LERPING_ALBEDO)
 	{
-		//FRONT SIDE OF CUBE
-		0,1,2,
-		2,3,0,
+		unsigned int cube_index_list[] =
+		{
+			//FRONT SIDE OF CUBE
+			0,1,2,
+			2,3,0,
 
-		//BACK SIDE OF CUBE
-		4,5,6,
-		6,7,4,
+			//BACK SIDE OF CUBE
+			4,5,6,
+			6,7,4,
 
-		//TOP SIDE OF CUBE
-		1,6,5,
-		5,2,1,
+			//TOP SIDE OF CUBE
+			1,6,5,
+			5,2,1,
 
-		//BOTTOM SIDE OF CUBE
-		7,0,3,
-		3,4,7,
+			//BOTTOM SIDE OF CUBE
+			7,0,3,
+			3,4,7,
 
-		//RIGHT SIDE OF CUBE
-		3,2,5,
-		5,4,3,
+			//RIGHT SIDE OF CUBE
+			3,2,5,
+			5,4,3,
 
-		//LEFT SIDE OF CUBE
-		7,6,1,
-		1,0,7
-	};
+			//LEFT SIDE OF CUBE
+			7,6,1,
+			1,0,7
+		};
 
-	for(int i = 0; i < 36; i++)
-	{
-		index_list[i] = cube_index_list[i];
+		for (int i = 0; i < 36; i++)
+		{
+			index_list[i] = cube_index_list[i];
+		}
 	}
+	else if (cubeShaderType == ShaderTypes::FLAT_TEXTURED)
+	{
+		unsigned int cube_index_list[] =
+		{
+			//FRONT SIDE OF CUBE
+			0,1,2,
+			2,3,0,
+
+			//BACK SIDE OF CUBE
+			4,5,6,
+			6,7,4,
+
+			//TOP SIDE OF CUBE
+			8,9,10,
+			10,11,8,
+
+			//BOTTOM SIDE OF CUBE
+			12,13,14,
+			14,15,12, 
+
+			//RIGHT SIDE OF CUBE
+			16,17,18,
+			18,19,16,
+
+			//LEFT SIDE OF CUBE
+			20,21,22,
+			22,23,20
+		};
+
+		for (int i = 0; i < 36; i++)
+		{
+			index_list[i] = cube_index_list[i];
+		}
+	}
+	
 }
 
 void* CubePrimitive::getIndexList()
@@ -302,6 +366,9 @@ void CubePrimitive::draw(float width, float height)
 	//set default shaders
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
+
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, wood_tex);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, wood_tex);
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());

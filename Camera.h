@@ -2,6 +2,7 @@
 #include "AGameObject.h"
 #include "InputListener.h"
 #include "EngineTime.h"
+#include "Matrix4x4.h"
 
 class Camera : public AGameObject, public InputListener
 {

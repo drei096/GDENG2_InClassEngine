@@ -1,10 +1,7 @@
 #pragma once
 #include "AGameObject.h"
 #include "ShaderCollection.h"
-#include "MathUtils.h"
 
-
-struct vertex;
 
 class CubePrimitive : public AGameObject
 {
@@ -43,6 +40,7 @@ protected:
 	flatColorVertex vertex_list[8];
 	texturedVertex texd_vertex_list[24];
 	unsigned int index_list[36];
+	unsigned int texd_index_list[36];
 
 private:
 	//FOR ANIMATION PURPOSES
@@ -55,6 +53,6 @@ protected:
 	LPCWSTR pixelShaderFile = L"";
 	ShaderTypes cubeShaderType;
 
-	
+	Texture* wood_tex;
 };
 

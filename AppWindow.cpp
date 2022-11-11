@@ -37,7 +37,7 @@ void AppWindow::OnCreate()
 
 	//CREATING OBJECTS
 
-	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::PLANE, ShaderTypes::ALBEDO, Vector3D(0.0f, 0.0f, 0.0f), Vector3D(5.0f, 0.1f, 5.0f), Vector3D(0.0f, 0.0f, 0.0f));

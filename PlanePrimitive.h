@@ -1,8 +1,5 @@
 #pragma once
 #include "CubePrimitive.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
 
 
 class PlanePrimitive : public CubePrimitive

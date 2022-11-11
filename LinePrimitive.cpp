@@ -1,10 +1,13 @@
 #include "LinePrimitive.h"
 
+#include "ConstantBuffer.h"
+#include "GraphicsEngine.h"
+#include "VertexBuffer.h"
 #include "ViewportCameraManager.h"
 
 LinePrimitive::LinePrimitive(std::string name, Vector3D origin, Vector3D line) : AGameObject(name)
 {
-	vertex vertex_list[] =
+	flatColorVertex vertex_list[] =
 	{
 		{origin, Vector3D(1,0,0)},
 		{line, Vector3D(1,0,0)}
@@ -19,7 +22,7 @@ LinePrimitive::LinePrimitive(std::string name, Vector3D origin, Vector3D line) :
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(L"AlbedoVertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
-	vertexBuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shader_byte_code, size_of_shader, ShaderTypes::ALBEDO);
+	vertexBuffer->load(vertex_list, sizeof(flatColorVertex), ARRAYSIZE(vertex_list), shader_byte_code, size_of_shader, ShaderTypes::ALBEDO);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER

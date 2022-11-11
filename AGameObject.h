@@ -1,22 +1,18 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
+
+#include "Matrix4x4.h"
+#include "Prerequisites.h"
 #include "Vector2D.h"
 #include "Vector3D.h"
-#include "PixelShader.h"
-#include "VertexShader.h"
-#include "DeviceContext.h"
-#include "AppWindow.h"
+
 
 struct flatColorVertex
 {
 	Vector3D position;
 	Vector3D color;
 	Vector3D color1;
-	Vector2D texcoord;
 };
 
 struct texturedVertex
@@ -40,9 +36,6 @@ public:
 	AGameObject(std::string name);
 	virtual bool release();
 
-	void* getVertexList();
-	void setVertexList();
-	UINT getVertexListSize();
 
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3D pos);

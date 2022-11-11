@@ -1,6 +1,7 @@
 #pragma once
 #include <d3d11.h>
 #include "Prerequisites.h"
+#include "Texture.h"
 
 class DeviceContext
 {
@@ -16,6 +17,9 @@ public:
 	
 	void setConstantBuffer(VertexShader* vertex_shader, ConstantBuffer* buffer);
 	void setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* buffer);
+
+	void setTexture(VertexShader* vertex_shader, Texture* texture);
+	void setTexture(PixelShader* pixel_shader, Texture* texture);
 
 	void setIndexBuffer(IndexBuffer* index_buffer);
 

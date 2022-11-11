@@ -1,10 +1,16 @@
 #include "PlanePrimitive.h"
+
+#include "ConstantBuffer.h"
+#include "DeviceContext.h"
 #include "GraphicsEngine.h"
-#include "ViewportCameraManager.h"
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
 
 PlanePrimitive::PlanePrimitive(std::string name, ShaderTypes shaderType) : CubePrimitive(name, shaderType)
 {
 	AssignVertexAndPixelShaders(shaderType);
+	this->cubeShaderType = shaderType;
+
 
 	setVertexList(shaderType);
 
@@ -23,7 +29,7 @@ PlanePrimitive::PlanePrimitive(std::string name, ShaderTypes shaderType) : CubeP
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
-	vertexBuffer->load(getVertexList(), sizeof(vertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+	vertexBuffer->load(getVertexList(), sizeof(flatColorVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER

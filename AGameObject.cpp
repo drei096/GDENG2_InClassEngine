@@ -1,4 +1,13 @@
 #include "AGameObject.h"
+#include "ShaderCollection.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "ConstantBuffer.h"
+#include "PixelShader.h"
+#include "VertexShader.h"
+#include "Vector3D.h"
+
+
 
 AGameObject::AGameObject(std::string name)
 {

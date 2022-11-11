@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "InputSystem.h"
+
 Camera::Camera(std::string name) : AGameObject(name)
 {
 	this->setPosition(0.0f, 0.0f, -2.0f);
