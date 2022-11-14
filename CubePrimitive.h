@@ -45,6 +45,9 @@ protected:
 private:
 	//FOR ANIMATION PURPOSES
 	float animationTicks = 0.0f;
+	float translateSpeed = 0.0f;
+	float scaleSpeed = 1.0f;
+	float rotateSpeed = 0.0f;
 
 protected:
 	LPCWSTR vertexShaderFile = L"";

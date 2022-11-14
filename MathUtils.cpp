@@ -26,3 +26,8 @@ float MathUtils::maxValue(float a, float b)
 {
     return (a < b) ? b : a;
 }
+
+float MathUtils::distance3D(Vector3D a, Vector3D b)
+{
+    return sqrtf(powf(b.x - a.x, 2) + powf(b.y - a.y, 2) + powf(b.z - a.z, 2));
+}

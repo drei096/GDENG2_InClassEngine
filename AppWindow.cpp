@@ -34,11 +34,12 @@ void AppWindow::OnCreate()
 	ViewportCameraManager::init();
 
 	//CREATING A CUBE OBJECT
-	
+
+
+	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
 	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
-	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, Vector3D(0.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
-	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, 2.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PLANE, Vector3D(5.0f, 2.0f, 1.0f), ShaderTypes::LERPING_ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::CUBE, -5.0f, 1.0f, 0.0f, ShaderTypes::LERPING_ALBEDO);
 	//PrimitiveManager::GetInstance()->createObjectWithTransformations(PrimitiveManager::CUBE, ShaderTypes::ALBEDO, Vector3D(1.0f, 2.0f, 0.0f), Vector3D(1.5f, 1.5f, 1.5f), Vector3D(0.0f, 45.0f, 10.0f));
 	 
 }
@@ -105,16 +106,24 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 {
 	bool isFirstObjectFound = false;
 	int listIterator = 0;
+	float closestDistance = 0.0f;
+
 	const PrimitiveManager::List gameObjectList = PrimitiveManager::GetInstance()->getAllObjects();
 	if (gameObjectList.empty())
 		return;
+
+
+	for (int i = 0; i < gameObjectList.size(); i++)
+	{
+		gameObjectList[i]->isSelected = false;
+	}
 
 	
 	Matrix4x4 viewMatrixInverse;
 	Matrix4x4 projMatrix;
 	Matrix4x4 viewProjMatrix;
 
-	
+	projMatrix = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
 	float width = this->getClientWindowRect().right - this->getClientWindowRect().left;
 	float height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
@@ -130,13 +139,17 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 
 	viewMatrixInverse = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
 	viewMatrixInverse.inverse();
-	projMatrix = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
+	
 
 	ray.origin = viewMatrixInverse.multiplyTo(ray.origin);
 	ray.direction = projMatrix.multiplyTo(ray.direction);
 	ray.direction = viewMatrixInverse.multiplyTo(ray.direction);
 	
 	//ray.direction = Vector4D::getUnitVector(ray.direction);
+
+	//calculate distances of ray dir to each obj
+	
+	
 
 	Vector3D temp;
 	while(isFirstObjectFound == false && listIterator < gameObjectList.size())
@@ -145,6 +158,7 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 		if (directionMagnitude < gameObjectList[listIterator]->getBoundingSphereValue())
 		{
 			std::cout << gameObjectList[listIterator]->getName() << std::endl;
+			gameObjectList[listIterator]->isSelected = true;
 			isFirstObjectFound = true;
 		}
 		else
@@ -185,8 +199,15 @@ void AppWindow::onLeftMouseDown(const Point& mouse_pos)
 }
 
 void AppWindow::onLeftMouseUp(const Point& mouse_pos)
-{ 
-	
+{
+	/*
+	const PrimitiveManager::List gameObjectList = PrimitiveManager::GetInstance()->getAllObjects();
+
+	for(int i = 0; i < gameObjectList.size(); i++)
+	{
+		gameObjectList[i]->isSelected = false;
+	}
+	*/
 }
 
 void AppWindow::onRightMouseDown(const Point& mouse_pos)

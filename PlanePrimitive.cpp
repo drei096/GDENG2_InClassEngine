@@ -51,7 +51,62 @@ PlanePrimitive::~PlanePrimitive()
 
 void PlanePrimitive::update(float deltaTime)
 {
-	
+	if (isSelected)
+	{
+		//TRANSLATION
+		if (InputSystem::GetInstance()->isKeyDown('W'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(this->getLocalPosition().x, this->getLocalPosition().y, translateSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('S'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(this->getLocalPosition().x, this->getLocalPosition().y, translateSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('A'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(translateSpeed, this->getLocalPosition().y, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('D'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(translateSpeed, this->getLocalPosition().y, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('Q'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(this->getLocalPosition().x, translateSpeed, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('E'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(this->getLocalPosition().x, translateSpeed, this->getLocalPosition().z);
+		}
+
+		//SCALING AND ROTATING
+		if (InputSystem::GetInstance()->isKeyDown('I'))
+		{
+			scaleSpeed += deltaTime;
+			this->setScale(scaleSpeed, this->getLocalScale().y, scaleSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('K'))
+		{
+			scaleSpeed -= deltaTime;
+			this->setScale(scaleSpeed, this->getLocalScale().y, scaleSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('J'))
+		{
+			rotateSpeed -= deltaTime;
+			this->setRotation(rotateSpeed, rotateSpeed, rotateSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('L'))
+		{
+			rotateSpeed += deltaTime;
+			this->setRotation(rotateSpeed, rotateSpeed, rotateSpeed);
+		}
+	}
 }
 
 void PlanePrimitive::setVertexList(ShaderTypes shaderType)

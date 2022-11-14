@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Vector3D.h"
+
 class MathUtils
 {
 public:
@@ -6,5 +9,6 @@ public:
 	static int randomInt(int a, int b);
 	static float minValue(float a, float b);
 	static float maxValue(float a, float b);
+	static float distance3D(Vector3D a, Vector3D b);
 };
 

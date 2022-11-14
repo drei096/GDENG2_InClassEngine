@@ -36,9 +36,7 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	cc.m_angle = 0.0f;
 	m_cb->load(&cc, sizeof(constantData));
 
-	//set default shaders
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
+	
 
 	
 	this->setPosition(0.0f, 0.0f, 0.0f);
@@ -166,6 +164,9 @@ void CubePrimitive::AssignVertexAndPixelShaders(ShaderTypes shaderType)
 void CubePrimitive::update(float deltaTime)
 {
 	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
+	
+
+	//std::cout << isSelected << std::endl;
 
 	/*
 	* ROTATE A CUBE
@@ -175,6 +176,65 @@ void CubePrimitive::update(float deltaTime)
 	float rotSpeed = this->animationTicks * 1.0f;
 	this->setRotation(rotSpeed, rotSpeed, rotSpeed);
 	*/
+
+	
+
+	if(isSelected)
+	{
+		//TRANSLATION
+		if (InputSystem::GetInstance()->isKeyDown('W'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(this->getLocalPosition().x, this->getLocalPosition().y, translateSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('S'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(this->getLocalPosition().x, this->getLocalPosition().y, translateSpeed);
+		}
+		if(InputSystem::GetInstance()->isKeyDown('A'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(translateSpeed, this->getLocalPosition().y, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('D'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(translateSpeed, this->getLocalPosition().y, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('Q'))
+		{
+			translateSpeed -= deltaTime;
+			this->setPosition(this->getLocalPosition().x, translateSpeed, this->getLocalPosition().z);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('E'))
+		{
+			translateSpeed += deltaTime;
+			this->setPosition(this->getLocalPosition().x, translateSpeed, this->getLocalPosition().z);
+		}
+
+		//SCALING AND ROTATING
+		if (InputSystem::GetInstance()->isKeyDown('I'))
+		{
+			scaleSpeed += deltaTime;
+			this->setScale(scaleSpeed, scaleSpeed, scaleSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('K'))
+		{
+			scaleSpeed -= deltaTime;
+			this->setScale(scaleSpeed, scaleSpeed, scaleSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('J'))
+		{
+			rotateSpeed -= deltaTime;
+			this->setRotation(rotateSpeed, rotateSpeed, rotateSpeed);
+		}
+		if (InputSystem::GetInstance()->isKeyDown('L'))
+		{
+			rotateSpeed += deltaTime;
+			this->setRotation(rotateSpeed, rotateSpeed, rotateSpeed);
+		}
+	}
 }
 
 void CubePrimitive::draw(float width, float height)
@@ -205,6 +265,8 @@ void CubePrimitive::draw(float width, float height)
 	yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
 
 	//Scale --> Rotate --> Transform as recommended order.
+	allMatrix *= scaleMatrix;
+
 	Matrix4x4 rotMatrix;
 	rotMatrix.setIdentity();
 	rotMatrix *= zMatrix;
@@ -213,7 +275,7 @@ void CubePrimitive::draw(float width, float height)
 	allMatrix *= rotMatrix;
 	
 
-	allMatrix *= scaleMatrix;
+	
 	allMatrix *= translationMatrix;
 	cc.m_world = allMatrix;
 
@@ -234,6 +296,10 @@ void CubePrimitive::draw(float width, float height)
 	this->m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
+
+	//set default shaders
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());

@@ -82,5 +82,8 @@ protected:
 
 private:
 	bool enabled = true;
+
+public:
+	bool isSelected = false;
 };
 
