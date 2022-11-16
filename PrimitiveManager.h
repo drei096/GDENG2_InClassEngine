@@ -27,6 +27,7 @@ public:
 		PLANE,
 		SPHERE,
 		LINE,
+		MESH,
 	};
 
 	static void initialize();
@@ -50,6 +51,9 @@ public:
 
 	//NEW! CREATE PRIMS WITH TRANSFORMATIONS
 	void createObjectWithTransformations(PrimitiveType type, ShaderTypes shaderType, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy);
+
+	//NEW! CREATE MESHES
+	void createMesh(Mesh* mesh, Texture* tex);
 
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);

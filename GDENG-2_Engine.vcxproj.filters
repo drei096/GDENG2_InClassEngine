@@ -115,6 +115,12 @@
     <ClCompile Include="Texture.cpp">
       <Filter>GameEngine\Graphics\Resource Manager\Texture Manager</Filter>
     </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager\Mesh Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>GameEngine\Graphics\Resource Manager\Mesh Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -255,6 +261,15 @@
     <ClInclude Include="Vector2D.h">
       <Filter>GameEngine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>GameEngine\Graphics\Resource Manager\Mesh Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>GameEngine\Graphics\Resource Manager\Mesh Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexMesh.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -356,6 +371,12 @@
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="FlatTexturedPixelShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutShader.hlsl">
+      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexMeshLayoutPixelShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

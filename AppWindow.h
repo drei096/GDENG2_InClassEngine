@@ -53,7 +53,8 @@ private:
 
 	PickingRay ray;
 
-
+	Mesh* test_mesh;
+	Texture* test_tex;
 	
 };
 

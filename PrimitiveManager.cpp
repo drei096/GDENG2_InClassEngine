@@ -200,6 +200,11 @@ void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, Shade
 	}
 }
 
+void PrimitiveManager::createMesh(Mesh* mesh, Texture* tex)
+{
+	this->gameObjectList.push_back((AGameObject*)mesh);
+}
+
 void PrimitiveManager::deleteObject(AGameObject* gameObject)
 {
 	this->gameObjectMap.erase(gameObject->getName());
