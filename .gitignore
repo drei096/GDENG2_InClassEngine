@@ -497,3 +497,4 @@ Debug/SwapChain.obj
 Debug/VertexBuffer.obj
 Debug/VertexShader.obj
 Debug/Window.obj
+GDENG-2_Engine.vcxproj.filters

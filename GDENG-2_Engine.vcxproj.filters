@@ -332,6 +332,9 @@
     <Filter Include="GameEngine\Graphics\Resource Manager\Texture Manager">
       <UniqueIdentifier>{e3ce5c49-7071-4b1d-bc5f-25e5fc42389c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Graphics\Resource Manager\Mesh Manager">
+      <UniqueIdentifier>{f99857ab-f648-4bf4-bdc3-9e960e500eed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="shader.fx">

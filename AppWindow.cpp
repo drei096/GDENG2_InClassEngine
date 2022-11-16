@@ -212,16 +212,3 @@ void AppWindow::OnKillFocus()
 {
 	InputSystem::GetInstance()->removeListener(this);
 }
-
-
-
-
-
-
-/*cc.m_proj.setOrthoLH
-	(
-		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 400.0f,
-		(this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 400.0f,
-		-4.0f,
-		4.0f
-	);*/
