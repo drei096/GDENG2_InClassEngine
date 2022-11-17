@@ -84,6 +84,22 @@ bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 			return false;
 		}
 	}
+	else if (shaderType == ShaderTypes::MESH_TEXTURED)
+	{
+		D3D11_INPUT_ELEMENT_DESC layout[] =
+		{
+			//SEMANTIC NAME, SEMANTIC INDEX, FORMAT, INPUT SLOT, ALIGNED BYTE OFFSET, INPUT SLOT CLASS, INSTANCE DATA STEP RATE
+			{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		};
+
+		UINT size_layout = ARRAYSIZE(layout);
+
+		if (FAILED(m_renderingSystem->d3d11_device->CreateInputLayout(layout, size_layout, shader_byte_code, size_byte_shader, &m_input_layout)))
+		{
+			return false;
+		}
+	}
 	
 	
 

@@ -200,9 +200,31 @@ void PrimitiveManager::createObjectWithTransformations(PrimitiveType type, Shade
 	}
 }
 
-void PrimitiveManager::createMesh(Mesh* mesh, Texture* tex)
+void PrimitiveManager::createTeapot(ShaderTypes shaderType)
 {
-	this->gameObjectList.push_back((AGameObject*)mesh);
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\teapot.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(0.0f, 0.0f, 0.0f);
+	this->addObject(cube);
+}
+
+void PrimitiveManager::createBunny(ShaderTypes shaderType)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\bunny.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(-2.0f, 0.0f, 0.0f);
+	this->addObject(cube);
+}
+
+void PrimitiveManager::createArmadillo(ShaderTypes shaderType)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\armadillo.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(5.0f, 0.0f, 0.0f);
+	this->addObject(cube);
 }
 
 void PrimitiveManager::deleteObject(AGameObject* gameObject)

@@ -53,7 +53,9 @@ public:
 	void createObjectWithTransformations(PrimitiveType type, ShaderTypes shaderType, Vector3D translateBy, Vector3D scaleBy, Vector3D rotateBy);
 
 	//NEW! CREATE MESHES
-	void createMesh(Mesh* mesh, Texture* tex);
+	void createTeapot(ShaderTypes shaderType);
+	void createBunny(ShaderTypes shaderType);
+	void createArmadillo(ShaderTypes shaderType);
 
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);

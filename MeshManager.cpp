@@ -12,12 +12,10 @@ MeshManager::~MeshManager()
 
 Resource* MeshManager::createResourceFromFileConcrete(const wchar_t* file_path)
 {
-	std::string name = "mesh";
-
 	Mesh* mesh = nullptr;
 	try
 	{
-		mesh = new Mesh(file_path, name);
+		mesh = new Mesh(file_path);
 	}
 	catch (...) {}
 

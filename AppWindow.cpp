@@ -37,10 +37,10 @@ void AppWindow::OnCreate()
 	UIManager::initialize(m_hwnd);
 
 	//CREATING OBJECTS
+	PrimitiveManager::GetInstance()->createTeapot(ShaderTypes::FLAT_TEXTURED);
+	//PrimitiveManager::GetInstance()->createBunny(ShaderTypes::FLAT_TEXTURED);
+	//PrimitiveManager::GetInstance()->createArmadillo(ShaderTypes::FLAT_TEXTURED);
 
-	test_tex = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\brick.png");
-	test_mesh = GraphicsEngine::GetInstance()->getMeshManager()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
-	test_mesh->assignTex(test_tex);
 	//PrimitiveManager::GetInstance()->createMesh(test_mesh, test_tex);
 	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);
@@ -67,7 +67,6 @@ void AppWindow::OnUpdate()
 
 
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
-	test_mesh->draw(WIDTH, HEIGHT);
 	PrimitiveManager::GetInstance()->updateAll();
 
 	UIManager::GetInstance()->drawAllUIScreens();

@@ -33,6 +33,8 @@ public:
 
 	bool release() override;
 
+	void setMesh(const wchar_t* mesh_path);
+	void setTexture(const wchar_t* tex_path);
 
 	
 
@@ -52,7 +54,5 @@ protected:
 	LPCWSTR vertexShaderFile = L"";
 	LPCWSTR pixelShaderFile = L"";
 	ShaderTypes cubeShaderType;
-
-	Texture* wood_tex;
 };
 

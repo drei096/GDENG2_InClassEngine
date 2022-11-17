@@ -14,6 +14,8 @@ void ShaderCollection::LoadAllShaders()
 	shaderHashTable[PIXEL_SHADER_LERPING_ALBEDO] = L"LerpingAlbedoPixelShader.hlsl";
 	shaderHashTable[VERTEX_SHADER_FLAT_TEXTURED] = L"FlatTexturedVertexShader.hlsl";
 	shaderHashTable[PIXEL_SHADER_FLAT_TEXTURED] = L"FlatTexturedPixelShader.hlsl";
+	shaderHashTable[VERTEX_SHADER_MESH_TEXTURED] = L"VertexMeshLayoutShader.hlsl";
+	shaderHashTable[PIXEL_SHADER_MESH_TEXTURED] = L"VertexMeshLayoutPixelShader.hlsl";
 }
 
 void ShaderCollection::getShadersByType(ShaderTypes shaderType, LPCWSTR* vertexShaderName, LPCWSTR* pixelShaderName)
@@ -33,6 +35,11 @@ void ShaderCollection::getShadersByType(ShaderTypes shaderType, LPCWSTR* vertexS
 	case FLAT_TEXTURED:
 		*vertexShaderName = shaderHashTable[VERTEX_SHADER_FLAT_TEXTURED];
 		*pixelShaderName = shaderHashTable[PIXEL_SHADER_FLAT_TEXTURED];
+		break;
+
+	case MESH_TEXTURED:
+		*vertexShaderName = shaderHashTable[VERTEX_SHADER_MESH_TEXTURED];
+		*pixelShaderName = shaderHashTable[PIXEL_SHADER_MESH_TEXTURED];
 		break;
 	}
 }

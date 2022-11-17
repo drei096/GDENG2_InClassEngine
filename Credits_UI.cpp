@@ -15,8 +15,8 @@ void Credits_UI::drawUI()
 	ImGui::Text("GDENG-2_InClassEngine v0.1\n");
 	ImGui::Text("Created by Aldrey D. Gaurana - GDENG-2 X22\n");
 
-	Texture* m_wood_tex = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\iC.png");
-	ImGui::Image((void*)m_wood_tex->getShaderResourceView(), ImVec2(256, 256));
+	Texture* tex = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\iC.png");
+	ImGui::Image((void*)tex->getShaderResourceView(), ImVec2(256, 256));
 
 	ImGui::Text("Acknowledgements:\n");
 	ImGui::Text(" - Sir Del Gallego for the course\n");

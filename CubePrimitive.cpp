@@ -9,15 +9,17 @@
 #include "GraphicsEngine.h"
 #include "IndexBuffer.h"
 #include "MathUtils.h"
+#include "Mesh.h"
 #include "VertexBuffer.h"
+#include "VertexShader.h"
 
 CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameObject(name)
 {
 	AssignVertexAndPixelShaders(shaderType);
 	this->cubeShaderType = shaderType;
 
-	//temp
-	wood_tex = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(L"Assets\\Textures\\wood.jpg");
+	//setTexture(L"Assets\\Textures\\wood.jpg");
+
 
 	setVertexList(shaderType);
 
@@ -114,7 +116,7 @@ void CubePrimitive::setVertexList(ShaderTypes shaderType)
 		vertex_list[6] = { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1) , Vector3D(1,0,1) };
 		vertex_list[7] = { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0) , Vector3D(0.7f,0.25f,0.6f) };
 	}
-	else if (shaderType == ShaderTypes::FLAT_TEXTURED)
+	else if (shaderType == ShaderTypes::FLAT_TEXTURED || shaderType == ShaderTypes::MESH_TEXTURED)
 	{
 		Vector3D positionList[] =
 		{
@@ -290,18 +292,15 @@ void CubePrimitive::update(float deltaTime)
 	this->animationTicks += deltaTime;
 
 	/*
-	scaleSpeed += 0.0001f * deltaTime;
+	scaleSpeed += 0.5f * deltaTime;
 
-	
-	if(this->getLocalScale().x <= 10.0f && this->getLocalScale().y >= 0.01f && this->getLocalScale().z <= 10.0f)
-	{
-		float xscale = MathUtils::lerp(this->getLocalScale().x, 10.0f, (sin(scaleSpeed)) * animationTicks);
-		float yscale = MathUtils::lerp(this->getLocalScale().y, 0.01f, (sin(scaleSpeed)) * animationTicks);
-		float zscale = MathUtils::lerp(this->getLocalScale().z, 10.0f, (sin(scaleSpeed)) * animationTicks);
+	float xscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
+	float yscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
+	float zscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
 
-		this->setScale(xscale, yscale, zscale);
-	}
+	this->setScale(xscale, yscale, zscale);
 	*/
+	
 }
 
 void CubePrimitive::draw(float width, float height)
@@ -351,7 +350,7 @@ void CubePrimitive::draw(float width, float height)
 	float aspectRatio = (float)width / (float)height;
 	cc.m_proj = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
-	computeBoundingSphere();
+	//computeBoundingSphere();
 
 	if(cubeShaderType == ShaderTypes::LERPING_ALBEDO)
 	{
@@ -367,15 +366,15 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, wood_tex);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, wood_tex);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
 
 	//set the indices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(getIndexBuffer());
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(indexBuffer);
 	//set the vertices of the object/cube/triangle to draw
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(getVertexBuffer());
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(vertexBuffer);
 
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(indexBuffer->getSizeIndexList(), 0, 0);
 }
 
 
@@ -424,6 +423,32 @@ void CubePrimitive::computeBoundingSphere()
 bool CubePrimitive::release()
 {
 	return true;
+}
+
+void CubePrimitive::setMesh(const wchar_t* mesh_path)
+{
+	void* shader_byte_code = nullptr;
+	UINT size_of_shader = 0;
+
+	m_mesh = GraphicsEngine::GetInstance()->getMeshManager()->createMeshFromFile(mesh_path);
+	indexBuffer = m_mesh->getIndexBuffer();
+	vertexBuffer = m_mesh->getVertexBuffer();
+
+	this->cubeShaderType = ShaderTypes::MESH_TEXTURED;
+	AssignVertexAndPixelShaders(this->cubeShaderType);
+
+
+
+	//CREATING PIXEL SHADER
+	GraphicsEngine::GetInstance()->getRenderingSystem()->compilePixelShader(this->pixelShaderFile, "psmain", &shader_byte_code, &size_of_shader);
+	m_ps = GraphicsEngine::GetInstance()->getRenderingSystem()->createPixelShader(shader_byte_code, size_of_shader);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
+}
+
+void CubePrimitive::setTexture(const wchar_t* tex_path)
+{
+	// assign the texture file to the BNS_Texture pointer by passing the its path in the file
+	m_texture = GraphicsEngine::GetInstance()->getTextureManager()->createTextureFromFile(tex_path);
 }
 
 

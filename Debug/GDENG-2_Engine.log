@@ -1,24 +1,2 @@
-﻿  Mesh.cpp
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(53,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(98,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(104,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(105,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(106,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(107,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(129,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(130,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(131,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(132,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(137,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(138,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(139,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(140,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(145,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(146,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(147,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(148,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(197,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(198,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(199,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Programming\c++\GDENG-2\GDENG-2_Engine\Matrix4x4.h(200,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  Texture.cpp
   GDENG-2_Engine.vcxproj -> D:\Programming\c++\GDENG-2\GDENG-2_Engine\Debug\GDENG-2_Engine.exe

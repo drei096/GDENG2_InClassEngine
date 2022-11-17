@@ -1,24 +1,24 @@
 #pragma once
 
 #include "Resource.h"
-#include "AGameObject.h"
+#include "Prerequisites.h"
 
 
-class Mesh : public Resource, public AGameObject
+class Mesh : public Resource
 {
 public:
-	Mesh(const wchar_t* full_path, std::string name);
+	Mesh(const wchar_t* full_path);
 	~Mesh();
-	const VertexBuffer* getVertexBuffer();
-	const IndexBuffer* getIndexBuffer();
+	VertexBuffer* getVertexBuffer();
+	IndexBuffer* getIndexBuffer();
+	VertexShader* getVertexShader();
 
-	void update(float deltaTime) override;
-	void draw(float width, float height) override;
-
-	void assignTex(Texture* tex);
+private:
+	VertexBuffer* vertexBuffer = nullptr;
+	IndexBuffer* indexBuffer = nullptr;
+	VertexShader* vertexShader = nullptr;
 
 private:
 	friend class DeviceContext;
-	Texture* m_tex;
 };
 

@@ -81,6 +81,9 @@ protected:
 	Vector3D objectCenterOffset;
 	float boundingSphereValue;
 
+	Mesh* m_mesh = nullptr;
+	Texture* m_texture = nullptr;
+
 private:
 	bool enabled = true;
 };
