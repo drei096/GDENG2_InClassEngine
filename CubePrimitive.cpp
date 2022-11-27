@@ -33,14 +33,14 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	indexBuffer->load(index_list, getIndexListSize());
 
 	void* shader_byte_code = nullptr;
-	UINT size_of_shader = 0;
+	size_t size_of_shader = 0;
 
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
 
 	//set to texturedvertex for now
-	vertexBuffer->load(texd_vertex_list, sizeof(texturedVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+	vertexBuffer->load(vertex_list, sizeof(flatColorVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
 
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
@@ -291,6 +291,8 @@ void CubePrimitive::update(float deltaTime)
 	
 	this->animationTicks += deltaTime;
 
+	std::cout << this->name << " " << "is updating" << std::endl;
+
 	/*
 	scaleSpeed += 0.5f * deltaTime;
 
@@ -305,43 +307,52 @@ void CubePrimitive::update(float deltaTime)
 
 void CubePrimitive::draw(float width, float height)
 {
-	Matrix4x4 allMatrix;
-	allMatrix.setIdentity();
+	if(this->overrideMatrix)
+	{
+		cc.m_world.setIdentity();
+		cc.m_world = localMatrix;
+	}
+	else
+	{
+		Matrix4x4 allMatrix;
+		allMatrix.setIdentity();
 
-	Matrix4x4 translationMatrix;
-	translationMatrix.setIdentity();
-	translationMatrix.setTranslationMatrix(this->getLocalPosition());
+		Matrix4x4 translationMatrix;
+		translationMatrix.setIdentity();
+		translationMatrix.setTranslationMatrix(this->getLocalPosition());
 
-	Matrix4x4 scaleMatrix;
-	scaleMatrix.setIdentity();
-	scaleMatrix.setScale(this->getLocalScale());
+		Matrix4x4 scaleMatrix;
+		scaleMatrix.setIdentity();
+		scaleMatrix.setScale(this->getLocalScale());
 
+
+		Vector3D rotation = this->getLocalRotation();
+		Matrix4x4 zMatrix;
+		zMatrix.setIdentity();
+		zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
+
+		Matrix4x4 xMatrix;
+		xMatrix.setIdentity();
+		xMatrix.setQuaternionRotation(rotation.x, 1, 0, 0);
+
+		Matrix4x4 yMatrix;
+		yMatrix.setIdentity();
+		yMatrix.setQuaternionRotation(rotation.y, 0, 1, 0);
+
+		//Scale --> Rotate --> Transform as recommended order.
+		allMatrix *= scaleMatrix;
+
+		Matrix4x4 rotMatrix;
+		rotMatrix.setIdentity();
+		rotMatrix *= zMatrix;
+		rotMatrix *= yMatrix;
+		rotMatrix *= xMatrix;
+		allMatrix *= rotMatrix;
+
+		allMatrix *= translationMatrix;
+		cc.m_world = allMatrix;
+	}
 	
-	Vector3D rotation = this->getLocalRotation();
-	Matrix4x4 zMatrix;
-	zMatrix.setIdentity();
-	zMatrix.setQuaternionRotation(rotation.z, 0, 0, 1);
-
-	Matrix4x4 xMatrix;
-	xMatrix.setIdentity();
-	xMatrix.setQuaternionRotation(rotation.x, 1,0,0);
-
-	Matrix4x4 yMatrix;
-	yMatrix.setIdentity();
-	yMatrix.setQuaternionRotation(rotation.y, 0,1,0);
-
-	//Scale --> Rotate --> Transform as recommended order.
-	allMatrix *= scaleMatrix;
-
-	Matrix4x4 rotMatrix;
-	rotMatrix.setIdentity();
-	rotMatrix *= zMatrix;
-	rotMatrix *= yMatrix;
-	rotMatrix *= xMatrix;
-	allMatrix *= rotMatrix;
-
-	allMatrix *= translationMatrix;
-	cc.m_world = allMatrix;
 
 	Matrix4x4 cameraMatrix = ViewportCameraManager::getInstance()->getSceneCameraViewMatrix();
 	cc.m_view = cameraMatrix;
@@ -366,15 +377,15 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
+	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
+	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(indexBuffer);
 	//set the vertices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexBuffer(vertexBuffer);
 
-	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(indexBuffer->getSizeIndexList(), 0, 0);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(getIndexListSize(), 0, 0);
 }
 
 
@@ -428,7 +439,7 @@ bool CubePrimitive::release()
 void CubePrimitive::setMesh(const wchar_t* mesh_path)
 {
 	void* shader_byte_code = nullptr;
-	UINT size_of_shader = 0;
+	size_t size_of_shader = 0;
 
 	m_mesh = GraphicsEngine::GetInstance()->getMeshManager()->createMeshFromFile(mesh_path);
 	indexBuffer = m_mesh->getIndexBuffer();

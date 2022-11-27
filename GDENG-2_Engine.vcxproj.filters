@@ -121,6 +121,18 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>GameEngine\Graphics\Resource Manager\Mesh Manager</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>GameEngine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponentSystem.cpp">
+      <Filter>GameEngine\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponent.cpp">
+      <Filter>GameEngine\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>GameEngine\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -270,6 +282,18 @@
     <ClInclude Include="VertexMesh.h">
       <Filter>GameEngine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>GameEngine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponentSystem.h">
+      <Filter>GameEngine\Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponent.h">
+      <Filter>GameEngine\Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>GameEngine\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -350,11 +374,11 @@
     <Filter Include="GameEngine\Graphics\Resource Manager\Mesh Manager">
       <UniqueIdentifier>{f99857ab-f648-4bf4-bdc3-9e960e500eed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Physics">
+      <UniqueIdentifier>{ddce20d8-0bff-4278-967c-41b4834ebd09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="shader.fx">
-      <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="AlbedoVertexShader.hlsl">
       <Filter>GameEngine\Graphics\RenderingSystem\Shaders</Filter>
     </FxCompile>

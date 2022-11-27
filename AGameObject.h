@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 
+#include "PhysicsComponent.h"
 #include "Matrix4x4.h"
 #include "Prerequisites.h"
 #include "Vector2D.h"
@@ -30,9 +31,17 @@ struct constantData
 	float m_angle;
 };
 
+class AComponent;
+class Matrix4x4;
+class AppWindow;
+
 class AGameObject
 {
 public:
+	typedef std::string String;
+	typedef std::vector<AComponent*> ComponentList;
+
+
 	AGameObject(std::string name);
 	virtual bool release();
 
@@ -57,6 +66,18 @@ public:
 
 	std::string getName();
 	bool isEnabled();
+
+	float* GetPhysicsLocalMatrix();
+	void RecomputeMatrix(float matrix[16]);
+	Matrix4x4 GetMatrix();
+
+	void AttachComponent(AComponent* component);
+	void DetachComponent(AComponent* component);
+
+	AComponent* FindComponentByName(String name);
+	AComponent* FindComponentOfType(AComponent::ComponentType type, String name = "");
+	ComponentList GetComponentsOfType(AComponent::ComponentType type);
+	ComponentList GetComponentsOfTypeRecursive(AComponent::ComponentType type);
 
 private:
 	friend class PrimitiveManager;
@@ -83,6 +104,9 @@ protected:
 
 	Mesh* m_mesh = nullptr;
 	Texture* m_texture = nullptr;
+
+	ComponentList componentList;
+	bool overrideMatrix = false;
 
 private:
 	bool enabled = true;

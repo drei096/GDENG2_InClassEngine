@@ -28,6 +28,8 @@ public:
 		SPHERE,
 		LINE,
 		MESH,
+		PHYSICS_CUBE,
+		PHYSICS_PLANE,
 	};
 
 	static void initialize();

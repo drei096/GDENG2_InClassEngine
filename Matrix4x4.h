@@ -10,6 +10,11 @@ public:
 	{
 	}
 
+	float* GetMatrix()
+	{
+		return *matrix;
+	}
+
 	void setIdentity()
 	{
 		//fill the [4][4] matrix with zeroes
@@ -151,6 +156,25 @@ public:
 	void setMatrix(const Matrix4x4& matrix)
 	{
 		::memcpy(this->matrix, matrix.matrix, sizeof(float) * 16);
+	}
+
+	void setMatrix(float matrix[16])
+	{
+		Matrix4x4 out;
+		int index = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				out.matrix[i][j] = matrix[index];
+			}
+		}
+		setMatrix(out);
+	}
+
+	void setMatrix(float matrix[4][4])
+	{
+		::memcpy(matrix, matrix, sizeof(float) * 16);
 	}
 
 	float getDeterminant()

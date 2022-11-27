@@ -17,7 +17,7 @@ LinePrimitive::LinePrimitive(std::string name, Vector3D origin, Vector3D line) :
 
 
 	void* shader_byte_code = nullptr;
-	UINT size_of_shader = 0;
+	size_t size_of_shader = 0;
 
 	//CREATING VERTEX SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(L"AlbedoVertexShader.hlsl", "vsmain", &shader_byte_code, &size_of_shader);

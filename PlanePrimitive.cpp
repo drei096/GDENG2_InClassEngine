@@ -23,7 +23,7 @@ PlanePrimitive::PlanePrimitive(std::string name, ShaderTypes shaderType) : CubeP
 	indexBuffer->load(index_list, getIndexListSize());
 	
 	void* shader_byte_code = nullptr;
-	UINT size_of_shader = 0;
+	size_t size_of_shader = 0;
 
 
 	//CREATING VERTEX SHADER
@@ -57,7 +57,7 @@ PlanePrimitive::~PlanePrimitive()
 
 void PlanePrimitive::update(float deltaTime)
 {
-	
+	std::cout << this->name << " " << "is updating" << std::endl;
 }
 
 void PlanePrimitive::setVertexList(ShaderTypes shaderType)

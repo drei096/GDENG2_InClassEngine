@@ -25,7 +25,8 @@ Mesh::Mesh(const wchar_t* full_path) : Resource(full_path)
 	std::string warn;
 	std::string err;
 
-	std::string input_file = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(full_path);
+	std::wstring ws(full_path);
+	std::string input_file(ws.begin(), ws.end());
 
 	bool res = tinyobj::LoadObj(&attribs, &shapes, &materials, &warn, &err, input_file.c_str());
 

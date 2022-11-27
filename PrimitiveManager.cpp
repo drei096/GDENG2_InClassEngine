@@ -1,6 +1,8 @@
 #include "PrimitiveManager.h"
 #include "MathUtils.h"
 #include "EngineTime.h"
+#include "PhysicsComponent.h"
+#include "PhysicsSystem.h"
 
 
 PrimitiveManager* PrimitiveManager::GetInstance()
@@ -156,6 +158,31 @@ void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point, S
 	{
 		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		plane->setPosition(point);
+		this->addObject(plane);
+	}
+
+	if (type == PrimitiveType::PHYSICS_CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+		cube->setPosition(point);
+
+		// adding physics component
+		PhysicsComponent* physicsComp = new PhysicsComponent("PhysCube", cube);
+		cube->AttachComponent(physicsComp);
+		
+		this->addObject(cube);
+	}
+
+	if (type == PrimitiveType::PHYSICS_PLANE)
+	{
+		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
+		plane->setPosition(point);
+		
+
+		// adding physics component
+		PhysicsComponent* physicsComp = new PhysicsComponent("PhysPlane", plane);
+		plane->AttachComponent(physicsComp);
+
 		this->addObject(plane);
 	}
 }

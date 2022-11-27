@@ -1,7 +1,8 @@
 #include "AppWindow.h"
 
 #include "Mesh.h"
-
+#include "BaseComponentSystem.h"
+#include "PhysicsSystem.h"
 
 AppWindow::AppWindow()
 {
@@ -16,6 +17,10 @@ void AppWindow::OnCreate()
 {
 	//CREATING THE WINDOW, SWAP CHAIN, AND INPUT LISTENERS
 	Window::OnCreate();
+
+	//INIT BASE COMPONENT SYSTEM
+	BaseComponentSystem::Initialize();
+
 	//INIT INPUT SYSTEM
 	InputSystem::GetInstance()->addListener(this);
 	//INIT GRAPHICS SYSTEM
@@ -37,7 +42,10 @@ void AppWindow::OnCreate()
 	UIManager::initialize(m_hwnd);
 
 	//CREATING OBJECTS
-	PrimitiveManager::GetInstance()->createTeapot(ShaderTypes::FLAT_TEXTURED);
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_PLANE, Vector3D(0.0f, 0.0f, 0.0f), ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_CUBE, Vector3D(0.0f, 3.0f, 0.0f), ShaderTypes::ALBEDO);
+
+	//PrimitiveManager::GetInstance()->createTeapot(ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createBunny(ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createArmadillo(ShaderTypes::FLAT_TEXTURED);
 
@@ -68,6 +76,7 @@ void AppWindow::OnUpdate()
 
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 	PrimitiveManager::GetInstance()->updateAll();
+	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->UpdateAllComponents();
 
 	UIManager::GetInstance()->drawAllUIScreens();
 
@@ -82,7 +91,8 @@ void AppWindow::OnDestroy()
 	//destroy cam
 	ViewportCameraManager::getInstance()->destroy();
 
-	
+	//BaseComponentSystem::GetInstance()->Destroy();
+
 	swapChain->release();
 	GraphicsEngine::GetInstance()->release();
 
