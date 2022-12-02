@@ -79,6 +79,8 @@ public:
 	ComponentList GetComponentsOfType(AComponent::ComponentType type);
 	ComponentList GetComponentsOfTypeRecursive(AComponent::ComponentType type);
 
+	void updateLocalMatrix();
+
 private:
 	friend class PrimitiveManager;
 

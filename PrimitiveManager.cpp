@@ -181,6 +181,7 @@ void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point, S
 
 		// adding physics component
 		PhysicsComponent* physicsComp = new PhysicsComponent("PhysPlane", plane);
+		physicsComp->GetRigidBody()->setType(BodyType::KINEMATIC);
 		plane->AttachComponent(physicsComp);
 
 		this->addObject(plane);

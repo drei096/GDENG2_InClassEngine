@@ -81,7 +81,7 @@ public:
 		::memcpy(this->matrix, out.matrix, sizeof(float) * 16);
 	}
 
-	Matrix4x4 multiplyTo(Matrix4x4 matrix)
+	Matrix4x4 multiplyTo(const Matrix4x4& matrix)
 	{
 		Matrix4x4 out;
 		for (int i = 0; i < 4; i++) {
@@ -173,8 +173,8 @@ public:
 	}
 
 	void setMatrix(float matrix[4][4])
-	{
-		::memcpy(matrix, matrix, sizeof(float) * 16);
+	{	
+		::memcpy(this->matrix, matrix, sizeof(float) * 16);
 	}
 
 	float getDeterminant()
@@ -277,6 +277,7 @@ public:
 
 	Vector4D multiplyTo(Vector4D inVector)
 	{
+
 		Vector4D outVector;
 
 		outVector.x = (inVector.x * this->matrix[0][0]) + (inVector.y * this->matrix[1][0]) + (inVector.z * this->matrix[2][0]) + (inVector.w * this->matrix[3][0]);

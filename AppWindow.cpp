@@ -43,7 +43,7 @@ void AppWindow::OnCreate()
 
 	//CREATING OBJECTS
 	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_PLANE, Vector3D(0.0f, 0.0f, 0.0f), ShaderTypes::ALBEDO);
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_CUBE, Vector3D(0.0f, 3.0f, 0.0f), ShaderTypes::ALBEDO);
+	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_CUBE, Vector3D(0.0f, 10.0f, 0.0f), ShaderTypes::ALBEDO);
 
 	//PrimitiveManager::GetInstance()->createTeapot(ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createBunny(ShaderTypes::FLAT_TEXTURED);
@@ -63,6 +63,8 @@ void AppWindow::OnUpdate()
 	Window::OnUpdate();
 	InputSystem::GetInstance()->update(m_hwnd);
 
+	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->UpdateAllComponents();
+
 	//clear render target
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->clearRenderTargetColor(this->swapChain, 0.1f, 0.1f, 0.2f, 1);
 
@@ -73,10 +75,10 @@ void AppWindow::OnUpdate()
 
 	ViewportCameraManager::getInstance()->update();
 
-
+	
 	PrimitiveManager::GetInstance()->renderAll(windowWidth, windowHeight);
 	PrimitiveManager::GetInstance()->updateAll();
-	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->UpdateAllComponents();
+	
 
 	UIManager::GetInstance()->drawAllUIScreens();
 

@@ -35,7 +35,7 @@ private:
 	float forward = 0.0f;
 	float right = 0.0f;
 	float up = 0.0f;
-	float camSpeed = 0.01f;
+	float camSpeed = 0.05f;
 
 	Matrix4x4 viewCamera;
 	float fovInDegrees = 90.0f;
