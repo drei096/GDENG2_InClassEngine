@@ -306,11 +306,11 @@ void AGameObject::RecomputeMatrix(float matrix[16])
 
 	rotMatrix.setEulerRotationX(localRotation.x);
 	newMatrix *= rotMatrix;
-	rotMatrix.setIdentity();
+	//rotMatrix.setIdentity();
 
 	rotMatrix.setEulerRotationY(localRotation.y);
 	newMatrix *= rotMatrix;
-	rotMatrix.setIdentity();
+	//rotMatrix.setIdentity();
 
 	rotMatrix.setEulerRotationZ(localRotation.z);
 	newMatrix *= rotMatrix;

@@ -47,7 +47,7 @@ PlanePrimitive::PlanePrimitive(std::string name, ShaderTypes shaderType) : CubeP
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
 	this->setPosition(0.0f, 0.0f, 0.0f);
-	this->setScale(10.0f, 0.01f, 10.0f);
+	this->setScale(50.0f, 0.01f, 50.0f);
 	this->setRotation(0.0f, 0.0f, 0.0f);
 }
 

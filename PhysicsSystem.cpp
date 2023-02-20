@@ -9,7 +9,7 @@ PhysicsSystem::PhysicsSystem()
 	this->physicsCommon = new PhysicsCommon();
 	PhysicsWorld::WorldSettings settings;
 	settings.defaultVelocitySolverNbIterations = 50;
-	settings.gravity = Vector3(0, -9.81, 0);
+	settings.gravity = Vector3(0, -9.81f, 0);
 	this->physicsWorld = this->physicsCommon->createPhysicsWorld(settings);
 }
 
@@ -76,13 +76,13 @@ PhysicsSystem::componentList PhysicsSystem::GetAllComponents()
 void PhysicsSystem::UpdateAllComponents()
 {
 	// do not update during first frame. Delta time is still 0.
-	if (EngineTime::getDeltaTime() > 0)
+	if (EngineTime::getDeltaTime() > 0.0)
 	{
 		// update physics world
-		physicsWorld->update(EngineTime::getDeltaTime());
+		physicsWorld->update((float)EngineTime::getDeltaTime());
 		for (int i = 0; i < _componentList.size(); ++i)
 		{
-			_componentList[i]->Perform(EngineTime::getDeltaTime());
+			_componentList[i]->Perform((float)EngineTime::getDeltaTime());
 		}
 	}
 }

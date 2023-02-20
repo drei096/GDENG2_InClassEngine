@@ -7,6 +7,17 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner) : AComponent
 {
 	// whenever a new physics component is initialized. Register to physics system
 	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->RegisterComponent(this);
+	UpdateRigidBody();
+}
+
+PhysicsComponent::~PhysicsComponent()
+{
+	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->UnRegisterComponent(this);
+	AComponent::~AComponent();
+}
+
+void PhysicsComponent::UpdateRigidBody()
+{
 	PhysicsCommon* physicsCommon = BaseComponentSystem::GetInstance()->GetPhysicsSystem()->GetPhysicsCommon();
 	PhysicsWorld* physicsWorld = BaseComponentSystem::GetInstance()->GetPhysicsSystem()->GetPhysicsWorld();
 
@@ -16,7 +27,7 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner) : AComponent
 
 	Transform transform;
 	transform.setFromOpenGL(this->GetOwner()->GetPhysicsLocalMatrix());
-	this->boxShape = physicsCommon->createBoxShape(Vector3(scale.x / 2, scale.y / 2, scale.z / 2));
+	this->boxShape = physicsCommon->createBoxShape(Vector3(scale.x, scale.y, scale.z));
 
 	this->rigidBody = physicsWorld->createRigidBody(transform);
 	this->rigidBody->addCollider(this->boxShape, transform);
@@ -29,17 +40,6 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner) : AComponent
 	transform.getOpenGLMatrix(matrix);
 
 	this->GetOwner()->RecomputeMatrix(matrix);
-}
-
-PhysicsComponent::~PhysicsComponent()
-{
-	AComponent::~AComponent();
-	BaseComponentSystem::GetInstance()->GetPhysicsSystem()->UnRegisterComponent(this);
-}
-
-void PhysicsComponent::UpdateRigidBody()
-{
-	
 	
 }
 

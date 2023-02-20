@@ -291,7 +291,7 @@ void CubePrimitive::update(float deltaTime)
 	
 	this->animationTicks += deltaTime;
 
-	std::cout << this->name << " " << "is updating" << std::endl;
+	std::cout << this->name << " " << "is updating" << " (" << this->getLocalPosition().x << this->getLocalPosition().y << this->getLocalPosition().z << ") " << std::endl;
 
 	/*
 	scaleSpeed += 0.5f * deltaTime;

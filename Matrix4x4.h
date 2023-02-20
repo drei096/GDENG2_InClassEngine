@@ -1,7 +1,9 @@
 #pragma once
 #include <memory>
+#include <cmath>
 #include "Vector3D.h"
 #include "Vector4D.h"
+#include "DirectXMath.h"
 
 class Matrix4x4
 {
@@ -29,7 +31,7 @@ public:
 
 	void setTranslationMatrix(const Vector3D& translationAmount)
 	{
-
+		setIdentity();
 		//hardset the trans values with the passed param
 		matrix[3][0] = translationAmount.x;
 		matrix[3][1] = translationAmount.y;
@@ -38,6 +40,7 @@ public:
 
 	void setScale(const Vector3D& scale)
 	{
+		setIdentity();
 		matrix[0][0] = scale.x;
 		matrix[1][1] = scale.y;
 		matrix[2][2] = scale.z;
@@ -131,6 +134,7 @@ public:
 
 	void setEulerRotationX(float x)
 	{
+		setIdentity();
 		this->matrix[1][1] = cos(x);
 		this->matrix[1][2] = sin(x);
 		this->matrix[2][1] = -sin(x);
@@ -139,6 +143,7 @@ public:
 
 	void setEulerRotationY(float y)
 	{
+		setIdentity();
 		this->matrix[0][0] = cos(y);
 		this->matrix[0][2] = -sin(y);
 		this->matrix[2][0] = sin(y);
@@ -147,6 +152,7 @@ public:
 
 	void setEulerRotationZ(float z)
 	{
+		setIdentity();
 		this->matrix[0][0] = cos(z);
 		this->matrix[0][1] = sin(z);
 		this->matrix[1][0] = -sin(z);

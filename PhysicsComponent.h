@@ -17,7 +17,7 @@ public:
 
 private:
 	float mass = 1000.0f; // in kilograms
-	RigidBody* rigidBody = nullptr;
+	RigidBody* rigidBody;
 	BoxShape* boxShape = nullptr;
 };
 
