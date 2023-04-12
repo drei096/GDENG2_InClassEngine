@@ -30,6 +30,7 @@ void SceneManager::addScene(AScene* scene)
 
 void SceneManager::initializeScenes()
 {
+	
 	AScene* sceneTemp;
 
 	sceneTemp = new Scene1("Scene1", this->sceneList.size());
@@ -45,6 +46,8 @@ void SceneManager::initializeScenes()
 
 	//pre-load all scenes
 	loadAllScenes();
+
+	
 }
 
 std::vector<AScene*> &SceneManager::getSceneList()

@@ -24,6 +24,7 @@ public:
 		HIERARCHY_SCREEN,
 		CREDITS_SCREEN,
 		COLOR_PICKER_SCREEN,
+		PARCM_LOADER_SCREEN,
 	};
 
 	typedef std::vector<AUIScreen*> uiScreenList;

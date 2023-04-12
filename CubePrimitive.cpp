@@ -18,7 +18,7 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	AssignVertexAndPixelShaders(shaderType);
 	this->cubeShaderType = shaderType;
 
-	//setTexture(L"Assets\\Textures\\wood.jpg");
+	setTexture(L"Assets\\Textures\\wood.jpg");
 
 
 	setVertexList(shaderType);
@@ -289,9 +289,9 @@ void CubePrimitive::update(float deltaTime)
 	
 	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	
-	this->animationTicks += deltaTime;
+	//this->animationTicks += deltaTime;
 
-	std::cout << this->name << " " << "is updating" << " (" << this->getLocalPosition().x << this->getLocalPosition().y << this->getLocalPosition().z << ") " << std::endl;
+	//std::cout << this->name << " " << "is updating" << " (" << this->getLocalPosition().x << this->getLocalPosition().y << this->getLocalPosition().z << ") " << std::endl;
 
 	/*
 	scaleSpeed += 0.5f * deltaTime;
@@ -342,8 +342,8 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
-	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
-	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
+	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(indexBuffer);

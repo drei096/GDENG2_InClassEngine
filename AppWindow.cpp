@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "BaseComponentSystem.h"
 #include "PhysicsSystem.h"
+#include "SceneManager.h"
 
 AppWindow::AppWindow()
 {
@@ -37,6 +38,10 @@ void AppWindow::OnCreate()
 
 	//INIT VIEWPORT CAMERA
 	ViewportCameraManager::init();
+
+	//INIT SCENE LOADING
+	SceneManager::create();
+	SceneManager::Instance()->initializeScenes();
 
 	//INIT GUI
 	UIManager::initialize(m_hwnd);

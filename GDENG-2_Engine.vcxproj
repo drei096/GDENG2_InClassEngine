@@ -52,6 +52,7 @@
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="ObjectScene.cpp" />
+    <ClCompile Include="PARCMLoaderScreen.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="PixelShader.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="ObjectScene.h" />
+    <ClInclude Include="PARCMLoaderScreen.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PixelShader.h" />

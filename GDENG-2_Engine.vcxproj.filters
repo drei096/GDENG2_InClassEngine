@@ -147,6 +147,9 @@
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="AScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="PARCMLoaderScreen.cpp">
+      <Filter>GameEngine\Graphics\UI\PARCM UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -324,6 +327,9 @@
     <ClInclude Include="AScene.h" />
     <ClInclude Include="BNS_EnumHandler.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="PARCMLoaderScreen.h">
+      <Filter>GameEngine\Graphics\UI\PARCM UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">
@@ -406,6 +412,9 @@
     </Filter>
     <Filter Include="GameEngine\Physics">
       <UniqueIdentifier>{ddce20d8-0bff-4278-967c-41b4834ebd09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Graphics\UI\PARCM UI">
+      <UniqueIdentifier>{4d266fdb-1e5e-4863-aca8-7268fbdaec71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

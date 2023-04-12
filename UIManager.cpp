@@ -1,6 +1,7 @@
 #include "UIManager.h"
 
 #include "GraphicsEngine.h"
+#include "PARCMLoaderScreen.h"
 
 UIManager* UIManager::sharedInstance = NULL;
 
@@ -69,6 +70,11 @@ UIManager::UIManager(HWND hwnd)
 	ColorPickerScreen* colorPickerScreen = new ColorPickerScreen("cpScreen");
 	this->uiTable[UINames::COLOR_PICKER_SCREEN] = colorPickerScreen;
 	this->_uiScreenList.push_back(colorPickerScreen);
+
+	PARCMLoaderScreen* parcmLoaderScreen = new PARCMLoaderScreen("parcmLoaderScreen");
+	this->uiTable[UINames::PARCM_LOADER_SCREEN] = parcmLoaderScreen;
+	this->_uiScreenList.push_back(parcmLoaderScreen);
+	
 }
 
 UIManager::~UIManager()
