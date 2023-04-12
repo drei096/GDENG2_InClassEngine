@@ -42,10 +42,10 @@ void AppWindow::OnCreate()
 	UIManager::initialize(m_hwnd);
 
 	//CREATING OBJECTS
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_PLANE, Vector3D(0.0f, 0.0f, 0.0f), ShaderTypes::ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_PLANE, Vector3D(0.0f, 0.0f, 0.0f), ShaderTypes::ALBEDO);
 
 	
-	PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_CUBE, Vector3D(0.0f, 4.0f, 0.0f), ShaderTypes::ALBEDO);
+	//PrimitiveManager::GetInstance()->createObjectAtPoint(PrimitiveManager::PHYSICS_CUBE, Vector3D(0.0f, 4.0f, 0.0f), ShaderTypes::ALBEDO);
 
 	//PrimitiveManager::GetInstance()->createTeapot(ShaderTypes::FLAT_TEXTURED);
 	//PrimitiveManager::GetInstance()->createBunny(ShaderTypes::FLAT_TEXTURED);

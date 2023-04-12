@@ -133,6 +133,20 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>GameEngine\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="IETSemaphore.cpp" />
+    <ClCompile Include="IETThread.cpp" />
+    <ClCompile Include="IWorkerAction.cpp" />
+    <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="ObjectScene.cpp" />
+    <ClCompile Include="PoolWorkerThread.cpp" />
+    <ClCompile Include="Scene1.cpp" />
+    <ClCompile Include="Scene2.cpp" />
+    <ClCompile Include="Scene3.cpp" />
+    <ClCompile Include="Scene4.cpp" />
+    <ClCompile Include="Scene5.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="AScene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -294,6 +308,22 @@
     <ClInclude Include="PhysicsComponent.h">
       <Filter>GameEngine\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="IETSemaphore.h" />
+    <ClInclude Include="IETThread.h" />
+    <ClInclude Include="IExecutionEvent.h" />
+    <ClInclude Include="IWorkerAction.h" />
+    <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="ObjectScene.h" />
+    <ClInclude Include="PoolWorkerThread.h" />
+    <ClInclude Include="Scene1.h" />
+    <ClInclude Include="Scene2.h" />
+    <ClInclude Include="Scene3.h" />
+    <ClInclude Include="Scene4.h" />
+    <ClInclude Include="Scene5.h" />
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="AScene.h" />
+    <ClInclude Include="BNS_EnumHandler.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="App">

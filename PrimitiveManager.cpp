@@ -255,6 +255,92 @@ void PrimitiveManager::createArmadillo(ShaderTypes shaderType)
 	this->addObject(cube);
 }
 
+AGameObject* PrimitiveManager::createTeapot(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\teapot.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createBunny(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\bunny.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createArmadillo(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\armadillo.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createStatue(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\statue.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createEarth(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\sphere.obj");
+	cube->setTexture(L"Assets\\Textures\\earth_color.jpg");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createScene(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\scene.obj");
+	cube->setTexture(L"Assets\\Textures\\brick.png");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createSphere(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\sphere.obj");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
+AGameObject* PrimitiveManager::createCapsule(ShaderTypes shaderType, Vector3D pos)
+{
+	CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+	cube->setMesh(L"Assets\\Meshes\\capsule.obj");
+	cube->setPosition(pos.x, pos.y, pos.z);
+	this->addObject(cube);
+
+	return cube;
+}
+
 void PrimitiveManager::deleteObject(AGameObject* gameObject)
 {
 	this->gameObjectMap.erase(gameObject->getName());

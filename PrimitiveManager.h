@@ -58,6 +58,15 @@ public:
 	void createTeapot(ShaderTypes shaderType);
 	void createBunny(ShaderTypes shaderType);
 	void createArmadillo(ShaderTypes shaderType);
+	AGameObject* createTeapot(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createBunny(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createArmadillo(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createStatue(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createEarth(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createScene(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createSphere(ShaderTypes shaderType, Vector3D pos);
+	AGameObject* createCapsule(ShaderTypes shaderType, Vector3D pos);
+
 
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
