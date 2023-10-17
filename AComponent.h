@@ -15,14 +15,15 @@ public:
 		Script = 0,
 		Renderer = 1,
 		Input = 2,
-		Physics = 3
+		Physics = 3,
+		Transform = 4,
 	};
 
 	AComponent(String name, ComponentType type, AGameObject* owner);
 	~AComponent();
 
 	void AttachOwner(AGameObject* owner);
-	void DetachOwner();
+	virtual void DetachOwner();
 	AGameObject* GetOwner();
 	ComponentType GetType();
 	String GetName();

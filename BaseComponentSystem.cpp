@@ -23,6 +23,11 @@ PhysicsSystem* BaseComponentSystem::GetPhysicsSystem()
 	return physicsSystem;
 }
 
+TransformSystem* BaseComponentSystem::GetTransformSystem()
+{
+	return transformSystem;
+}
+
 BaseComponentSystem::BaseComponentSystem()
 {
 	physicsSystem = new PhysicsSystem();

@@ -17,10 +17,6 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 {
 	AssignVertexAndPixelShaders(shaderType);
 	this->cubeShaderType = shaderType;
-
-	//setTexture(L"Assets\\Textures\\wood.jpg");
-
-
 	setVertexList(shaderType);
 
 	std::cout << shaderType << std::endl;
@@ -39,9 +35,25 @@ CubePrimitive::CubePrimitive(std::string name, ShaderTypes shaderType) : AGameOb
 	GraphicsEngine::GetInstance()->getRenderingSystem()->compileVertexShader(this->vertexShaderFile, "vsmain", &shader_byte_code, &size_of_shader);
 	m_vs = GraphicsEngine::GetInstance()->getRenderingSystem()->createVertexShader(shader_byte_code, size_of_shader);
 
-	//set to texturedvertex for now
-	vertexBuffer->load(vertex_list, sizeof(flatColorVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+	//LOAD VERTEX BUFFER WITH VERTEX LIST
+	switch(shaderType)
+	{
+	case ShaderTypes::ALBEDO:
+		vertexBuffer->load(getVertexList(), sizeof(flatColorVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+		break;
+	case ShaderTypes::LERPING_ALBEDO:
+		vertexBuffer->load(getVertexList(), sizeof(flatColorVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+		break;
+	case ShaderTypes::FLAT_TEXTURED:
+		vertexBuffer->load(getVertexList(), sizeof(texturedVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+		break;
+	case ShaderTypes::MESH_TEXTURED:
+		vertexBuffer->load(getVertexList(), sizeof(texturedVertex), getVertexListSize(), shader_byte_code, size_of_shader, shaderType);
+		break;
+	}
+	
 
+	//RELEASE COMPILED SHADER
 	GraphicsEngine::GetInstance()->getRenderingSystem()->releaseCompiledShader();
 
 	//CREATING PIXEL SHADER
@@ -289,19 +301,7 @@ void CubePrimitive::update(float deltaTime)
 	
 	m_cb->update(GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext(), &cc);
 	
-	this->animationTicks += deltaTime;
-
-	//std::cout << this->name << " " << "is updating" << " (" << this->getLocalPosition().x << this->getLocalPosition().y << this->getLocalPosition().z << ") " << std::endl;
-
-	/*
-	scaleSpeed += 0.5f * deltaTime;
-
-	float xscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
-	float yscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
-	float zscale = MathUtils::lerp(0.5f, 1.0f, (sin(animationTicks) + 1.0f) / 2.0f);
-
-	this->setScale(xscale, yscale, zscale);
-	*/
+	
 	
 }
 
@@ -326,7 +326,6 @@ void CubePrimitive::draw(float width, float height)
 	float aspectRatio = (float)width / (float)height;
 	cc.m_proj = ViewportCameraManager::getInstance()->GetSceneCameraProjectionMatrix();
 
-	//computeBoundingSphere();
 
 	if(cubeShaderType == ShaderTypes::LERPING_ALBEDO)
 	{
@@ -338,12 +337,14 @@ void CubePrimitive::draw(float width, float height)
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
 
-	//set default shaders
+	//set shaders
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
-
-	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
-	//GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
+	if(m_texture != nullptr)
+	{
+		GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_vs, m_texture);
+		GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setTexture(m_ps, m_texture);
+	}
 
 	//set the indices of the object/cube/triangle to draw
 	GraphicsEngine::GetInstance()->getRenderingSystem()->getImmediateDeviceContext()->setIndexBuffer(indexBuffer);
@@ -354,47 +355,7 @@ void CubePrimitive::draw(float width, float height)
 }
 
 
-void CubePrimitive::computeBoundingSphere()
-{
-	Vector3D minVertex, maxVertex;
-	
 
-	for(int i = 0; i < getVertexListSize(); i++)
-	{
-		Vector4D vertex4D = Vector4D(vertex_list[i].position, 1.0f);
-		Vector4D vertex4DTransformed = Vector4D(cc.m_world.multiplyTo(vertex4D));
-		vertex4DTransformed = cc.m_view.multiplyTo(vertex4DTransformed);
-		vertex4DTransformed = cc.m_proj.multiplyTo(vertex4DTransformed);
-		Vector3D vertex3DTransformed = Vector3D(vertex4DTransformed.x, vertex4DTransformed.y, vertex4DTransformed.z);
-
-
-		minVertex.x = MathUtils::minValue(minVertex.x, vertex3DTransformed.x);
-		minVertex.y = MathUtils::minValue(minVertex.y, vertex3DTransformed.y);    // Find smallest y value in model
-		minVertex.z = MathUtils::minValue(minVertex.z, vertex3DTransformed.z);    // Find smallest z value in model
-
-		//Get the largest vertex 
-		maxVertex.x = MathUtils::maxValue(maxVertex.x, vertex3DTransformed.x);    // Find largest x value in model
-		maxVertex.y = MathUtils::maxValue(maxVertex.y, vertex3DTransformed.y);    // Find largest y value in model
-		maxVertex.z = MathUtils::maxValue(maxVertex.z, vertex3DTransformed.z);    // Find largest z value in model
-	}
-
-
-	// Compute distance between maxVertex and minVertex
-	float distX = (maxVertex.x - minVertex.x) / 2.0f;
-	float distY = (maxVertex.y - minVertex.y) / 2.0f;
-	float distZ = (maxVertex.z - minVertex.z) / 2.0f;
-
-	// Now store the distance between (0, 0, 0) in model space to the models real center
-	objectCenterOffset = Vector3D(maxVertex.x - distX, maxVertex.y - distY, maxVertex.z - distZ);
-
-	// Compute bounding sphere (distance between min and max bounding box vertices)
-	// boundingSphere = sqrt(distX*distX + distY*distY + distZ*distZ) / 2.0f;
-	Vector3D distVec = Vector3D(distX, distY, distZ);
-	Vector3D temp;
-	boundingSphereValue = temp.getMagnitude(distVec);
-
-	//std::cout << boundingSphereValue << std::endl;
-}
 
 bool CubePrimitive::release()
 {
@@ -412,7 +373,6 @@ void CubePrimitive::setMesh(const wchar_t* mesh_path)
 
 	this->cubeShaderType = ShaderTypes::MESH_TEXTURED;
 	AssignVertexAndPixelShaders(this->cubeShaderType);
-
 
 
 	//CREATING PIXEL SHADER

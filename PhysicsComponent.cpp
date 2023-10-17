@@ -16,6 +16,8 @@ PhysicsComponent::~PhysicsComponent()
 	AComponent::~AComponent();
 }
 
+
+
 void PhysicsComponent::UpdateRigidBody()
 {
 	PhysicsCommon* physicsCommon = BaseComponentSystem::GetInstance()->GetPhysicsSystem()->GetPhysicsCommon();
@@ -23,10 +25,10 @@ void PhysicsComponent::UpdateRigidBody()
 
 
 	// Create a rigid body in the world
-	Vector3D scale = this->GetOwner()->getLocalScale();
+	Vector3D scale = GetOwner()->getLocalScale();
 
-	Transform transform;
-	transform.setFromOpenGL(this->GetOwner()->GetPhysicsLocalMatrix());
+	reactphysics3d::Transform transform;
+	transform.setFromOpenGL(GetOwner()->GetPhysicsLocalMatrix());
 	this->boxShape = physicsCommon->createBoxShape(Vector3(scale.x, scale.y, scale.z));
 
 	this->rigidBody = physicsWorld->createRigidBody(transform);
@@ -39,13 +41,13 @@ void PhysicsComponent::UpdateRigidBody()
 	float matrix[16];
 	transform.getOpenGLMatrix(matrix);
 
-	this->GetOwner()->RecomputeMatrix(matrix);
+	GetOwner()->RecomputeMatrix(matrix);
 	
 }
 
 void PhysicsComponent::Perform(float deltaTime)
 {
-	const Transform transform = this->rigidBody->getTransform();
+	const reactphysics3d::Transform transform = this->rigidBody->getTransform();
 	float matrix[16];
 	transform.getOpenGLMatrix(matrix);
 

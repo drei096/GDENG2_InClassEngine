@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-
+class TransformSystem;
 class PhysicsSystem;
 
 
@@ -15,6 +15,7 @@ public:
 	static void Destroy();
 
 	PhysicsSystem* GetPhysicsSystem();
+	TransformSystem* GetTransformSystem();
 
 private:
 	BaseComponentSystem();
@@ -24,5 +25,6 @@ private:
 	static  BaseComponentSystem* sharedInstance;
 
 	PhysicsSystem* physicsSystem;
+	TransformSystem* transformSystem;
 };
 

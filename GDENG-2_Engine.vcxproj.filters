@@ -133,6 +133,12 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>GameEngine\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="TransformSystem.cpp">
+      <Filter>GameEngine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>GameEngine\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -292,6 +298,12 @@
       <Filter>GameEngine\Backend</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsComponent.h">
+      <Filter>GameEngine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformSystem.h">
+      <Filter>GameEngine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
       <Filter>GameEngine\Physics</Filter>
     </ClInclude>
   </ItemGroup>

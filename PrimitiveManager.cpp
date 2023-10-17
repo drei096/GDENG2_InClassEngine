@@ -110,13 +110,18 @@ void PrimitiveManager::createObject(PrimitiveType type, ShaderTypes shaderType)
 		this->addObject(cube);
 		
 	}
-
-	
 	if (type == PrimitiveType::PLANE) 
 	{
 		PlanePrimitive* plane = new PlanePrimitive("Plane", shaderType);
 		this->addObject(plane);
 		
+	}
+	if (type == PrimitiveType::TEXTURED_CUBE)
+	{
+		CubePrimitive* cube = new CubePrimitive("Cube", shaderType);
+		cube->setTexture(L"Assets\\Textures\\brick.png");
+		this->addObject(cube);
+
 	}
 	
 }

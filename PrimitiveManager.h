@@ -30,6 +30,7 @@ public:
 		MESH,
 		PHYSICS_CUBE,
 		PHYSICS_PLANE,
+		TEXTURED_CUBE,
 	};
 
 	static void initialize();

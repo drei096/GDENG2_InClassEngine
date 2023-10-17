@@ -24,6 +24,10 @@ void MenuToolbar::drawUI()
 			{
 				PrimitiveManager::GetInstance()->createObject(PrimitiveManager::CUBE, ShaderTypes::ALBEDO);
 			}
+			if (ImGui::MenuItem("Create Textured Cube", NULL))
+			{
+				PrimitiveManager::GetInstance()->createObject(PrimitiveManager::TEXTURED_CUBE, ShaderTypes::FLAT_TEXTURED);
+			}
 			if (ImGui::MenuItem("Create Plane", NULL))
 			{
 				PrimitiveManager::GetInstance()->createObject(PrimitiveManager::PLANE, ShaderTypes::ALBEDO);

@@ -29,8 +29,6 @@ public:
 	void draw(float width, float height) override;
 
 
-	void computeBoundingSphere();
-
 	bool release() override;
 
 	void setMesh(const wchar_t* mesh_path);
