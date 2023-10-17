@@ -169,6 +169,12 @@ void PrimitiveManager::createObjectAtPoint(PrimitiveType type, Vector3D point, S
 		// adding physics component
 		PhysicsComponent* physicsComp = new PhysicsComponent("PhysCube", cube);
 		cube->AttachComponent(physicsComp);
+		if(physicsComp != nullptr)
+		{
+			BodyType bodyType = physicsComp->GetRigidBody()->getType();
+			physicsComp->UpdateRigidBody();
+			physicsComp->GetRigidBody()->setType(bodyType);
+		}
 		
 		this->addObject(cube);
 	}
@@ -286,6 +292,8 @@ void PrimitiveManager::deleteObjectByName(std::string name)
 		this->deleteObject(object);
 	}
 }
+
+
 
 
 

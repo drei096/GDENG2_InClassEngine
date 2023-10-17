@@ -61,7 +61,8 @@ public:
 
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(std::string name);
-	
+
+
 	
 
 private:

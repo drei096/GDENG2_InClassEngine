@@ -221,9 +221,10 @@ void AGameObject::updateLocalMatrix()
 
 	Matrix4x4 rotMatrix;
 	rotMatrix.setIdentity();
-	rotMatrix *= zMatrix;
-	rotMatrix *= yMatrix;
-	rotMatrix *= xMatrix;
+	rotMatrix = rotMatrix.multiplyTo(xMatrix.multiplyTo(yMatrix.multiplyTo(zMatrix)));
+	//rotMatrix *= zMatrix;
+	//rotMatrix *= yMatrix;
+	//rotMatrix *= xMatrix;
 	allMatrix *= rotMatrix;
 
 
@@ -304,21 +305,30 @@ void AGameObject::RecomputeMatrix(float matrix[16])
 	Matrix4x4 rotMatrix;
 	rotMatrix.setIdentity();
 
-	rotMatrix.setEulerRotationX(localRotation.x);
-	newMatrix *= rotMatrix;
+	Matrix4x4 rot_xMatrix;
+	rot_xMatrix.setIdentity();
+	rot_xMatrix.setQuaternionRotation(localRotation.x, 1, 0, 0);
+	//newMatrix *= rotMatrix;
 	//rotMatrix.setIdentity();
 
-	rotMatrix.setEulerRotationY(localRotation.y);
-	newMatrix *= rotMatrix;
+	Matrix4x4 rot_yMatrix;
+	rot_yMatrix.setIdentity();
+	rot_yMatrix.setQuaternionRotation(localRotation.y, 0, 1, 0);
+	//newMatrix *= rotMatrix;
 	//rotMatrix.setIdentity();
 
-	rotMatrix.setEulerRotationZ(localRotation.z);
+	Matrix4x4 rot_zMatrix;
+	rot_zMatrix.setIdentity();
+	rot_zMatrix.setQuaternionRotation(localRotation.z, 0, 0, 1);
+
+	rotMatrix = rot_xMatrix.multiplyTo(rot_yMatrix.multiplyTo(rot_zMatrix));
 	newMatrix *= rotMatrix;
 
 	Matrix4x4 transMatrix;
 	transMatrix.setIdentity();
 	transMatrix.setTranslationMatrix(localPosition);
 	newMatrix *= transMatrix;
+
 	localMatrix = newMatrix;
 	this->overrideMatrix = true;
 }
